@@ -7,11 +7,9 @@ import { Provider } from 'mobx-react'
 import GlobalStore from './store/GlobalStore'
 
 ReactDOM.render(
-    <React.StrictMode>
       <Provider GlobalStore={GlobalStore}>
         <App />
-      </Provider>
-    </React.StrictMode>,
+      </Provider>,
   document.getElementById('root')
 );
 
