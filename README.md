@@ -1,68 +1,47 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Stretch: Nature Office
 
-## Available Scripts
+## Team Members:
+Madison Randle - [GitHub](https://github.com/madisonrandle)
 
-In the project directory, you can run:
+Edita Ignot - [GitHub](https://github.com/edignot)
 
-### `npm start`
+Nick Taylor - [GitHub](https://github.com/nickstaylor)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Taras Tarlov - [GitHub](https://github.com/ttarlov)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Abstract
 
-### `npm test`
+**Technologies Used:**
+*React*, *React Router*, *ES6*, *TDD*, *SCSS*, *MobX*, *Fetch API for receiving 3rd party data*
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Nature Office is an appication we built during our time at [Turing School of Softwar and Design](http://turing.io). Placeholder text...........
 
-### `npm run build`
+## Setup
+1. clone down this repo to desired location
+2. `cd` into the new directory
+3. run `npm install`
+4. run `npm start`
+5. Open localhost:3000 in your favorite browser (unless your terminal says otherwise)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## App Screenshots
+### Login Page:
+![Picture of Login Page]()
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### Landing Page:
+![Picture of Landing Page]()
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Another Page:
+![Picture of Page]()
 
-### `npm run eject`
+### Another Page:
+![Picture of Page]()
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Another Page:
+![Picture of Page]()
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Another Page:
+![Picture of Page]()
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Another Page:
+![Picture of Page]()
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
