@@ -1,13 +1,30 @@
-import React from 'react';
-import './App.scss';
+import React from 'react'
+import './App.scss'
 import Map from '../Map/Map'
+import Login from '../Login/Login'
+import LandingPage from '../LandingPage/LandingPage'
+import Nav from '../Nav/Nav'
+import Search from '../Search/Search'
+import SpotContainer from '../SpotContainer/SpotContainer'
+import SpotDetails from '../SpotDetails/SpotDetails'
+import UserPage from '../UserPage/UserPage'
+import { inject, observer } from 'mobx-react'
+import { Route, Redirect, Switch } from 'react-router-dom'
 
-function App() {
+
+const App = inject('GlobalStore')(observer(() => {
   return (
-    <div className="App">
+    <section className="App">
+      <Login/>
+      <LandingPage/>
       <Map/>
-    </div>
-  );
-}
+      <Nav/>
+      <Search/>
+      <SpotContainer/>
+      <SpotDetails/>
+      <UserPage/>
+    </section>
+  )
+}))
 
-export default App;
+export default App
