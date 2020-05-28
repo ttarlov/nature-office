@@ -8,3 +8,4 @@ export const apiCalls = () => {
   .then(contents => console.log(contents.results))
   .catch(() => console.log("Can't access " + url + " response. Blocked by browser?"))
 
+}
