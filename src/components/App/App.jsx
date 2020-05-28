@@ -8,7 +8,7 @@ import Search from '../Search/Search'
 import SpotContainer from '../SpotContainer/SpotContainer'
 import SpotDetails from '../SpotDetails/SpotDetails'
 import AddNewSpot from '../AddNewSpot/AddNewSpot'
-import { apiCalls } from '../../apiCalls'
+import { getSpots } from '../../apiCalls'
 
 import UserPage from '../UserPage/UserPage'
 import { inject, observer } from 'mobx-react'
@@ -21,10 +21,10 @@ class App extends Component{
     super();
 
   }
-  componentDidMount() {
-    apiCalls()
+  // componentDidMount() {
+  //   apiCalls()
 
-  }
+  // }
 
   render() {
     return (
