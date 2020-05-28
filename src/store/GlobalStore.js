@@ -17,7 +17,7 @@ class GlobalStore {
         rating: spot.rating,
         photo: getSpotPhoto(spot.photos[0].photo_reference),
         coordinates: spot.geometry.location,
-        // open: spot.opening_hours.open_now,
+        open: spot.opening_hours.open_now,
         wifi: true,
         restroom: true,
         comments:["great spot"],
