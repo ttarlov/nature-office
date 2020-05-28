@@ -8,6 +8,7 @@ import Search from '../Search/Search'
 import SpotContainer from '../SpotContainer/SpotContainer'
 import SpotDetails from '../SpotDetails/SpotDetails'
 import AddNewSpot from '../AddNewSpot/AddNewSpot'
+import apiCalls from '../../apiCalls'
 
 import UserPage from '../UserPage/UserPage'
 import { inject, observer } from 'mobx-react'
@@ -16,6 +17,15 @@ import { Route, Redirect, Switch } from 'react-router-dom'
 @inject('GlobalStore')
 @observer
 class App extends Component{
+  constructor() {
+    super();
+
+  }
+  componentDidMount() {
+    apiCalls()
+
+  }
+
   render() {
     return (
       <section className="App">
