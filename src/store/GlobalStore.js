@@ -129,7 +129,8 @@ class GlobalStore {
         wifi: true,
         restroom: true,
         comments:["great spot"],
-        placeId: spot.place_id
+        placeId: spot.place_id,
+        favorite: false
       }
     )
   })
