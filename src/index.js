@@ -6,13 +6,23 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'mobx-react'
 import GlobalStore from './store/GlobalStore'
 import { BrowserRouter } from 'react-router-dom'
+// import { RouterStore, syncHistoryWithStore } from 'mobx-react-router'
 
+// const routingStore = new RouterStore();
+// const stores = {
+//   // Key can be whatever you want
+//   routing: routingStore,
+//   // ...other stores
+// };
+
+// const history = syncHistoryWithStore(browserHistory, routingStore);
 ReactDOM.render(
+   
+      <Provider GlobalStore={GlobalStore}>
     <BrowserRouter>
-        <Provider GlobalStore={GlobalStore}>
           <App />
-        </Provider>
-    </BrowserRouter>,
+    </BrowserRouter>
+        </Provider>,
   document.getElementById('root')
 );
 
