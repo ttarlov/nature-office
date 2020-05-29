@@ -21,44 +21,44 @@ class App extends Component{
     return (
       <section className="app-container">
         <Switch>
-        <Route
-          exact path='/' render={ () =>
-            <Login />
-          }
-        />
+          <Route
+            exact path='/' render={ () =>
+              <Login />
+            }
+          />
 
-        <Route
-          path='/landing' render={ () =>
-            <>
-              <Search />
-              <LandingPage />
-            </>
-          }
-        />
+          <Route
+            path='/landing' render={ () =>
+              <>
+                <Search />
+                <LandingPage />
+              </>
+            }
+          />
 
-        <Route
-          exact path='/spotContainer' render={ () =>
-            <SpotContainer />
-          }
-        />
+          <Route
+            exact path='/spotContainer' render={ () =>
+              <SpotContainer />
+            }
+          />
 
-        <Route
-          exact path='/spotDetails' render={ () =>
-            <SpotDetails />
-          }
-        />
+          <Route
+            exact path='/spotDetails' render={ () =>
+              <SpotDetails />
+            }
+          />
 
-        <Route
-          exact path='/userPage' render={ () =>
-            <UserPage />
-          }
-        />
+          <Route
+            exact path='/userPage' render={ () =>
+              <UserPage />
+            }
+          />
 
-        <Route
-          exact path='/addNewSpot' render={ () =>
-            <AddNewSpot />
-          }
-        />
+          <Route
+            exact path='/addNewSpot' render={ () =>
+              <AddNewSpot />
+            }
+          />
         </Switch>
         {GlobalStore.spots.length > 0 && <Nav/>}
       </section>

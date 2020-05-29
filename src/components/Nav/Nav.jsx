@@ -11,31 +11,47 @@ import MdAddCircle from 'react-ionicons/lib/MdAddCircle'
 const Nav = inject('GlobalStore')(observer(() => {
     return (
           <nav className="nav">
-            <MdSearch 
-              className="nav-icon"
-              color="#fff"
-              fontSize="40px"
-            />
-            <MdHeart 
-              className="nav-icon"
-              color="#fff"
-              fontSize="40px"
-            />
-            <MdMap 
-              className="nav-icon"
-              color="#fff"
-              fontSize="40px"
-            />
-            <MdAddCircle
-              className="nav-icon"
-              color="#fff"
-              fontSize="40px"
-            />
-            <MdPerson
-              className="nav-icon"
-              color="#fff"
-              fontSize="40px"
-            />
+
+            <Link to="/landing">
+              <MdSearch 
+                className="nav-icon"
+                color="#fff"
+                fontSize="40px"
+              />
+            </Link>
+
+            <Link to="/SpotContainer">
+              <MdHeart 
+                className="nav-icon"
+                color="#fff"
+                fontSize="40px"
+              />
+            </Link>
+
+            <Link to="/landing">
+              <MdMap 
+                className="nav-icon"
+                color="#fff"
+                fontSize="40px"
+              />
+            </Link>
+
+            <Link to="/addNewSpot">
+              <MdAddCircle
+                className="nav-icon"
+                color="#fff"
+                fontSize="40px"
+              />
+            </Link>
+
+            <Link to="/userPage">
+              <MdPerson
+                className="nav-icon"
+                color="#fff"
+                fontSize="40px"
+              />
+            </Link>
+            
           </nav>
       )
 }))
