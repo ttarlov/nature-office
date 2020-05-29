@@ -136,8 +136,11 @@ class GlobalStore {
   })
   }
 
-
-
+  @action toggleFavorite = (id) => {
+    this.spots.forEach(spot => {
+      (spot.id === id) && (spot.favorite = !spot.favorite)
+    })
+  }
 }
 
 const store = new GlobalStore()

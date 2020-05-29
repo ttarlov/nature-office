@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react'
 import MdHeart from 'react-ionicons/lib/MdHeart'
 import MdHeartOutline from 'react-ionicons/lib/MdHeartOutline'
 import MdStar from 'react-ionicons/lib/MdStar'
+import GlobalStore from '../../store/GlobalStore'
 
 const Spot = inject('GlobalStore')(observer((props) => {
     const { 
@@ -10,20 +11,26 @@ const Spot = inject('GlobalStore')(observer((props) => {
       favorite, 
       name, 
       photo ,
-      address
+      address,
+      id
     } = props.spot
     const stars = [...Array(Math.round(rating))].map(i => <MdStar/>)
     return (
         <section className="spot-wrapper">
           <div className="spot-img-wrapper">
-            {favorite ? <MdHeart 
-              color="#fff"
-              fontSize="40px"
-              className="spot-remove-fav"/> : 
+            {favorite ? 
+              <MdHeart 
+                color="#fff"
+                fontSize="40px"
+                className="spot-remove-fav"
+                onClick={() => GlobalStore.toggleFavorite(id)}
+              /> : 
               <MdHeartOutline 
-              color="#fff"  
-              fontSize="40px"
-              className="spot-add-fav"/>
+                color="#fff"  
+                fontSize="40px"
+                className="spot-add-fav"
+                onClick={() => GlobalStore.toggleFavorite(id)}
+              />
             }
             <img
               className="spot-img"
