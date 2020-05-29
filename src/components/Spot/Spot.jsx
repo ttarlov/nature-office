@@ -9,7 +9,7 @@ const Spot = inject('GlobalStore')(observer((props) => {
     const stars = [...Array(Math.round(rating))].map(i => <MdStar/>)
     return (
         <section className="spot-wrapper">
-          <div className="img-wrapper">
+          <div className="spot-img-wrapper">
             {!props ? <MdHeart 
               color="#fff"
               fontSize="40px"
