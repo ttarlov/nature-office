@@ -1,9 +1,12 @@
 @mixin icon-on-img {
   position: absolute;
-  opacity: .7;
   top: 10px;
-  cursor: pointer;
   z-index: 999;
+}
+
+@mixin icon-hover {
+  opacity: .7;
+  cursor: pointer;
   &:hover {
     opacity: 1;
     transition: opacity .2s;

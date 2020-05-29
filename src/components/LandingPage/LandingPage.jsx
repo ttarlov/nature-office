@@ -8,9 +8,9 @@ const LandingPage = inject('GlobalStore')(observer((props) => {
       return <div>Text</div>
     } else {
       return (
-          <section>
+          <section className="landing-page">
             <h2>HI</h2>
-            <img src={GlobalStore.spots[0].photo} alt="spot"></img>
+            <img src={GlobalStore.spots[0].photo} alt="spot" width="20px"></img>
             <h2>{GlobalStore.spots[0].name}</h2>
           </section>
         )

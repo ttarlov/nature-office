@@ -1,0 +1,13 @@
+.nav {
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    padding: 20px;
+    justify-content: space-evenly;
+    background-color: $background-medium;
+    .nav-icon {
+        @include icon-hover;
+    }
+}

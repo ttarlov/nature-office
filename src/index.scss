@@ -1,5 +1,6 @@
 @import './variables';
 @import './mixins';
+@import './src/components/Nav/Nav';
 
 body,
 * {
@@ -61,6 +62,7 @@ body,
 .spot-add-fav,
 .spot-remove-fav {
   @include icon-on-img;
+  @include icon-hover;
   right: 10px;
 }
 
@@ -79,6 +81,7 @@ body,
 
 .details-back-btn {
   @include icon-on-img;
+  @include icon-hover;
   left: 10px;
 }
 
@@ -95,5 +98,8 @@ body,
     margin-left: 20px;
   }
 }
+
+// LANDING PAGE 
+
 
 @import './media-queries';
