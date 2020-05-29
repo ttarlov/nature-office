@@ -11,52 +11,50 @@
 // }
 const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
 
-export const getSpotsApi = () => {
+export const getSpotsApi = async () => {
   console.log('apiCalls')
-  return fetch('https://fe-cors-proxy.herokuapp.com', {
+  const result = await fetch('https://fe-cors-proxy.herokuapp.com', {
   headers: {
     "Target-URL": `https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=parks&location=39.750759, -104.996656&radius=50000&type=point_of_interest&key=${apiKey}`
   }
 })
-  .then(response => response.json())
+  const response = await result.json()
+  console.log("GetSpotsApi Returns", response.results);
+  
+  return response
   // .then(data => console.log(data.results))
   // .catch(error => console.error(error))
 }
 
 export const getSpotPhoto = (param) => {
-  console.log(param)
-  return fetch('https://fe-cors-proxy.herokuapp.com', {
-    headers: {
-      "Target-URL": `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&key=${apiKey}&photoreference=${param}`
-    }
-  })
-  .then(response => response.json())
-  .then(data => console.log(data))
-
+  return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&photoreference=${param}&key=${apiKey}`
+ 
 }
+
+
 
 // export getPictures = (param)=>{
 
 // }
 
 
-export const getAreas = () => {
-  return fetch('https://vrad-api.herokuapp.com/api/v1/areas')
-    .then(res => res.json())
-    .then(data => {
-      const areaDetails = data.areas.map(area => {
-        return fetch(`https://vrad-api.herokuapp.com${area.details}`)
-          .then(res => res.json())
-          .then(area => {
-            return {
-              name: area.name,
-              ...area
-            }
-          })
-      })
-      return Promise.all(areaDetails)
-    })
+// export const getAreas = () => {
+//   return fetch('https://vrad-api.herokuapp.com/api/v1/areas')
+//     .then(res => res.json())
+//     .then(data => {
+//       const areaDetails = data.areas.map(area => {
+//         return fetch(`https://vrad-api.herokuapp.com${area.details}`)
+//           .then(res => res.json())
+//           .then(area => {
+//             return {
+//               name: area.name,
+//               ...area
+//             }
+//           })
+//       })
+//       return Promise.all(areaDetails)
+//     })
 
 
 
-}
+// }

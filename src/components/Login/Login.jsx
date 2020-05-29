@@ -38,7 +38,7 @@ const Login = inject('GlobalStore')(observer((props) => {
 
 
           </form>
-          <button className="login-btn" onClick={GlobalStore.getSpots} onClick={GlobalStore.validateUser}>Login</button>
+          <button className="login-btn" onClick={GlobalStore.validateUser}>Login</button>
         {GlobalStore.completedForm && <Redirect to="/landing" />}
           {GlobalStore.loginError && 
            <p>

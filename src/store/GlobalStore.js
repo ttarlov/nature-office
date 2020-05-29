@@ -110,19 +110,20 @@ class GlobalStore {
     }
   }
 
-  @action getSpots = () => {
+   @action getSpots = async () => {
   console.log('apicall made')
-  getSpotsApi()
+  const spotsApiData = await getSpotsApi()
   // .then(data=> console.log(data))
-  .then(data => data.results.forEach(spot => {
-    spot.
+  spotsApiData.results.forEach(spot => {
+    console.log(spot);
+    
     this.spots.push(
       {
         name: spot.name,
         id: spot.id,
         address: spot.vicinity,
         rating: spot.rating,
-        photo: getSpotPhoto(spot.photos[0].photo_reference),
+        photo: <img src={getSpotPhoto(spot.photos[0].photo_reference)}/>,
         coordinates: spot.geometry.location,
         // open: spot.opening_hours.open_now,
         wifi: true,
@@ -131,8 +132,7 @@ class GlobalStore {
         placeId: spot.place_id
       }
     )
-  }))
-  .catch(error => console.error(error))
+  })
   }
 
 
@@ -141,3 +141,5 @@ class GlobalStore {
 
 const store = new GlobalStore()
 export default store
+
+// spot.photos[0].photo_reference
