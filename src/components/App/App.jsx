@@ -15,6 +15,7 @@ import { inject, observer } from 'mobx-react'
 import { Route, Redirect, Switch } from 'react-router-dom'
 
 @inject('GlobalStore')
+// @inject('routing')
 @observer
 class App extends Component{
   constructor() {
@@ -29,6 +30,7 @@ class App extends Component{
   render() {
     return (
       <section className="App">
+        <Switch>
         <Route
           exact path='/' render={ () =>
             <Login />
@@ -36,7 +38,7 @@ class App extends Component{
         />
 
         <Route
-          exact path='/landing' render={ () =>
+          path='/landing' render={ () =>
             <>
               <Search />
               <LandingPage />
@@ -67,6 +69,7 @@ class App extends Component{
             <AddNewSpot />
           }
         />
+        </Switch>
 
         <Nav />
       </section>
