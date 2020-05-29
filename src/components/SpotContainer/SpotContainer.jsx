@@ -13,7 +13,6 @@ const SpotContainer = inject('GlobalStore')(observer((props) => {
   // })
     return (
         <section className="spot-container">
-         Spot Container
           {/* { spots } */}
           <Spot />
           <Spot />
