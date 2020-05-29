@@ -1,0 +1,31 @@
+$break1: 640px;
+$break2: 768px;
+$break3: 1024px;
+$break4: 1280px;
+
+@media (min-width: $break1) {
+   .spot-container {
+      grid-template: auto / repeat(2, 1fr);
+    }
+    
+}
+
+@media (min-width: $break2) {
+    .spot-container {
+      grid-template: auto / repeat(3, 1fr);
+    }
+    
+}
+
+@media (min-width: $break3) {
+    .spot-container {
+      grid-template: auto / repeat(4, 1fr);
+    }
+}
+
+@media (min-width: $break4) {
+    .spot-container {
+      grid-template: auto / repeat(4, 1fr);
+    }
+    
+}

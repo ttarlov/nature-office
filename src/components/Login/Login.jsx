@@ -3,9 +3,7 @@ import { inject, observer } from 'mobx-react'
 import GlobalStore from '../../store/GlobalStore'
 
 
-
 const Login = inject('GlobalStore')(observer((props) => {
-    
     return (
         <section>
           <h2>{GlobalStore.title}</h2>

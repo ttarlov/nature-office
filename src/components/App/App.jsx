@@ -28,7 +28,7 @@ class App extends Component{
 
   render() {
     return (
-      <section className="App">
+      <section className="app-container">
         <Route
           exact path='/' render={ () =>
             <Login />
