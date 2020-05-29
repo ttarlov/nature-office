@@ -8,7 +8,7 @@ import SpotContainer from '../SpotContainer/SpotContainer'
 import SpotDetails from '../SpotDetails/SpotDetails'
 import AddNewSpot from '../AddNewSpot/AddNewSpot'
 import { getSpots } from '../../apiCalls'
-
+import GlobalStore from '../../store/GlobalStore'
 import UserPage from '../UserPage/UserPage'
 import { inject, observer } from 'mobx-react'
 import { Route, Redirect, Switch } from 'react-router-dom'
@@ -60,8 +60,7 @@ class App extends Component{
           }
         />
         </Switch>
-
-        <Nav />
+        {GlobalStore.spots.length > 0 && <Nav/>}
       </section>
     )
   }
