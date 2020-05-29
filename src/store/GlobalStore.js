@@ -123,7 +123,7 @@ class GlobalStore {
         id: spot.id,
         address: spot.vicinity,
         rating: spot.rating,
-        photo: <img src={getSpotPhoto(spot.photos[0].photo_reference)}/>,
+        photo: getSpotPhoto(spot.photos[0].photo_reference),
         coordinates: spot.geometry.location,
         // open: spot.opening_hours.open_now,
         wifi: true,
