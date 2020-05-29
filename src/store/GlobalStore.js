@@ -5,7 +5,8 @@ import { Redirect, Link } from 'react-router-dom';
 import React from 'react'
 
 class GlobalStore {
-  @observable title = 'nature office'
+  @observable title = 'nature office';
+  @observable apiData = [] 
   @observable spots = []
   @observable loginError = ''
   @observable completedForm = false;
@@ -122,10 +123,9 @@ class GlobalStore {
         id: spot.id,
         address: spot.vicinity,
         rating: spot.rating,
-        // photo: getSpotPhoto(spot.photos[0].photo_reference).then(data => data),
-        photoRef: spot.photos[0].photo_reference,
+        photo: getSpotPhoto(spot.photos[0].photo_reference),
         coordinates: spot.geometry.location,
-        open: spot.opening_hours.open_now,
+        // open: spot.opening_hours.open_now,
         wifi: true,
         restroom: true,
         comments:["great spot"],
@@ -134,6 +134,9 @@ class GlobalStore {
     )
   })
   }
+
+
+
 }
 
 const store = new GlobalStore()

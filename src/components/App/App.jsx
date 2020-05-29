@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import './App.scss'
 import Map from '../Map/Map'
 import Login from '../Login/Login'
 import LandingPage from '../LandingPage/LandingPage'
