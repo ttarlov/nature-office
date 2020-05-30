@@ -1,5 +1,5 @@
 import { observable, action, computed } from 'mobx'
-import { getSpotsApi, getSpotPhoto } from "../apiCalls"
+import { getSpotsApi, getSpotPhoto, getSpotDetailsApi, getSpotDetailsPhotoApi } from "../apiCalls"
 // import { RouterStore, syncHistoryWithStore } from ‘mobx-react-router’;
 import { Redirect, Link } from 'react-router-dom';
 import React from 'react'
@@ -15,6 +15,7 @@ class GlobalStore {
   @observable userEmail = ''
   @observable zipCode = ''
   @observable zipCodes = zipCodes
+  @observable spotDetails = []
 
   @action handleChange = (event) => {
     // this.loginError = ''
@@ -57,7 +58,6 @@ class GlobalStore {
         // open: spot.opening_hours.open_now || false,
         wifi: true,
         restroom: true,
-        comments:["great spot"],
         placeId: spot.place_id,
         favorite: false
       }
@@ -70,9 +70,27 @@ class GlobalStore {
       (spot.id === id) && (spot.favorite = !spot.favorite)
     })
   }
+
+  @action displaySpotDetails = async (id) => {
+    const spot = this.spots.find(item => item.id === id)
+    const spotDetails = await getSpotDetailsApi(spot.placeId)
+    const d = spotDetails.result
+    const photoUrls = d.photos.map(photo => getSpotPhoto(photo.photo_reference))
+    this.spotDetails.push({
+      id: d.id,
+      phone: d.formatted_phone_number,
+      lat: d.geometry.location.lat,
+      lng: d.geometry.location.lng,
+      hours: d.opening_hours.weekday_text,
+      reviews: d.reviews,
+      types: d.types,
+      mapUrl: d.url,
+      website: d.website,
+      photos: photoUrls
+    })
+   console.log(this.spotDetails)
+  }
 }
 
 const store = new GlobalStore()
 export default store
-
-// spot.photos[0].photo_reference

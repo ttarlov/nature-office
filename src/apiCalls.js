@@ -20,3 +20,15 @@ export const getSpotPhoto = (param) => {
  
 }
 
+export const getSpotDetailsApi = async (placeId) => {
+  try {
+    const response = await fetch('https://fe-cors-proxy.herokuapp.com', {
+      headers: {
+        "Target-URL": `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${apiKey}`
+      }
+    })
+    return await response.json()  
+  } catch (error) {
+    console.log(error)
+  }
+}
