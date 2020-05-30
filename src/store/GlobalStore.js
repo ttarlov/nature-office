@@ -1,20 +1,22 @@
 import { observable, action, computed } from 'mobx'
-import { getSpotsApi, getSpotPhoto } from "../apiCalls"
+import { getSpotsApi, getNorrisJoke } from "../apiCalls"
 // import { RouterStore, syncHistoryWithStore } from ‘mobx-react-router’;
 import { Redirect, Link } from 'react-router-dom';
 import React from 'react'
-import { zipCodes } from '../constants'
+import { zipCodes, getSpotPhoto } from '../constants'
+
 
 class GlobalStore {
   @observable title = 'nature office';
   @observable apiData = [] 
   @observable spots = []
   @observable loginError = ''
-  @observable completedForm = false;
+  @observable isFormCompleted = false;
   @observable userName = ''
   @observable userEmail = ''
   @observable zipCode = ''
   @observable zipCodes = zipCodes
+  @observable joke = ''
 
   @action handleChange = (event) => {
     // this.loginError = ''
@@ -22,7 +24,7 @@ class GlobalStore {
   }
 
   @action validateUser = (event) => {
-    this.completedForm = false
+    this.isFormCompleted = false
     event.preventDefault()
     
     console.log('here')
@@ -34,9 +36,16 @@ class GlobalStore {
     } else {
       console.log('all inputs satisfied')
       this.loginError = ''
-      this.completedForm = true;
+      this.isFormCompleted = true;
       this.getSpots()
+      this.errorJoke()
     }
+  }
+
+  @action errorJoke = async () => {
+    const joke = await getNorrisJoke()
+    this.joke = joke;
+    
   }
 
    @action getSpots = async () => {
