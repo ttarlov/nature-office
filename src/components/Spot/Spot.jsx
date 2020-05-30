@@ -7,33 +7,34 @@ import MdStar from 'react-ionicons/lib/MdStar'
 import GlobalStore from '../../store/GlobalStore'
 
 const Spot = inject('GlobalStore')(observer((props) => {
-    const { 
-      rating, 
-      favorite, 
-      name, 
+    const {
+      rating,
+      favorite,
+      name,
       photo ,
       address,
       id
     } = props.spot
+    console.log('name', name);
     const stars = [...Array(Math.round(rating))].map(i => <MdStar/>)
     return (
         <section className="spot-wrapper">
           <div className="spot-img-wrapper">
-            {favorite ? 
-              <MdHeart 
+            {favorite ?
+              <MdHeart
                 color="#fff"
                 fontSize="40px"
                 className="spot-remove-fav"
                 onClick={() => GlobalStore.toggleFavorite(id)}
-              /> : 
-              <MdHeartOutline 
-                color="#fff"  
+              /> :
+              <MdHeartOutline
+                color="#fff"
                 fontSize="40px"
                 className="spot-add-fav"
                 onClick={() => GlobalStore.toggleFavorite(id)}
               />
             }
-          <Link 
+          <Link
             to={`/spotDetails/${name}`}
             onClick={() => GlobalStore.displaySpotDetails(id)}
           >
@@ -44,7 +45,7 @@ const Spot = inject('GlobalStore')(observer((props) => {
             />
           </Link>
           </div>
-          <Link 
+          <Link
             to={`/spotDetails/${name}`}
             onClick={() => GlobalStore.displaySpotDetails(id)}
           >
