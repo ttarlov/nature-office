@@ -11,7 +11,7 @@ const Login = inject('GlobalStore')(observer((props) => {
           <h2>{GlobalStore.title}</h2>
           <form>
             <label htmlFor="userName">Name</label>
-            <input 
+            <input
             type="text"
             name="userName"
             placeholder="name"
@@ -28,7 +28,7 @@ const Login = inject('GlobalStore')(observer((props) => {
             />
           <label htmlFor="zipCode">Zip Code</label>
           <input
-            type="text"
+            type="number"
             name="zipCode"
             placeholder="80202"
             value={GlobalStore.zipCode}
@@ -39,7 +39,7 @@ const Login = inject('GlobalStore')(observer((props) => {
           </form>
           <button className="login-btn" onClick={GlobalStore.validateUser}>Login</button>
         {GlobalStore.isFormCompleted && <Redirect to="/landing" />}
-          {GlobalStore.loginError && 
+          {GlobalStore.loginError &&
            <p>
              {GlobalStore.loginError}
            </p>}

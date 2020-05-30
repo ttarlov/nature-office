@@ -7,7 +7,7 @@ export const getSpotPhoto = (param) => {
 
 
 
-export const zipCodes = [80201
+export const zipCodes = [80201, 55104,
     ,80202
     ,80203
     ,80204
