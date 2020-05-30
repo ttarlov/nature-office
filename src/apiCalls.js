@@ -32,3 +32,11 @@ export const getSpotDetailsApi = async (placeId) => {
     console.log(error)
   }
 }
+
+export const checkIfPropertyExists = (fn) => {
+  try {
+      return fn()
+  } catch (e) {
+      return null
+  }
+}

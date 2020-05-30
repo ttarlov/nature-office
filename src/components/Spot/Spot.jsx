@@ -34,7 +34,7 @@ const Spot = inject('GlobalStore')(observer((props) => {
               />
             }
           <Link 
-            to={`/spotDetails`}
+            to={`/spotDetails/${name}`}
             onClick={() => GlobalStore.displaySpotDetails(id)}
           >
             <img
@@ -45,7 +45,7 @@ const Spot = inject('GlobalStore')(observer((props) => {
           </Link>
           </div>
           <Link 
-            to={`/spotDetails`}
+            to={`/spotDetails/${name}`}
             onClick={() => GlobalStore.displaySpotDetails(id)}
           >
             <p className="spot-title">{name}</p>

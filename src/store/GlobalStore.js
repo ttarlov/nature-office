@@ -1,5 +1,5 @@
 import { observable, action, computed } from 'mobx'
-import { getSpotsApi, getSpotPhoto, getSpotDetailsApi, getSpotDetailsPhotoApi } from "../apiCalls"
+import { getSpotsApi, getSpotPhoto, getSpotDetailsApi, checkIfPropertyExists } from "../apiCalls"
 // import { RouterStore, syncHistoryWithStore } from ‘mobx-react-router’;
 import { Redirect, Link } from 'react-router-dom';
 import React from 'react'
@@ -55,11 +55,7 @@ class GlobalStore {
         rating: spot.rating,
         photo: getSpotPhoto(spot.photos[0].photo_reference),
         coordinates: spot.geometry.location,
-        // open: spot.opening_hours.open_now || false,
-        wifi: true,
-        restroom: true,
         placeId: spot.place_id,
-        favorite: false
       }
     )
   })
@@ -79,14 +75,15 @@ class GlobalStore {
     this.spotDetails.push({
       id: d.id,
       phone: d.formatted_phone_number,
-      lat: d.geometry.location.lat,
-      lng: d.geometry.location.lng,
-      hours: d.opening_hours.weekday_text,
+      hours: checkIfPropertyExists(() => d.opening_hours.weekday_text),
       reviews: d.reviews,
       types: d.types,
       mapUrl: d.url,
       website: d.website,
-      photos: photoUrls
+      photos: photoUrls,
+      wifi: true,
+      restroom: true,
+      favorite: false
     })
    console.log(this.spotDetails)
   }
