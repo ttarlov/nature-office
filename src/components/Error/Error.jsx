@@ -5,7 +5,7 @@ const Error = () => {
 
     return (
         <div className="error-container">
-            404 Error this needs work to look professional
+            <p>404 Error this needs work to look professional</p>
         </div>
     )
 }
