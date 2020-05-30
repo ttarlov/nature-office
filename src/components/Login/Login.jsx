@@ -5,7 +5,7 @@ import { Link, Redirect } from 'react-router-dom'
 
 
 const Login = inject('GlobalStore')(observer((props) => {
-  console.log('completedForm', GlobalStore.completedForm)
+  console.log('isFormCompleted', GlobalStore.isFormCompleted)
     return (
         <section>
           <h2>{GlobalStore.title}</h2>
@@ -38,7 +38,7 @@ const Login = inject('GlobalStore')(observer((props) => {
 
           </form>
           <button className="login-btn" onClick={GlobalStore.validateUser}>Login</button>
-        {GlobalStore.completedForm && <Redirect to="/landing" />}
+        {GlobalStore.isFormCompleted && <Redirect to="/landing" />}
           {GlobalStore.loginError && 
            <p>
              {GlobalStore.loginError}
