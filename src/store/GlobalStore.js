@@ -7,7 +7,7 @@ import { zipCodes } from '../constants'
 
 class GlobalStore {
   @observable title = 'nature office';
-  @observable apiData = [] 
+  @observable apiData = []
   @observable spots = []
   @observable loginError = ''
   @observable completedForm = false;
@@ -16,6 +16,7 @@ class GlobalStore {
   @observable zipCode = ''
   @observable zipCodes = zipCodes
   @observable spotDetails = {}
+  @observable loadingSpotDetailPics = false
 
   @action handleChange = (event) => {
     // this.loginError = ''
@@ -25,7 +26,7 @@ class GlobalStore {
   @action validateUser = (event) => {
     this.completedForm = false
     event.preventDefault()
-    
+
     console.log('here')
     console.log(this.zipCode)
 
@@ -46,7 +47,7 @@ class GlobalStore {
   // .then(data=> console.log(data))
   spotsApiData.results.forEach(spot => {
     console.log(spot);
-    
+
     this.spots.push(
       {
         name: spot.name,
@@ -69,12 +70,14 @@ class GlobalStore {
   }
 
   @action displaySpotDetails = async (id) => {
+    this.loadingSpotDetailPics = true
     const spot = this.spots.find(item => item.id === id)
     const spotDetails = await getSpotDetailsApi(spot.placeId)
     const d = spotDetails.result
     const photoUrls = d.photos.map(photo => getSpotPhoto(photo.photo_reference))
     this.spotDetails = {
       id: d.id,
+      name: spot.name,
       phone: d.formatted_phone_number,
       hours: checkIfPropertyExists(() => d.opening_hours.weekday_text),
       reviews: d.reviews,
@@ -86,6 +89,7 @@ class GlobalStore {
       restroom: true,
     }
    console.log(this.spotDetails)
+   this.loadingSpotDetailPics = false
   }
 
   @action isFavorite(id) {
