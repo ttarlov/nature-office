@@ -43,7 +43,7 @@ class App extends Component{
           />
 
           <Route
-            exact path='/spotDetails/:name' render={ () =>
+            exact path='/spotDetails' render={ () =>
               <SpotDetails />
             }
           />
@@ -61,6 +61,7 @@ class App extends Component{
           />
         </Switch>
         {GlobalStore.spots.length > 0 && <Nav/>}
+        {GlobalStore.spotDetails && <Redirect to={`/spotDetails`}/>}
       </section>
     )
   }

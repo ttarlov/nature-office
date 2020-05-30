@@ -14,9 +14,11 @@ import IosBatteryCharging from 'react-ionicons/lib/IosBatteryCharging'
 
 
 const SpotDetails = inject('GlobalStore')(observer(() => {
+
     const {
       id, 
       website,
+      favorite,
       pictures
     } = GlobalStore.spotDetails
 
@@ -48,9 +50,9 @@ const SpotDetails = inject('GlobalStore')(observer(() => {
               color="#fff"
               fontSize="60px"
             />
-            {GlobalStore.isFavorite(id) ? <MdHeart 
+            {favorite ? <MdHeart 
                 color="#fff"
-                fontSize="40px"
+                fontSize="60px"
                 className="spot-remove-fav"
                 onClick={() => GlobalStore.toggleFavorite(id)}/> : 
                 <MdHeartOutline 
@@ -92,9 +94,7 @@ const SpotDetails = inject('GlobalStore')(observer(() => {
               />
               <p>power: </p>
             </div>
-
             <ul className="details-comments">
-            
             </ul>
           </div>
         </section>

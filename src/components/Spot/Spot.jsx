@@ -33,8 +33,8 @@ const Spot = inject('GlobalStore')(observer((props) => {
                 onClick={() => GlobalStore.toggleFavorite(id)}
               />
             }
-          <Link 
-            to={`/spotDetails/${name}`}
+          <div
+            // to={`/spotDetails/${name}`}
             onClick={() => GlobalStore.displaySpotDetails(id)}
           >
             <img
@@ -42,10 +42,10 @@ const Spot = inject('GlobalStore')(observer((props) => {
               src={photo}
               alt="spot"
             />
-          </Link>
           </div>
-          <Link 
-            to={`/spotDetails/${name}`}
+          </div>
+          <div
+            // to={`/spotDetails/${name}`}
             onClick={() => GlobalStore.displaySpotDetails(id)}
           >
             <p className="spot-title">{name}</p>
@@ -53,7 +53,7 @@ const Spot = inject('GlobalStore')(observer((props) => {
             <div className="stars-container">
               { stars }
             </div>
-          </Link>
+          </div>
         </section>
       )
 }))

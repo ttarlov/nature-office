@@ -15,7 +15,7 @@ class GlobalStore {
   @observable userEmail = ''
   @observable zipCode = ''
   @observable zipCodes = zipCodes
-  @observable spotDetails = {}
+  @observable spotDetails = null
 
   @action handleChange = (event) => {
     // this.loginError = ''
@@ -66,6 +66,9 @@ class GlobalStore {
     this.spots.forEach(spot => {
       (spot.id === id) && (spot.favorite = !spot.favorite)
     })
+    if (this.spotDetails && this.spotDetails.id === id) {
+      this.spotDetails.favorite = !this.spotDetails.favorite
+    }
   }
 
   @action displaySpotDetails = async (id) => {
@@ -74,6 +77,11 @@ class GlobalStore {
     const d = spotDetails.result
     const photoUrls = d.photos.map(photo => getSpotPhoto(photo.photo_reference))
     this.spotDetails = {
+      name: spot.name,
+      address: spot.address,
+      rating: spot.rating,
+      coordinates: spot.coordinates,
+      favorite: spot.favorite,
       id: d.id,
       phone: d.formatted_phone_number,
       hours: checkIfPropertyExists(() => d.opening_hours.weekday_text),
@@ -88,17 +96,6 @@ class GlobalStore {
    console.log(this.spotDetails)
   }
 
-  @action isFavorite(id) {
-      // const found = this.spots.find(spot => {
-      //   let favorite
-      //   if (spot.id === id) {
-      //     return favorite = spot.favorite
-      //   }
-      //   return favorite
-      // })
-      // console.log(found)
-      return true
-  }
 }
 
 const store = new GlobalStore()
