@@ -6,6 +6,9 @@ import Weather from '../Weather/Weather'
 import Search from '../Search/Search'
 
 const LandingPage = inject('GlobalStore')(observer(() => {
+  const topRated = GlobalStore.spots[0] // Hard coded until getTopRatedSpots() is created / implemented
+
+
   if (!GlobalStore.spots.length || !GlobalStore.weatherTemp || !GlobalStore.weatherType) {
     return <Loading />
   } else {
@@ -14,8 +17,12 @@ const LandingPage = inject('GlobalStore')(observer(() => {
       <section className="landing-container">
         <Search />
         <Weather />
-        <img src={GlobalStore.spots[0].photo} alt="spot" width="20px"></img>
-        <h2>{GlobalStore.spots[0].name}</h2>
+
+        <img src={topRated.photo} alt="spot" />
+
+
+
+
       </section>
     )
 
