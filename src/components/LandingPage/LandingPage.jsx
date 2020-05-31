@@ -2,31 +2,28 @@ import React from 'react'
 import { inject, observer } from 'mobx-react'
 import GlobalStore from '../../store/GlobalStore'
 import Loading from '../Loading/Loading'
-import Weather from '../Weather/Weather'
 import Search from '../Search/Search'
+import Weather from '../Weather/Weather'
 
 const LandingPage = inject('GlobalStore')(observer(() => {
   const topRated = GlobalStore.spots[0] // Hard coded until getTopRatedSpots() is created / implemented
 
-
-  if (!GlobalStore.spots.length || !GlobalStore.weatherTemp || !GlobalStore.weatherType) {
-    return <Loading />
-  } else {
-
-    return (
+  return !GlobalStore.spots.length || !GlobalStore.weatherTemp || !GlobalStore.weatherType  ?
+    <Loading /> :
       <section className="landing-container">
         <Search />
         <Weather />
-
-        <img src={topRated.photo} alt="spot" />
-
-
-
-
+        <section className="spot-wrapper">
+          <div className="spot-img-wrapper">
+            <img
+              className="spot-img"
+              src={topRated.photo}
+              alt="spot"
+            />
+          </div>
+          <p className="category-title">TOP RATED</p>
+        </section>
       </section>
-    )
-
-  }
 }))
 
 export default LandingPage
