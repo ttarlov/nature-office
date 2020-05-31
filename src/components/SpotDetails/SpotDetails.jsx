@@ -18,14 +18,27 @@ import { Link } from 'react-router-dom'
 const SpotDetails = inject('GlobalStore')(observer((props) => {
   console.log(GlobalStore.spotDetails);
     const {
-      id,
       name,
+      address,
+      rating,
+      coordinates,
+      favorite,
+      id,
+      phone,
+      hours,
+      reviews,
+      types,
+      mapUrl,
+      website,
       pictures,
-      favorite
+      wifi,
+      restroom,
     } = GlobalStore.spotDetails
 
     let galleryItems
+    let stars
     if (!GlobalStore.loadingSpotDetailPics) {
+      stars = [...Array(Math.round(rating))].map(i => <MdStar/>)
       galleryItems = pictures.map(img => {
       return (
         <div>
@@ -42,9 +55,6 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
       slidesToShow: 1,
       slidesToScroll: 1
     }
-
-    const rating = 4.555
-    const stars = [...Array(Math.round(rating))].map(i => <MdStar/>)
 
     return (
         <section className="details-container">
