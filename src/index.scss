@@ -4,7 +4,6 @@
 @import './src/components/Spot/Spot';
 @import './src/components/Nav/Nav';
 @import './src/components/SpotDetails/SpotDetails';
-@import './src/components/Error/Error';
 
 body,
 * {
@@ -22,6 +21,15 @@ body,
   padding: 0;
   box-sizing: border-box;
   background-color: $background-light;
+}
+
+.error-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: solid red 1px;
+  height: 100vh;
 }
 
 @import './media-queries';
