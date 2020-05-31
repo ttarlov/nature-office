@@ -19,9 +19,14 @@
       }
   }
 }
-  
-.feature,
-.time-feature {
+
+.details-info-wrapper {
+  padding: 50px;
+  h2 {
+    font-size: 2.5rem;
+  }
+  .feature,
+  .time-feature {
     font-size: 1.4rem;
     display: flex;
     padding: 10px 0;
@@ -29,18 +34,20 @@
     p {
       margin-left: 20px;
     }
-}
-
-.time-feature {
-  align-items: flex-start;
-  list-style-type: none;
-  .work-time-wrapper {
+  }
+  .time-feature {
+    align-items: flex-start;
     list-style-type: none;
-    li {
-      margin-left: 20px;
+    .work-time-wrapper {
+      list-style-type: none;
+      li {
+        margin-left: 20px;
+      }
     }
   }
 }
+  
+
 
 .details-map-wrapper {
   width: 100%;
