@@ -15,8 +15,8 @@ export const getSpotsApi = async () => {
   // .catch(error => console.error(error))
 }
 
-export const getSpotPhoto = (param) => {
-  return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&photoreference=${param}&key=${apiKey}`
+export const getSpotPhoto = (param, size) => {
+  return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=${size}&photoreference=${param}&key=${apiKey}`
  
 }
 

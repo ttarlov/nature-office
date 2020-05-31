@@ -16,7 +16,6 @@ import { Link } from 'react-router-dom'
 
 
 const SpotDetails = inject('GlobalStore')(observer((props) => {
-  console.log(GlobalStore.spotDetails);
     const {
       name,
       address,
@@ -44,9 +43,9 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
         <div>
           <img src={img} alt="spot" className="details-img"/>
         </div>
-      )
-    })
-  }
+        )
+      })
+    }
 
     const gallerySettings = {
       dots: true,

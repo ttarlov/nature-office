@@ -162,7 +162,7 @@ class GlobalStore {
         id: spot.id,
         address: spot.vicinity,
         rating: spot.rating,
-        photo: getSpotPhoto(spot.photos[0].photo_reference),
+        photo: getSpotPhoto(spot.photos[0].photo_reference, 500),
         coordinates: spot.geometry.location,
         placeId: spot.place_id,
         favorite: false
@@ -185,7 +185,7 @@ class GlobalStore {
     const spot = this.spots.find(item => item.id === id)
     const spotDetails = await getSpotDetailsApi(spot.placeId)
     const d = spotDetails.result
-    const photoUrls = d.photos.map(photo => getSpotPhoto(photo.photo_reference))
+    const photoUrls = d.photos.map(photo => getSpotPhoto(photo.photo_reference, 3000))
     this.spotDetails = {
             name: spot.name,
             address: spot.address,
