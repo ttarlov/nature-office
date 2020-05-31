@@ -1,0 +1,6 @@
+.spot-container {
+    width: 90%;
+    @include container-grid;
+    background-color: $background-light;
+    padding: 50px 0 150px;
+  }

@@ -44,7 +44,7 @@ class App extends Component{
           />
 
           <Route
-            exact path='/spotDetails' render={ () =>
+            exact path='/spotDetails/:name' render={ () =>
               <SpotDetails />
             }
           />

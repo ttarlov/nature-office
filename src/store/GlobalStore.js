@@ -1,6 +1,10 @@
 import { observable, action, computed } from 'mobx'
-import { getSpotsApi, getNorrisJoke, getCoordinates } from "../apiCalls"
-// import { RouterStore, syncHistoryWithStore } from ‘mobx-react-router’;
+import { 
+  getSpotsApi, 
+  getSpotDetailsApi, 
+  checkIfPropertyExists, 
+  getNorrisJoke, 
+  getCoordinates } from "../apiCalls"
 import { Redirect, Link } from 'react-router-dom';
 import React from 'react'
 import { zipCodes, getSpotPhoto } from '../constants'
@@ -18,6 +22,8 @@ class GlobalStore {
   @observable userEmail = ''
   @observable zipCode = ''
   @observable zipCodes = zipCodes
+  @observable spotDetails = {}
+  @observable loadingSpotDetailPics = false
   @observable joke = ''
   @observable coordinates = {}
 
@@ -74,7 +80,7 @@ class GlobalStore {
     if (spot.photos === undefined){
        photo = stockPhoto
     } else {
-       photo = getSpotPhoto(spot.photos[0].photo_reference)
+       photo = getSpotPhoto(spot.photos[0].photo_reference, 500)
     }
     this.spots.push(
       {
@@ -83,12 +89,7 @@ class GlobalStore {
         address: spot.vicinity,
         rating: spot.rating,
         photo: photo,
-        // photo: getSpotPhoto(spot.photos[0].photo_reference),
         coordinates: spot.geometry.location,
-        // open: spot.opening_hours.open_now || false,
-        wifi: true,
-        restroom: true,
-        comments:["great spot"],
         placeId: spot.place_id,
         favorite: false
       }
@@ -100,10 +101,37 @@ class GlobalStore {
     this.spots.forEach(spot => {
       (spot.id === id) && (spot.favorite = !spot.favorite)
     })
+    if (this.spotDetails && this.spotDetails.id === id) {
+      this.spotDetails.favorite = !this.spotDetails.favorite
+    }
+  }
+
+  @action displaySpotDetails = async (id) => {
+    this.loadingSpotDetailPics = true
+    const spot = this.spots.find(item => item.id === id)
+    const spotDetails = await getSpotDetailsApi(spot.placeId)
+    const d = spotDetails.result
+    const photoUrls = d.photos.map(photo => getSpotPhoto(photo.photo_reference, 3000))
+    this.spotDetails = {
+            name: spot.name,
+            address: spot.address,
+            rating: spot.rating,
+            coordinates: spot.coordinates,
+            favorite: spot.favorite,
+            id: d.id,
+            phone: d.formatted_phone_number,
+            hours: checkIfPropertyExists(() => d.opening_hours.weekday_text),
+            reviews: d.reviews,
+            types: d.types,
+            mapUrl: d.url,
+            website: d.website,
+            pictures: photoUrls,
+            wifi: true,
+            power: false,
+          }
+   this.loadingSpotDetailPics = false
   }
 }
 
 const store = new GlobalStore()
 export default store
-
-// spot.photos[0].photo_reference
