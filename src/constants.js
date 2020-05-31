@@ -1,4 +1,13 @@
-export const zipCodes = [80201
+const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
+
+export const getSpotPhoto = (param) => {
+    return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&photoreference=${param}&key=${apiKey}`
+
+}
+
+
+
+export const zipCodes = [80201, 55104,
     ,80202
     ,80203
     ,80204

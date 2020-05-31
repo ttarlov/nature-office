@@ -5,13 +5,13 @@ import { Link, Redirect } from 'react-router-dom'
 
 
 const Login = inject('GlobalStore')(observer((props) => {
-  console.log('completedForm', GlobalStore.completedForm)
+  console.log('isFormCompleted', GlobalStore.isFormCompleted)
     return (
         <section>
           <h2>{GlobalStore.title}</h2>
           <form>
             <label htmlFor="userName">Name</label>
-            <input 
+            <input
             type="text"
             name="userName"
             placeholder="name"
@@ -28,7 +28,7 @@ const Login = inject('GlobalStore')(observer((props) => {
             />
           <label htmlFor="zipCode">Zip Code</label>
           <input
-            type="text"
+            type="number"
             name="zipCode"
             placeholder="80202"
             value={GlobalStore.zipCode}
@@ -38,8 +38,8 @@ const Login = inject('GlobalStore')(observer((props) => {
 
           </form>
           <button className="login-btn" onClick={GlobalStore.validateUser}>Login</button>
-        {GlobalStore.completedForm && <Redirect to="/landing" />}
-          {GlobalStore.loginError && 
+        {GlobalStore.isFormCompleted && <Redirect to="/landing" />}
+          {GlobalStore.loginError &&
            <p>
              {GlobalStore.loginError}
            </p>}

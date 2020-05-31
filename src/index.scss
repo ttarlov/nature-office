@@ -104,4 +104,16 @@ body,
 // LANDING PAGE 
 
 
+// ERROR PAGE
+
+.error-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: solid red 1px;
+  height: 100vh;
+}
+
+
 @import './media-queries';
