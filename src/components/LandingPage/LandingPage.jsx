@@ -1,6 +1,7 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 import GlobalStore from '../../store/GlobalStore'
+import Loading from '../Loading/Loading'
 
 const LandingPage = inject('GlobalStore')(observer((props) => {
   console.log('landingPage', GlobalStore)
