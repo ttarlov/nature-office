@@ -7,34 +7,35 @@ import MdStar from 'react-ionicons/lib/MdStar'
 import GlobalStore from '../../store/GlobalStore'
 
 const Spot = inject('GlobalStore')(observer((props) => {
-    const { 
-      rating, 
-      favorite, 
-      name, 
+    const {
+      rating,
+      favorite,
+      name,
       photo ,
       address,
       id
     } = props.spot
+    console.log('name', name);
     const stars = [...Array(Math.round(rating))].map(i => <MdStar/>)
     return (
         <section className="spot-wrapper">
           <div className="spot-img-wrapper">
-            {favorite ? 
-              <MdHeart 
+            {favorite ?
+              <MdHeart
                 color="#fff"
                 fontSize="40px"
                 className="spot-remove-fav"
                 onClick={() => GlobalStore.toggleFavorite(id)}
-              /> : 
-              <MdHeartOutline 
-                color="#fff"  
+              /> :
+              <MdHeartOutline
+                color="#fff"
                 fontSize="40px"
                 className="spot-add-fav"
                 onClick={() => GlobalStore.toggleFavorite(id)}
               />
             }
-          <div
-            // to={`/spotDetails/${name}`}
+          <Link
+            to={`/spotDetails/${name}`}
             onClick={() => GlobalStore.displaySpotDetails(id)}
           >
             <img
@@ -42,10 +43,10 @@ const Spot = inject('GlobalStore')(observer((props) => {
               src={photo}
               alt="spot"
             />
+          </Link>
           </div>
-          </div>
-          <div
-            // to={`/spotDetails/${name}`}
+          <Link
+            to={`/spotDetails/${name}`}
             onClick={() => GlobalStore.displaySpotDetails(id)}
           >
             <p className="spot-title">{name}</p>
@@ -53,7 +54,7 @@ const Spot = inject('GlobalStore')(observer((props) => {
             <div className="stars-container">
               { stars }
             </div>
-          </div>
+          </Link>
         </section>
       )
 }))

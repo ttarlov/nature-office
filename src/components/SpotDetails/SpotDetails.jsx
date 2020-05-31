@@ -1,3 +1,4 @@
+  
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 import MdHeartOutline from 'react-ionicons/lib/MdHeartOutline'
@@ -11,24 +12,28 @@ import MdStar from 'react-ionicons/lib/MdStar'
 import IosWifi from 'react-ionicons/lib/IosWifi'
 import MdTime from 'react-ionicons/lib/MdTime'
 import IosBatteryCharging from 'react-ionicons/lib/IosBatteryCharging'
+import { Link } from 'react-router-dom'
 
 
-const SpotDetails = inject('GlobalStore')(observer(() => {
-
+const SpotDetails = inject('GlobalStore')(observer((props) => {
+  console.log(GlobalStore.spotDetails);
     const {
-      id, 
-      website,
-      favorite,
-      pictures
+      id,
+      name,
+      pictures,
+      favorite
     } = GlobalStore.spotDetails
 
-    const galleryItems = pictures.map(img => {
+    let galleryItems
+    if (!GlobalStore.loadingSpotDetailPics) {
+      galleryItems = pictures.map(img => {
       return (
         <div>
           <img src={img} alt="spot" className="details-img"/>
         </div>
       )
     })
+  }
 
     const gallerySettings = {
       dots: true,
@@ -43,31 +48,34 @@ const SpotDetails = inject('GlobalStore')(observer(() => {
 
     return (
         <section className="details-container">
-
           <div className="details-img-gallery">
+            <Link to="/spotContainer">
             <MdArrowRoundBack
               className="details-back-btn"
               color="#fff"
               fontSize="60px"
             />
-            {favorite ? <MdHeart 
+            </Link>
+            {favorite ? <MdHeart
                 color="#fff"
                 fontSize="60px"
                 className="spot-remove-fav"
-                onClick={() => GlobalStore.toggleFavorite(id)}/> : 
-                <MdHeartOutline 
-                color="#fff"  
+                onClick={() => GlobalStore.toggleFavorite(id)}/> :
+                <MdHeartOutline
+                color="#fff"
                 fontSize="60px"
                 className="spot-add-fav"
                 onClick={() => GlobalStore.toggleFavorite(id)}/>
               }
-            <Slider {...gallerySettings} className="details-img-slider">
+              {GlobalStore.loadingSpotDetailPics ? <div>Loading Pictures </div> :
+                <Slider {...gallerySettings} className="details-img-slider">
                 {galleryItems}
-            </Slider> 
+                </Slider>
+              }
           </div>
 
           <div className="details-info">
-            <h2 className="details-name">{website}</h2>
+            <h2 className="details-name">{name}</h2>
             <p>adress: 3372 w 38th ave Denver</p>
             <div className="stars-container">
               { stars }
@@ -81,7 +89,7 @@ const SpotDetails = inject('GlobalStore')(observer(() => {
               <p>wifi: </p>
             </div>
             <div className="feature">
-              <MdTime 
+              <MdTime
                 fontSize="40px"
                 className="feature-icon"
               />
@@ -94,7 +102,9 @@ const SpotDetails = inject('GlobalStore')(observer(() => {
               />
               <p>power: </p>
             </div>
+
             <ul className="details-comments">
+
             </ul>
           </div>
         </section>
