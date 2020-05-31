@@ -134,7 +134,6 @@ class GlobalStore {
         phone: d.formatted_phone_number,
         hours: checkIfArrayExists(() => d.opening_hours.weekday_text),
         reviews: d.reviews,
-        types: d.types,
         mapUrl: d.url,
         website: d.website,
         pictures: photoUrls,

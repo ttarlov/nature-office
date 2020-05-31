@@ -13,6 +13,7 @@ import IosWifi from 'react-ionicons/lib/IosWifi'
 import MdTime from 'react-ionicons/lib/MdTime'
 import MdCall from 'react-ionicons/lib/MdCall'
 import MdHome from 'react-ionicons/lib/MdHome'
+import MdLaptop from 'react-ionicons/lib/MdLaptop'
 import IosBatteryCharging from 'react-ionicons/lib/IosBatteryCharging'
 import { Link } from 'react-router-dom'
 import Map from '../Map/Map'
@@ -33,7 +34,6 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
       phone,
       hours,
       reviews,
-      types,
       mapUrl,
       website,
       pictures,
@@ -132,6 +132,13 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
                   className="feature-icon"
                 />
                 <p>{phone || 'N/a'}</p>
+              </div>
+              <div className="feature">
+                <MdLaptop
+                  fontSize="40px"
+                  className="feature-icon"
+                />
+                <p>{website || 'N/a'}</p>
               </div>
               <div className="feature">
                 <IosWifi
