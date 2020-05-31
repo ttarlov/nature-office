@@ -8,9 +8,6 @@ $break4: 1280px;
       grid-template: auto / repeat(1, 1fr);
       width: 70%;
     } 
-   .user-page-title {
-     font-size: 4rem;
-   }
 }
 
 @media (min-width: $break2) {
@@ -21,9 +18,6 @@ $break4: 1280px;
     .details-comment-wrapper {
       grid-template: auto / repeat(2, 1fr);
     }   
-    .user-page-title {
-      font-size: 5rem;
-    } 
 }
 
 @media (min-width: $break3) {
@@ -33,14 +27,10 @@ $break4: 1280px;
     .details-comment-wrapper {
       grid-template: auto / repeat(3, 1fr);
    } 
-   .user-page-title {
-    font-size: 6rem;
-  }
 }
 
 @media (min-width: $break4) {
     .spot-container {
       grid-template: auto / repeat(4, 1fr);
-    }
-    
+    } 
 }

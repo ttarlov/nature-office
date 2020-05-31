@@ -1,5 +1,6 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
+import { Link } from 'react-router-dom'
 import GlobalStore from '../../store/GlobalStore'
 import MdPerson from 'react-ionicons/lib/MdPerson'
 
@@ -24,7 +25,12 @@ const UserPage = inject('GlobalStore')(observer(() => {
               <h2>{userEmail}</h2>
             </div>
           </div>
-          <button className="logout-btn">LOGOUT</button>
+          <Link to="/"
+            onClick={GlobalStore.clearStore}
+            className="logout-btn"
+          >
+            LOGOUT
+          </Link>
         </section>
       )
 }))

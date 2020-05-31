@@ -36,6 +36,7 @@
 }
 
 .logout-btn {
-  @include button($background-dark)
+  @include button($background-dark);
+  text-decoration: none;
 }
 

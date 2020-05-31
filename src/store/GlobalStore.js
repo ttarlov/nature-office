@@ -113,23 +113,36 @@ class GlobalStore {
     const d = spotDetails.result
     const photoUrls = d.photos.map(photo => getSpotPhoto(photo.photo_reference, 3000))
     this.spotDetails = {
-            name: spot.name,
-            address: spot.address,
-            rating: spot.rating,
-            coordinates: spot.coordinates,
-            favorite: spot.favorite,
-            id: d.id,
-            phone: d.formatted_phone_number,
-            hours: checkIfPropertyExists(() => d.opening_hours.weekday_text),
-            reviews: d.reviews,
-            types: d.types,
-            mapUrl: d.url,
-            website: d.website,
-            pictures: photoUrls,
-            wifi: true,
-            power: false,
-          }
+        name: spot.name,
+        address: spot.address,
+        rating: spot.rating,
+        coordinates: spot.coordinates,
+        favorite: spot.favorite,
+        id: d.id,
+        phone: d.formatted_phone_number,
+        hours: checkIfPropertyExists(() => d.opening_hours.weekday_text),
+        reviews: d.reviews,
+        types: d.types,
+        mapUrl: d.url,
+        website: d.website,
+        pictures: photoUrls,
+        wifi: true,
+        power: false,
+      }
    this.loadingSpotDetailPics = false
+  }
+
+  @action clearStore = () => {
+    this.apiData = []
+    this.spots = []
+    this.loginError = ''
+    this.isFormCompleted = false;
+    this.userName = ''
+    this.userEmail = ''
+    this.zipCode = ''
+    this.spotDetails = {}
+    this.joke = ''
+    this.coordinates = {}
   }
 }
 
