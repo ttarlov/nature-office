@@ -9,24 +9,21 @@ import {
 } from "../apiCalls"
 import { Redirect, Link } from 'react-router-dom';
 import React from 'react'
-import { zipCodes, getSpotPhoto } from '../constants'
+import { getSpotPhoto } from '../constants'
 const stockPhoto = "/images/stockPhoto.jpg"
 // import rino from "../../images/RiNo.png";
 
 
 class GlobalStore {
   @observable title = 'nature office';
-  @observable apiData = []
   @observable spots = []
   @observable loginError = ''
   @observable isFormCompleted = false;
   @observable userName = ''
   @observable userEmail = ''
   @observable zipCode = ''
-  @observable zipCodes = zipCodes
   @observable spotDetails = {}
   @observable loadingSpotDetailPics = false
-  @observable joke = ''
   @observable coordinates = {}
   @observable weatherType = ''
   @observable weatherTemp = ''
@@ -144,7 +141,6 @@ class GlobalStore {
   }
 
   @action clearStore = () => {
-    this.apiData = []
     this.spots = []
     this.loginError = ''
     this.isFormCompleted = false;
@@ -152,7 +148,6 @@ class GlobalStore {
     this.userEmail = ''
     this.zipCode = ''
     this.spotDetails = {}
-    this.joke = ''
     this.coordinates = {}
   }
 }
