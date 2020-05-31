@@ -11,8 +11,9 @@ const LandingPage = inject('GlobalStore')(observer(() => {
   } else {
 
     return (
-      <section className="landing-page">
-        <h2>LANDING PAGE</h2>
+      <section className="landing-container">
+        <Search />
+        <Weather />
         <img src={GlobalStore.spots[0].photo} alt="spot" width="20px"></img>
         <h2>{GlobalStore.spots[0].name}</h2>
       </section>
