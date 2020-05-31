@@ -10,9 +10,12 @@ const Weather = inject('GlobalStore')(observer(() => {
   }
 
   return (
-    <section>
-      <p>{GlobalStore.weatherType}</p>
-      <p>{convertToFahrenheit()} <span>&#176;</span>F</p>
+    <section className="weather-container">
+      <div className="temp-location-container">
+        <p className="temp">{convertToFahrenheit()} <span>&#176;</span>F</p>
+        <p className="location">Denver</p>
+      </div>
+      <p className="weather-type">{GlobalStore.weatherType}</p>
     </section>
   )
 }))
