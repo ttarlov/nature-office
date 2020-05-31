@@ -1,10 +1,30 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
+import GlobalStore from '../../store/GlobalStore'
+import MdPerson from 'react-ionicons/lib/MdPerson'
 
 const UserPage = inject('GlobalStore')(observer(() => {
+  const {
+    userName,
+    userEmail
+  } = GlobalStore
     return (
-        <section>
-          <h2>UserPage</h2>
+        <section className="user-page-container">
+          <div className="user-page-img">
+            <h2 className="user-page-title">Nature Office</h2>
+          </div>
+          <div className="user-profile-wrapper">
+            <MdPerson
+              className="user-icon"
+              color="#fff"
+              fontSize="50px"
+            />
+            <div className="user-info-wrapper">
+              <h2>{userName}</h2>
+              <h2>{userEmail}</h2>
+            </div>
+          </div>
+          <button className="logout-btn">LOGOUT</button>
         </section>
       )
 }))
