@@ -60,9 +60,9 @@ class App extends Component{
               <AddNewSpot />
             }
           />
-          <Route path='/error' render ={ () => <Error />}/>
+          <Route render ={ () => <Error joke = {GlobalStore.joke} />}/>
 
-          <Redirect to='/error'/>   
+          {/* <Redirect to='/error'/>    */}
 
         </Switch>
         {GlobalStore.spots.length > 0 && <Nav/>}
