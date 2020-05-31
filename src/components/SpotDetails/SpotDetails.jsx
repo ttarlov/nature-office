@@ -34,15 +34,27 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
       restroom,
     } = GlobalStore.spotDetails
 
+    console.log(reviews)
     let galleryItems
     let stars
+    let comments
     if (!GlobalStore.loadingSpotDetailPics) {
       stars = [...Array(Math.round(rating))].map(i => <MdStar/>)
+
       galleryItems = pictures.map(img => {
       return (
         <div>
           <img src={img} alt="spot" className="details-img"/>
         </div>
+        )
+      })
+
+      comments = reviews.map(review => {
+        return (
+          <li>
+            <p>{review.author_name}</p>
+            <p>{review.text}</p>
+          </li>
         )
       })
     }
@@ -75,8 +87,8 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
                 fontSize="60px"
                 className="spot-add-fav"
                 onClick={() => GlobalStore.toggleFavorite(id)}/>
-              }
-              {GlobalStore.loadingSpotDetailPics ? <div>Loading Pictures </div> :
+            }
+            {GlobalStore.loadingSpotDetailPics ? <div>Loading Pictures </div> :
                 <Slider {...gallerySettings} className="details-img-slider">
                 {galleryItems}
                 </Slider>
@@ -85,7 +97,7 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
 
           <div className="details-info">
             <h2 className="details-name">{name}</h2>
-            <p>adress: 3372 w 38th ave Denver</p>
+            <p>adress: {address}</p>
             <div className="stars-container">
               { stars }
             </div>
@@ -111,10 +123,12 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
               />
               <p>power: </p>
             </div>
-
-            <ul className="details-comments">
-
-            </ul>
+            {GlobalStore.loadingSpotDetailPics ? <div>Loading Pictures </div> :
+                <ul className="details-comments">
+                { comments }
+              </ul>
+              }
+            
           </div>
         </section>
       )
