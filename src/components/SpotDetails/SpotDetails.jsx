@@ -1,33 +1,73 @@
+  
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 import MdHeartOutline from 'react-ionicons/lib/MdHeartOutline'
 import MdHeart from 'react-ionicons/lib/MdHeart'
 import MdArrowRoundBack from 'react-ionicons/lib/MdArrowRoundBack'
-import Slider from "react-slick";
+import Slider from "react-slick"
+import GlobalStore from '../../store/GlobalStore'
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import MdStar from 'react-ionicons/lib/MdStar'
 import IosWifi from 'react-ionicons/lib/IosWifi'
 import MdTime from 'react-ionicons/lib/MdTime'
+import MdCall from 'react-ionicons/lib/MdCall'
 import IosBatteryCharging from 'react-ionicons/lib/IosBatteryCharging'
+import { Link } from 'react-router-dom'
+import Map from '../Map/Map'
 
 
 const SpotDetails = inject('GlobalStore')(observer((props) => {
-  // FAKE IMG DATA, REPLACE WITH FETCHED IMG
-    const imgData = [
-      "https://images.unsplash.com/photo-1518172001620-cd0e03e41ff4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1655&q=80",
-      "https://images.unsplash.com/photo-1568319552388-8795606b75d6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
-      "https://images.unsplash.com/photo-1522206038088-8698bcefa6a0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
-      "https://images.unsplash.com/photo-1554700124-538d459fc050?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
-    ]
-  // CREATE GALLERY ITEMS
-    const galleryItems = imgData.map(img => {
+    const {
+      name,
+      address,
+      rating,
+      coordinates,
+      favorite,
+      id,
+      phone,
+      hours,
+      reviews,
+      types,
+      mapUrl,
+      website,
+      pictures,
+      wifi,
+      power,
+    } = GlobalStore.spotDetails
+
+
+    let galleryItems
+    let stars
+    let comments
+    let workTime
+    if (!GlobalStore.loadingSpotDetailPics) {
+      stars = [...Array(Math.round(rating))].map(i => <MdStar/>)
+
+      galleryItems = pictures.map(img => {
       return (
         <div>
           <img src={img} alt="spot" className="details-img"/>
         </div>
-      )
-    })
+        )
+      })
+
+      comments = reviews.map(review => {
+        return (
+          <li className="details-comment">
+            <p>{review.relative_time_description}</p>
+            <p>{review.author_name}</p>
+            <p>{review.text}</p>
+          </li>
+        )
+      })
+
+      workTime = hours.map(day => {
+        return (
+        <li className="work-time">{day}</li>
+        )
+      })
+    }
 
     const gallerySettings = {
       dots: true,
@@ -37,64 +77,80 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
       slidesToScroll: 1
     }
 
-    const rating = 4.555
-    const stars = [...Array(Math.round(rating))].map(i => <MdStar/>)
-
     return (
         <section className="details-container">
-
           <div className="details-img-gallery">
+            <Link to="/spotContainer">
             <MdArrowRoundBack
               className="details-back-btn"
               color="#fff"
               fontSize="60px"
             />
-            {!props ? <MdHeart 
+            </Link>
+            {favorite ? <MdHeart
                 color="#fff"
-                fontSize="40px"
-                className="spot-remove-fav"/> : 
-                <MdHeartOutline 
-                color="#fff"  
                 fontSize="60px"
-                className="spot-add-fav"/>
-              }
-            <Slider {...gallerySettings} className="details-img-slider">
+                className="spot-remove-fav"
+                onClick={() => GlobalStore.toggleFavorite(id)}/> :
+                <MdHeartOutline
+                color="#fff"
+                fontSize="60px"
+                className="spot-add-fav"
+                onClick={() => GlobalStore.toggleFavorite(id)}/>
+            }
+            {GlobalStore.loadingSpotDetailPics ? <div>Loading Pictures </div> :
+                <Slider {...gallerySettings} className="details-img-slider">
                 {galleryItems}
-            </Slider> 
+                </Slider>
+              }
           </div>
 
           <div className="details-info">
-            <h2 className="details-name">City Beach Park</h2>
-            <p>adress: 3372 w 38th ave Denver</p>
+            <h2 className="details-name">{name}</h2>
+            <p>adress: {address}</p>
             <div className="stars-container">
               { stars }
             </div>
-
+            <div className="feature">
+              <MdCall
+                fontSize="40px"
+                className="feature-icon"
+               />
+              <p>{phone}</p>
+            </div>
             <div className="feature">
               <IosWifi
                 fontSize="40px"
                 className="feature-icon"
                />
-              <p>wifi: </p>
-            </div>
-            <div className="feature">
-              <MdTime 
-                fontSize="40px"
-                className="feature-icon"
-              />
-              <p>open: </p>
+              <p>{wifi ? 'Yes' : 'No'}</p>
             </div>
             <div className="feature">
               <IosBatteryCharging
                 fontSize="40px"
                 className="feature-icon"
               />
-              <p>power: </p>
+              <p>{power ? 'Yes' : 'No'}</p>
             </div>
-
-            <ul className="details-comments">
-            
-            </ul>
+            {GlobalStore.loadingSpotDetailPics ? <div>Loading Pictures </div> :
+            <div className="time-feature">
+              <MdTime
+                fontSize="40px"
+                className="feature-icon"
+              />
+              <ul className="work-time-wrapper">
+                { workTime }
+              </ul>
+            </div>
+            }
+            <div className="details-map-wrapper">
+              <Map center={coordinates}/>
+            </div>
+            {GlobalStore.loadingSpotDetailPics ? <div>Loading Pictures </div> :
+                <ul className="details-comment-wrapper">
+                { comments }
+              </ul>
+              }
           </div>
         </section>
       )

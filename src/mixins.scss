@@ -12,3 +12,15 @@
     transition: opacity .2s;
   }
 }
+
+@mixin container-grid {
+  display: grid;
+  grid-template: auto / repeat(1, 1fr);
+  margin: 0 auto;
+  grid-gap: 50px;
+}
+
+@mixin box-shadow-radius {
+  border-radius: 7px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.05);
+}

@@ -44,7 +44,7 @@ class App extends Component{
           />
 
           <Route
-            exact path='/spotDetails' render={ () =>
+            exact path='/spotDetails/:name' render={ () =>
               <SpotDetails />
             }
           />
@@ -60,7 +60,8 @@ class App extends Component{
               <AddNewSpot />
             }
           />
-          <Route render ={ () => <Error joke = {GlobalStore.joke} />}/>
+          <Route path='*'  render ={ () => <Error />}/>
+           
 
           {/* <Redirect to='/error'/>    */}
 
