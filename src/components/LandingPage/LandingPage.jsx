@@ -6,7 +6,12 @@ import Search from '../Search/Search'
 import Weather from '../Weather/Weather'
 
 const LandingPage = inject('GlobalStore')(observer(() => {
-  const topRated = GlobalStore.spots[0] // Hard coded until getTopRatedSpots() is created / implemented
+  const allSpots = [...GlobalStore.spots]
+
+  const findRandomSpot = () => {
+    let sortedSpots = allSpots.sort(() => Math.random() - 0.5)
+    return sortedSpots[0]
+  }
 
   return !GlobalStore.spots.length || !GlobalStore.weatherTemp || !GlobalStore.weatherType  ?
     <Loading /> :
@@ -17,11 +22,21 @@ const LandingPage = inject('GlobalStore')(observer(() => {
           <div className="spot-img-wrapper">
             <img
               className="spot-img"
-              src={topRated.photo}
+              src={findRandomSpot().photo}
               alt="spot"
             />
           </div>
-          <p className="category-title">TOP RATED</p>
+          <p className="category-title">ALL SPOTS</p>
+        </section>
+        <section className="spot-wrapper">
+          <div className="spot-img-wrapper">
+            <img
+              className="spot-img"
+              src={findRandomSpot().photo}
+              alt="spot"
+            />
+          </div>
+          <p className="category-title">TOP SPOTS</p>
         </section>
       </section>
 }))
