@@ -5,7 +5,7 @@ import Spot from '../Spot/Spot'
 
 const SpotContainer = inject('GlobalStore')(observer((props) => {
   const spots = GlobalStore.spots.map(spot => {
-    return <Spot 
+    return <Spot
               spot={spot}
               id={spot.id}
               key={spot.id}
