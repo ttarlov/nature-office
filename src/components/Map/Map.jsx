@@ -10,6 +10,7 @@ const Map = (props) => {
           center={props.center}
           zoom={15}
         >
+        
         </GoogleMapReact>
       </div>
     )
