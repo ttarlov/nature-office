@@ -5,10 +5,18 @@ export const getSpotPhoto = (param, size) => {
    
   }
 
-  export const checkIfPropertyExists = (fn) => {
+  export const checkIfStringExists = (fn) => {
     try {
         return fn()
     } catch (e) {
-        return null
+        return 'N/a'
+    }
+  }
+
+  export const checkIfArrayExists = (fn) => {
+    try {
+        return fn()
+    } catch (e) {
+        return ['N/a']
     }
   }

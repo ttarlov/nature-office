@@ -8,7 +8,11 @@ import {
 } from "../apiCalls"
 import { Redirect, Link } from 'react-router-dom';
 import React from 'react'
-import { getSpotPhoto, checkIfPropertyExists } from '../constants'
+import { 
+  getSpotPhoto, 
+  checkIfStringExists,
+  checkIfArrayExists
+} from '../constants'
 const stockPhoto = "/images/stockPhoto.jpg"
 // import rino from "../../images/RiNo.png";
 
@@ -128,7 +132,7 @@ class GlobalStore {
         favorite: spot.favorite,
         id: d.id,
         phone: d.formatted_phone_number,
-        hours: checkIfPropertyExists(() => d.opening_hours.weekday_text),
+        hours: checkIfArrayExists(() => d.opening_hours.weekday_text),
         reviews: d.reviews,
         types: d.types,
         mapUrl: d.url,
