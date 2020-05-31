@@ -66,5 +66,6 @@ export const getWeatherApi = async () => {
 export const getNorrisJoke = async () => {
   const result = await fetch('https://api.chucknorris.io/jokes/random')
   const response = await result.json()
+  sessionStorage.setItem('joke', response.value)
   return response.value
 }
