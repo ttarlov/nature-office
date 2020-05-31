@@ -15,9 +15,13 @@ import MdCall from 'react-ionicons/lib/MdCall'
 import IosBatteryCharging from 'react-ionicons/lib/IosBatteryCharging'
 import { Link } from 'react-router-dom'
 import Map from '../Map/Map'
+import Loading from '../Loading/Loading'
 
 
 const SpotDetails = inject('GlobalStore')(observer((props) => {
+
+    const loadingMessage = "LOADING WORK SPACE DETAILS..."
+
     const {
       name,
       address,
@@ -98,7 +102,7 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
                 className="spot-add-fav"
                 onClick={() => GlobalStore.toggleFavorite(id)}/>
             }
-            {GlobalStore.loadingSpotDetailPics ? <div>Loading Pictures </div> :
+            {GlobalStore.loadingSpotDetailPics ? <Loading message={loadingMessage}/> :
                 <Slider {...gallerySettings} className="details-img-slider">
                 {galleryItems}
                 </Slider>
@@ -132,7 +136,7 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
               />
               <p>{power ? 'Yes' : 'No'}</p>
             </div>
-            {GlobalStore.loadingSpotDetailPics ? <div>Loading Pictures </div> :
+            {GlobalStore.loadingSpotDetailPics ? <Loading message={loadingMessage}/> :
             <div className="time-feature">
               <MdTime
                 fontSize="40px"
@@ -146,7 +150,7 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
             <div className="details-map-wrapper">
               <Map center={coordinates}/>
             </div>
-            {GlobalStore.loadingSpotDetailPics ? <div>Loading Pictures </div> :
+            {GlobalStore.loadingSpotDetailPics ? <Loading message={loadingMessage}/> :
                 <ul className="details-comment-wrapper">
                 { comments }
               </ul>

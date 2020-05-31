@@ -115,6 +115,7 @@ class GlobalStore {
   }
 
   @action displaySpotDetails = async (id) => {
+    window.scrollTo(0, 0);
     this.loadingSpotDetailPics = true
     const spot = this.spots.find(item => item.id === id)
     const spotDetails = await getSpotDetailsApi(spot.placeId)
