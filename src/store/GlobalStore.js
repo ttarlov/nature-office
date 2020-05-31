@@ -1,15 +1,15 @@
 import { observable, action, computed } from 'mobx'
-import { 
-  getSpotsApi, 
-  getSpotDetailsApi, 
-  checkIfPropertyExists, 
-  getNorrisJoke, 
+import {
+  getSpotsApi,
+  getSpotDetailsApi,
+  checkIfPropertyExists,
+  getNorrisJoke,
   getCoordinates } from "../apiCalls"
 import { Redirect, Link } from 'react-router-dom';
 import React from 'react'
 import { zipCodes, getSpotPhoto } from '../constants'
 const stockPhoto = "/images/stockPhoto.jpg"
-// import rino from "../../images/RiNo.png";
+
 
 
 class GlobalStore {
@@ -20,7 +20,7 @@ class GlobalStore {
   @observable isFormCompleted = false;
   @observable userName = ''
   @observable userEmail = ''
-  @observable zipCode = ''
+  @observable zipCode = '80202'
   @observable zipCodes = zipCodes
   @observable spotDetails = {}
   @observable loadingSpotDetailPics = false
