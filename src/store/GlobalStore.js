@@ -1,10 +1,12 @@
 import { observable, action, computed } from 'mobx'
-import { 
-  getSpotsApi, 
-  getSpotDetailsApi, 
-  checkIfPropertyExists, 
-  getNorrisJoke, 
-  getCoordinates } from "../apiCalls"
+import {
+  getSpotsApi,
+  getSpotDetailsApi,
+  checkIfPropertyExists,
+  getNorrisJoke,
+  getCoordinates,
+  getWeatherApi
+} from "../apiCalls"
 import { Redirect, Link } from 'react-router-dom';
 import React from 'react'
 import { zipCodes, getSpotPhoto } from '../constants'
