@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import Map from '../Map/Map'
 import Login from '../Login/Login'
+import LandingPage from '../LandingPage/LandingPage'
 import Nav from '../Nav/Nav';
 import SpotContainer from '../SpotContainer/SpotContainer';
 import SpotDetails from '../SpotDetails/SpotDetails';
@@ -22,6 +24,7 @@ class App extends Component{
           
           <Route
             exact path='/' render={ () => <Login />} />
+          <Route exact path='/landing' render={ () => <LandingPage /> }/>
           <Route
             exact path='/spotContainer' render={ () => <SpotContainer />} />
           <Route
