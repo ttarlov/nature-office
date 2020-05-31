@@ -29,7 +29,7 @@ export const getSpotDetailsApi = async (placeId) => {
         "Target-URL": `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${apiKey}`
       }
     })
-    return await response.json()  
+    return await response.json()
   } catch (error) {
     console.log(error)
   }
@@ -59,6 +59,16 @@ export const getCoordinates = async (zipCode) => {
   } catch (error) {
     window.alert(`Server Error. Its not your fault the error is: ${error}`)
   }
+}
+
+export const getWeatherApi = async () => {
+  const result = await fetch('https://fe-cors-proxy.herokuapp.com', {
+    headers: {
+      "Target-URL": 'https://www.metaweather.com/api/location/2391279/'
+    }
+  })
+
+  return await result.json()
 }
 
 export const getNorrisJoke = async () => {
