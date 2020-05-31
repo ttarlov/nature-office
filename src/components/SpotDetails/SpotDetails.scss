@@ -31,8 +31,12 @@
     display: flex;
     padding: 10px 0;
     align-items: center;
-    p {
+    p,
+    a {
       margin-left: 20px;
+    }
+    a {
+      color: inherit;
     }
   }
   .time-feature {

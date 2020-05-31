@@ -84,8 +84,6 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
 
     return (
         <section className="details-container">
-
-
           <div className="details-img-gallery">
             <Link to="/spotContainer">
             <MdArrowRoundBack
@@ -105,14 +103,13 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
                 className="spot-add-fav"
                 onClick={() => GlobalStore.toggleFavorite(id)}/>
             }
-            {GlobalStore.loadingSpotDetailPics ? <Loading message={loadingMessage}/> :
+            {GlobalStore.loadingSpotDetailPics ? 
+            <Loading message={loadingMessage}/> :
                 <Slider {...gallerySettings} className="details-img-gallery">
                 {galleryItems}
                 </Slider>
               }
           </div>
-
-
           <section classname="details-info-map-wrapper">
             <div className="details-info-wrapper">
               <h2 className="details-name">{name || "N/a"}</h2>
@@ -138,13 +135,14 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
                   fontSize="40px"
                   className="feature-icon"
                 />
-                <p>{website || 'N/a'}</p>
+                {website ? <a href={website} target='_blank'>Open Website</a> : <p>N/a</p>}
+                
               </div>
               <div className="feature">
                 <IosWifi
                   fontSize="40px"
                   className="feature-icon"
-                />
+                /> 
                 <p>{wifi ? 'Yes' : 'No'}</p>
               </div>
               <div className="feature">
@@ -154,7 +152,8 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
                 />
                 <p>{power ? 'Yes' : 'No'}</p>
               </div>
-              {GlobalStore.loadingSpotDetailPics ? <Loading message={loadingMessage}/> :
+              {GlobalStore.loadingSpotDetailPics ? 
+              <Loading message={loadingMessage}/> :
               <div className="time-feature">
                 <MdTime
                   fontSize="40px"
@@ -170,9 +169,8 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
                 <Map center={coordinates}/>
             </div>
           </section>
-
-          
-            {GlobalStore.loadingSpotDetailPics ? <Loading message={loadingMessage}/> :
+            {GlobalStore.loadingSpotDetailPics ? 
+            <Loading message={loadingMessage}/> :
               <section className="details-comment-container">
                 <h2>Comments: </h2>
                 <ul className="details-comment-wrapper">
