@@ -1,10 +1,12 @@
 import { observable, action, computed } from 'mobx'
-import { 
-  getSpotsApi, 
-  getSpotDetailsApi, 
-  checkIfPropertyExists, 
-  getNorrisJoke, 
-  getCoordinates } from "../apiCalls"
+import {
+  getSpotsApi,
+  getSpotDetailsApi,
+  checkIfPropertyExists,
+  getNorrisJoke,
+  getCoordinates,
+  getWeatherApi
+} from "../apiCalls"
 import { Redirect, Link } from 'react-router-dom';
 import React from 'react'
 import { zipCodes, getSpotPhoto } from '../constants'
@@ -26,6 +28,8 @@ class GlobalStore {
   @observable loadingSpotDetailPics = false
   @observable joke = ''
   @observable coordinates = {}
+  @observable weatherType = ''
+  @observable weatherTemp = ''
 
   @action handleChange = (event) => {
     // this.loginError = ''
@@ -49,6 +53,7 @@ class GlobalStore {
       this.getCoordinatesFromZip(+this.zipCode)
       // this.getSpots()
       this.errorJoke()
+      this.getWeather()
     }
   }
 
@@ -95,6 +100,12 @@ class GlobalStore {
       }
     )
   })
+  }
+
+  @action getWeather = async () => {
+    const weatherApiData = await getWeatherApi()
+    this.weatherType = weatherApiData.consolidated_weather[0].weather_state_name
+    this.weatherTemp = weatherApiData.consolidated_weather[0].the_temp
   }
 
   @action toggleFavorite = (id) => {
