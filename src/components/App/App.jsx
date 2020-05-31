@@ -6,11 +6,10 @@ import Nav from '../Nav/Nav'
 import SpotContainer from '../SpotContainer/SpotContainer'
 import SpotDetails from '../SpotDetails/SpotDetails'
 import AddNewSpot from '../AddNewSpot/AddNewSpot'
-import { getSpots } from '../../apiCalls'
 import GlobalStore from '../../store/GlobalStore'
 import UserPage from '../UserPage/UserPage'
 import { inject, observer } from 'mobx-react'
-import { Route, Redirect, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import Error from '../Error/Error.jsx'
 import Search from '../Search/Search.jsx'
 
@@ -22,49 +21,20 @@ class App extends Component{
     return (
       <section className="app-container">
         <Switch>
+          
           <Route
-            exact path='/' render={ () =>
-              <Login />
-            }
-          />
-
+            exact path='/' render={ () => <Login />} />
           <Route
-            path='/landing' render={ () =>
-              <>
-                <Search />
-                <LandingPage />
-              </>
-            }
-          />
-
+            path='/landing' render={ () => <> <Search /> <LandingPage /></>} />
           <Route
-            exact path='/spotContainer' render={ () =>
-              <SpotContainer />
-            }
-          />
-
+            exact path='/spotContainer' render={ () => <SpotContainer />} />
           <Route
-            exact path='/spotDetails/:name' render={ () =>
-              <SpotDetails />
-            }
-          />
-
+            exact path='/spotDetails/:name' render={ () => <SpotDetails />}/>
           <Route
-            exact path='/userPage' render={ () =>
-              <UserPage />
-            }
-          />
-
+            exact path='/userPage' render={ () => <UserPage />}/>
           <Route
-            exact path='/addNewSpot' render={ () =>
-              <AddNewSpot />
-            }
-          />
+            exact path='/addNewSpot' render={ () => <AddNewSpot />}/>
           <Route path='*'  render ={ () => <Error />}/>
-           
-
-          {/* <Redirect to='/error'  render ={ () => <Error />}/>    */}
-
         </Switch>
         {GlobalStore.spots.length > 0 && <Nav/>}
       </section>
