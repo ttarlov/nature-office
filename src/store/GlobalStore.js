@@ -37,6 +37,7 @@ class GlobalStore {
   }
 
   @action validateUser = (event) => {
+    
     this.isFormCompleted = false
     event.preventDefault()
 
@@ -52,7 +53,8 @@ class GlobalStore {
       this.isFormCompleted = true;
       this.getCoordinatesFromZip(+this.zipCode)
       // this.getSpots()
-      this.errorJoke()
+      // this.errorJoke()
+      // this.errorJoke()
       this.getWeather()
     }
   }
@@ -66,14 +68,15 @@ class GlobalStore {
     // this.long = coordinates.results[0].location.long
     console.log('coordinates', this.coordinates);
     this.getSpots()
+    getNorrisJoke()
   }
 
+  
+  // @action generateErrorJoke = async () => {
+  //   const joke = await getNorrisJoke()
+  
 
-  @action errorJoke = async () => {
-    const joke = await getNorrisJoke()
-    this.joke = joke;
-
-  }
+  // // }
 
    @action getSpots = async () => {
   console.log('apicall made')
