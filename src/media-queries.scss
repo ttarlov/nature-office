@@ -7,13 +7,16 @@ $break4: 1280px;
    .spot-container {
       grid-template: auto / repeat(1, 1fr);
       width: 70%;
-    }  
+    } 
 }
 
 @media (min-width: $break2) {
     .spot-container {
       grid-template: auto / repeat(2, 1fr);
       width: 90%;
+    } 
+    .details-comment-wrapper {
+      grid-template: auto / repeat(2, 1fr);
     }    
 }
 
@@ -21,6 +24,9 @@ $break4: 1280px;
     .spot-container {
       grid-template: auto / repeat(3, 1fr);
     }
+    .details-comment-wrapper {
+      grid-template: auto / repeat(3, 1fr);
+   } 
 }
 
 @media (min-width: $break4) {

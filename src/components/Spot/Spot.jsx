@@ -46,6 +46,7 @@ const Spot = inject('GlobalStore')(observer((props) => {
           </Link>
           </div>
           <Link
+            className="open-spot"
             to={`/spotDetails/${name}`}
             onClick={() => GlobalStore.displaySpotDetails(id)}
           >

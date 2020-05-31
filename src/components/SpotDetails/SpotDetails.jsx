@@ -11,8 +11,10 @@ import "slick-carousel/slick/slick-theme.css"
 import MdStar from 'react-ionicons/lib/MdStar'
 import IosWifi from 'react-ionicons/lib/IosWifi'
 import MdTime from 'react-ionicons/lib/MdTime'
+import MdCall from 'react-ionicons/lib/MdCall'
 import IosBatteryCharging from 'react-ionicons/lib/IosBatteryCharging'
 import { Link } from 'react-router-dom'
+import Map from '../Map/Map'
 
 
 const SpotDetails = inject('GlobalStore')(observer((props) => {
@@ -31,13 +33,14 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
       website,
       pictures,
       wifi,
-      restroom,
+      power,
     } = GlobalStore.spotDetails
 
-    console.log(reviews)
+
     let galleryItems
     let stars
     let comments
+    let workTime
     if (!GlobalStore.loadingSpotDetailPics) {
       stars = [...Array(Math.round(rating))].map(i => <MdStar/>)
 
@@ -51,10 +54,17 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
 
       comments = reviews.map(review => {
         return (
-          <li>
+          <li className="details-comment">
+            <p>{review.relative_time_description}</p>
             <p>{review.author_name}</p>
             <p>{review.text}</p>
           </li>
+        )
+      })
+
+      workTime = hours.map(day => {
+        return (
+        <li className="work-time">{day}</li>
         )
       })
     }
@@ -101,34 +111,46 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
             <div className="stars-container">
               { stars }
             </div>
-
+            <div className="feature">
+              <MdCall
+                fontSize="40px"
+                className="feature-icon"
+               />
+              <p>{phone}</p>
+            </div>
             <div className="feature">
               <IosWifi
                 fontSize="40px"
                 className="feature-icon"
                />
-              <p>wifi: </p>
-            </div>
-            <div className="feature">
-              <MdTime
-                fontSize="40px"
-                className="feature-icon"
-              />
-              <p>open: </p>
+              <p>{wifi ? 'Yes' : 'No'}</p>
             </div>
             <div className="feature">
               <IosBatteryCharging
                 fontSize="40px"
                 className="feature-icon"
               />
-              <p>power: </p>
+              <p>{power ? 'Yes' : 'No'}</p>
             </div>
             {GlobalStore.loadingSpotDetailPics ? <div>Loading Pictures </div> :
-                <ul className="details-comments">
+            <div className="time-feature">
+              <MdTime
+                fontSize="40px"
+                className="feature-icon"
+              />
+              <ul className="work-time-wrapper">
+                { workTime }
+              </ul>
+            </div>
+            }
+            <div className="details-map-wrapper">
+              <Map center={coordinates}/>
+            </div>
+            {GlobalStore.loadingSpotDetailPics ? <div>Loading Pictures </div> :
+                <ul className="details-comment-wrapper">
                 { comments }
               </ul>
               }
-            
           </div>
         </section>
       )
