@@ -1,4 +1,4 @@
-  
+
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 import MdHeartOutline from 'react-ionicons/lib/MdHeartOutline'
@@ -42,6 +42,7 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
     let comments
     let workTime
     if (!GlobalStore.loadingSpotDetailPics) {
+      if (rating !== undefined){
       stars = [...Array(Math.round(rating))].map(i => <MdStar/>)
 
       galleryItems = pictures.map(img => {
@@ -51,7 +52,8 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
         </div>
         )
       })
-
+    }
+      if (reviews !== undefined){
       comments = reviews.map(review => {
         return (
           <li className="details-comment">
@@ -61,13 +63,16 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
           </li>
         )
       })
-
-      workTime = hours.map(day => {
+      }
+      if (hours !== null){
+        workTime = hours.map(day => {
         return (
         <li className="work-time">{day}</li>
         )
       })
     }
+    }
+
 
     const gallerySettings = {
       dots: true,
