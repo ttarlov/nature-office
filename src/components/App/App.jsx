@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
-import Map from '../Map/Map'
 import Login from '../Login/Login'
-import LandingPage from '../LandingPage/LandingPage'
-import Nav from '../Nav/Nav'
-import SpotContainer from '../SpotContainer/SpotContainer'
-import SpotDetails from '../SpotDetails/SpotDetails'
-import AddNewSpot from '../AddNewSpot/AddNewSpot'
-import GlobalStore from '../../store/GlobalStore'
-import UserPage from '../UserPage/UserPage'
-import { inject, observer } from 'mobx-react'
-import { Route, Switch } from 'react-router-dom'
-import Error from '../Error/Error.jsx'
-import Search from '../Search/Search.jsx'
+import Nav from '../Nav/Nav';
+import SpotContainer from '../SpotContainer/SpotContainer';
+import SpotDetails from '../SpotDetails/SpotDetails';
+import AddNewSpot from '../AddNewSpot/AddNewSpot';
+import GlobalStore from '../../store/GlobalStore';
+import UserPage from '../UserPage/UserPage';
+import { inject, observer } from 'mobx-react';
+import { Route, Switch } from 'react-router-dom';
+import Error from '../Error/Error.jsx';
+
 
 @inject('GlobalStore')
 // @inject('routing')
@@ -24,8 +22,6 @@ class App extends Component{
           
           <Route
             exact path='/' render={ () => <Login />} />
-          <Route
-            path='/landing' render={ () => <> <Search /> <LandingPage /></>} />
           <Route
             exact path='/spotContainer' render={ () => <SpotContainer />} />
           <Route
