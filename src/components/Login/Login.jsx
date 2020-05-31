@@ -2,14 +2,24 @@ import React from 'react'
 import { inject, observer } from 'mobx-react'
 import GlobalStore from '../../store/GlobalStore'
 import { Link, Redirect } from 'react-router-dom'
+import homePageBackground from "./homePageBackground.jpg"
 
 
 const Login = inject('GlobalStore')(observer((props) => {
   console.log('isFormCompleted', GlobalStore.isFormCompleted)
     return (
-        <section>
-          <h2>{GlobalStore.title}</h2>
-          <form>
+
+      <section className="login-form-background">
+
+    <div className="login-title">
+      <h2>{GlobalStore.title}</h2>
+      <h3 className="form-title">Find your outdoor office spot</h3>
+      </div>
+      <section className="login-form-container">
+      <form className="login-form">
+      {GlobalStore.loginError &&
+        <p className="">{GlobalStore.loginError}
+        </p>}
             <label htmlFor="userName">Name</label>
             <input
             type="text"
@@ -34,15 +44,12 @@ const Login = inject('GlobalStore')(observer((props) => {
             value={GlobalStore.zipCode}
             onChange={GlobalStore.handleChange}
           />
-
-
+          <button className="login-btn" onClick={GlobalStore.validateUser}>
+          Go!</button>
           </form>
-          <button className="login-btn" onClick={GlobalStore.validateUser}>Login</button>
-        {GlobalStore.isFormCompleted && <Redirect to="/landing" />}
-          {GlobalStore.loginError &&
-           <p>
-             {GlobalStore.loginError}
-           </p>}
+          {GlobalStore.isFormCompleted && <Redirect to="/landing" />}
+
+        </section>
         </section>
       )
 }))
