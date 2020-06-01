@@ -15,7 +15,7 @@ const Loading = (props) => {
           rotate={true}
         />
         <IosCloudy
-          color="#efefef"
+          color="#f8f8f8"
           className="cloud"
           fontSize="8rem"
         />

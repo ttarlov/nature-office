@@ -5,6 +5,8 @@
 @import './src/components/Nav/Nav';
 @import './src/components/Loading/Loading';
 @import './src/components/SpotDetails/SpotDetails';
+@import './src/components/Weather/Weather';
+@import './src/components/Search/Search';
 @import './src/components/UserPage/UserPage';
 @import './src/components/Error/Error';
 
@@ -32,5 +34,13 @@ body,
 
 
 
+
+.weather {
+  background-color: #b3cdd1;
+  background-image: linear-gradient(315deg, #b3cdd1 0%, #9fa4c4 74%);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
 
 @import './media-queries';
