@@ -12,8 +12,19 @@ $break4: 1280px;
 }
 
 @media (max-width: $break2){
-  .login-form-container {
+  .login-form-container
+  {
     width: 50%;
+  }
+  .add-new-spot-form-container {
+    width: 50%;
+    margin-top: -25%;
+  }
+}
+@media (max-width: $break3){
+  .add-new-spot-form-container {
+    width: 50%;
+    margin-top: -30%;
   }
 }
 @media (min-width: $break2) {
