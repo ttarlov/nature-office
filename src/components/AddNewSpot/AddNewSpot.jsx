@@ -1,4 +1,5 @@
 import React from 'react'
+import GlobalStore from '../../store/GlobalStore'
 import { inject, observer } from 'mobx-react'
 
 const AddNewSpot = inject('GlobalStore')(observer(() => {
@@ -36,47 +37,70 @@ const AddNewSpot = inject('GlobalStore')(observer(() => {
 //   })
 // }
 
+
+// {
+//   // name: spot.name,
+//   id: spot.id,
+//   // address: spot.vicinity,
+//   rating: spot.rating,
+//   photo: photo,
+//   coordinates: spot.geometry.location,
+//   // placeId: spot.place_id,
+//   favorite: false
+// }
+console.log(GlobalStore.newSpotRating);
   return (
-    <section className="login-form-background">
+    <section className="add-new-spot-form-background">
     <h2>Add a new spot!</h2>
-    {// <section className="login-form-container">
-    // <form className="login-form">
-    // <input
-    //   type='text'
-    //   placeholder='name'
-    //   value={this.state.name}
-    //   name='name'
-    //   onChange={this.handleChange}
-    // />
-    //   <input
-    //     type='date'
-    //     placeholder='Date (mm/dd)'
-    //     value={this.state.date}
-    //     name='date'
-    //     onChange={this.handleChange}
-    //   />
-    //   <input
-    //     type='text'
-    //     placeholder='Time'
-    //     value={this.state.time}
-    //     name='time'
-    //     onChange={this.handleChange}
-    //   />
-    //   <input
-    //     type= 'number'
-    //     placeholder='Number of guests'
-    //     value={this.state.number}
-    //     name='number'
-    //     onChange={this.handleChange}
-    //   />
-    //   <button
-    //     onClick={this.submitReservation}
-    //   >
-    //     Make Reservation
-    //   </button>
-    // </form>
-    // </section>
-  }
+    <section className="add-new-spot-form-container">
+    <form className="add-new-spot-form">
+    <input
+      type='text'
+      placeholder='new spot name'
+      value={GlobalStore.newSpotName}
+      name='newSpotName'
+      onChange={GlobalStore.handleChange}
+    />
+      <input
+        type='text'
+        placeholder='address'
+        value={GlobalStore.newSpotAddress}
+        name='newSpotAddress'
+        onChange={GlobalStore.handleChange}
+      />
+      <input
+        type='text'
+        placeholder='zip code'
+        maxlength='5'
+        value={GlobalStore.newSpotZipCode}
+        name='newSpotZipCode'
+        onChange={GlobalStore.handleChange}
+      />
+      <input
+        type='text'
+        maxlength='1'
+        placeholder='rating(1-5)'
+        value={GlobalStore.newSpotRating}
+        name='newSpotRating'
+        onChange={GlobalStore.handleChange}
+      />
+
+      <input
+        type= 'text'
+        placeholder='image links'
+        value={GlobalStore.newSpotImages}
+        name='newSpotImages'
+        onChange={GlobalStore.handleChange}
+      />
+        <label htmlFor="userName">(separate multiple images by comma)</label>
+      <button
+        onClick={GlobalStore.addNewSpot}
+      >
+        Upload New Spot!
+      </button>
+    </form>
+    </section>
+
     </section>
       )
 }))
