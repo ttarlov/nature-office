@@ -7,17 +7,23 @@ $break4: 1280px;
    .spot-container {
       grid-template: auto / repeat(1, 1fr);
       width: 70%;
-    } 
+    }
+
 }
 
+@media (max-width: $break2){
+  .login-form-container {
+    width: 50%;
+  }
+}
 @media (min-width: $break2) {
     .spot-container {
       grid-template: auto / repeat(2, 1fr);
       width: 90%;
-    } 
+    }
     .details-comment-wrapper {
       grid-template: auto / repeat(2, 1fr);
-    }    
+    }
 }
 
 @media (min-width: $break3) {
@@ -26,12 +32,13 @@ $break4: 1280px;
     }
     .details-comment-wrapper {
       grid-template: auto / repeat(3, 1fr);
-   } 
+   }
+
 }
 
 @media (min-width: $break4) {
     .spot-container {
       grid-template: auto / repeat(4, 1fr);
     }
-    
+
 }
