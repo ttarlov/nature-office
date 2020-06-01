@@ -26,7 +26,7 @@ const LandingPage = inject('GlobalStore')(observer(() => {
               alt="spot"
             />
           </div>
-          <p className="category-title">ALL SPOTS</p>
+          <p className="category-title">Explore all</p>
         </section>
         <section className="spot-wrapper">
           <div className="spot-img-wrapper">
