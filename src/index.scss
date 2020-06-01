@@ -7,6 +7,8 @@
 @import './src/components/SpotDetails/SpotDetails';
 @import './src/components/Weather/Weather';
 @import './src/components/Search/Search';
+@import './src/components/UserPage/UserPage';
+@import './src/components/Error/Error';
 
 body,
 * {
@@ -17,23 +19,21 @@ body,
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
 }
 
 .app-container {
+  width: 100vw;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background-color: $background-light;
 }
 
-.error-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: solid red 1px;
-  height: 100vh;
-}
+
+
+
+
 
 .weather {
   background-color: #b3cdd1;

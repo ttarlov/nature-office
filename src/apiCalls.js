@@ -35,14 +35,6 @@ export const getSpotDetailsApi = async (placeId) => {
   }
 }
 
-export const checkIfPropertyExists = (fn) => {
-  try {
-      return fn()
-  } catch (e) {
-      return null
-  }
-}
-
 export const getCoordinates = async (zipCode) => {
   try {
     const result = await fetch('https://fe-cors-proxy.herokuapp.com', {
@@ -74,5 +66,6 @@ export const getWeatherApi = async () => {
 export const getNorrisJoke = async () => {
   const result = await fetch('https://api.chucknorris.io/jokes/random')
   const response = await result.json()
+  sessionStorage.setItem('joke', response.value)
   return response.value
 }

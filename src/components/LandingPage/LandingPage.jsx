@@ -15,7 +15,7 @@ const LandingPage = inject('GlobalStore')(observer(() => {
   }
 
   return !GlobalStore.spots.length || !GlobalStore.weatherTemp || !GlobalStore.weatherType  ?
-    <Loading /> :
+    <Loading message="LOOKING OUTSIDE FOR WORK SPACES..."/> :
       <React.Fragment>
       <div className="weather">
         <Weather/>
