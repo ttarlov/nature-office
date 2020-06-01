@@ -16,8 +16,8 @@ const LandingPage = inject('GlobalStore')(observer(() => {
   return !GlobalStore.spots.length || !GlobalStore.weatherTemp || !GlobalStore.weatherType  ?
     <Loading /> :
       <section className="landing-container">
-        <Search />
         <Weather />
+        <Search />
         <section className="spot-wrapper">
           <div className="spot-img-wrapper">
             <img
