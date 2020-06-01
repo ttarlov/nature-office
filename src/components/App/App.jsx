@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Map from '../Map/Map'
 import Login from '../Login/Login'
 import LandingPage from '../LandingPage/LandingPage'
+import Weather from '../Weather/Weather'
 import Nav from '../Nav/Nav'
 import SpotContainer from '../SpotContainer/SpotContainer'
 import SpotDetails from '../SpotDetails/SpotDetails'
@@ -20,6 +21,9 @@ class App extends Component{
   render() {
     return (
       <section className="app-container">
+        <div className="weather">
+          {GlobalStore.spots.length > 0 && <Weather/>}
+        </div>
         <Switch>
           <Route exact path='/' render={ () => <Login /> }/>
           <Route exact path='/landing' render={ () => <LandingPage /> }/>
