@@ -10,7 +10,6 @@ const Search = inject('GlobalStore')(observer(() => {
         type="text"
         name="search"
         placeholder="Search"
-        required
       />
       <button className="search-icon">
         <IosSearch
