@@ -1,0 +1,30 @@
+.search-container {
+  @include box-shadow-radius;
+  align-items: center;
+  background-color: $background-white;
+  border-radius: 1.5rem;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+
+  // position: fixed;
+  // top: 7rem;
+  // z-index: 1;
+}
+
+.search-input {
+  background-color: $background-white;
+  border: none;
+  border-radius: 1.5rem;
+  font-size: 1.2rem;
+  height: 2rem;
+  padding: .5rem 1rem;
+  width: 90%;
+}
+
+.search-icon {
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+  margin-right: 1rem;
+}

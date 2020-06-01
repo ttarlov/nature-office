@@ -1,64 +1,79 @@
 .details-container {
     padding-bottom: 100px;
-  }
-  
-.details-img-gallery {
-    position: relative;
-    width: 100vw;
-    height: 50vh;
-    background-color: $background-medium-dark;
-    .details-img {
-      width: 100%;
+    width: 100%;
+
+    .details-img-gallery {
+      position: relative;
+      width: 100vw;
       height: 50vh;
-      object-fit: cover;
+      background-color: $background-medium-dark;
+      .details-back-btn {
+        @include icon-on-img;
+        @include icon-hover;
+        left: 10px;
     }
+      .details-img {
+        width: 100%;
+        height: 50vh;
+        object-fit: cover;
+      }
+  }
 }
-  
-.details-back-btn {
-    @include icon-on-img;
-    @include icon-hover;
-    left: 10px;
-}
-  
-.details-info {
-    padding: 50px;
-}
-  
-.feature,
-.time-feature {
+
+.details-info-wrapper {
+  padding: 50px;
+  h2 {
+    font-size: 2.5rem;
+  }
+  .feature,
+  .time-feature {
     font-size: 1.4rem;
     display: flex;
     padding: 10px 0;
     align-items: center;
-    p {
+    p,
+    a {
       margin-left: 20px;
     }
-}
-
-.time-feature {
-  align-items: flex-start;
-  list-style-type: none;
-  .work-time-wrapper {
+    a {
+      color: inherit;
+    }
+  }
+  .time-feature {
+    align-items: flex-start;
     list-style-type: none;
-    li {
-      margin-left: 20px;
+    .work-time-wrapper {
+      list-style-type: none;
+      li {
+        margin-left: 20px;
+      }
     }
   }
 }
+  
 
-.details-comment-wrapper {
-  display: grid;
-  @include container-grid;
-  list-style-type: none;
-  grid-gap: 30px;
-  .details-comment {
-    background-color: $background-white;
-    @include box-shadow-radius;
-    padding: 20px;
-  }
-}
 
 .details-map-wrapper {
-  width: 500px;
+  width: 100%;
   height: 500px;
+}
+
+
+.details-comment-container {
+  padding: 30px;
+  h2 {
+    font-size: 2rem;
+  }
+  .details-comment-wrapper {
+    padding-top: 30px;
+    display: grid;
+    @include container-grid;
+    list-style-type: none;
+    grid-gap: 30px;
+    .details-comment {
+      background-color: $background-white;
+      @include box-shadow-radius;
+      padding: 20px;
+    }
+  }
 }

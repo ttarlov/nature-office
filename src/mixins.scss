@@ -24,3 +24,22 @@
   border-radius: 7px;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.05);
 }
+
+@mixin button($color) {
+  padding: 10px 20px;
+  border-radius: 5px;
+  align-self: center;
+  cursor: pointer;
+  border: 2px solid $color;
+  font-size: 1.2rem;
+  font-weight: bold;
+  opacity: .8;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.05);
+  color: $color;
+  &:hover {
+    opacity: 1;
+    color: #fff;
+    background-color: $color;
+    transition: color .5s, background-color .5s, opacity .5s;
+  }
+}

@@ -35,13 +35,6 @@ export const getSpotDetailsApi = async (placeId) => {
   }
 }
 
-export const checkIfPropertyExists = (fn) => {
-  try {
-      return fn()
-  } catch (e) {
-      return null
-  }
-}
 
 export const addNewSpotApi = async (zipCode, name)=>{
   try {
@@ -79,8 +72,19 @@ export const getCoordinates = async (zipCode) => {
   }
 }
 
+export const getWeatherApi = async () => {
+  const result = await fetch('https://fe-cors-proxy.herokuapp.com', {
+    headers: {
+      "Target-URL": 'https://www.metaweather.com/api/location/2391279/'
+    }
+  })
+
+  return await result.json()
+}
+
 export const getNorrisJoke = async () => {
   const result = await fetch('https://api.chucknorris.io/jokes/random')
   const response = await result.json()
+  sessionStorage.setItem('joke', response.value)
   return response.value
 }

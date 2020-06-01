@@ -2,36 +2,38 @@ import { observable, action, computed } from 'mobx'
 import {
   getSpotsApi,
   getSpotDetailsApi,
-  checkIfPropertyExists,
   getNorrisJoke,
   getCoordinates,
   addNewSpotApi } from "../apiCalls"
 import { Redirect, Link } from 'react-router-dom';
 import React from 'react'
-import { zipCodes, getSpotPhoto } from '../constants'
+import {
+  getSpotPhoto,
+  checkIfStringExists,
+  checkIfArrayExists
+} from '../constants'
 const stockPhoto = "/images/stockPhoto.jpg"
 
 
 
 class GlobalStore {
   @observable title = 'nature office';
-  @observable apiData = []
   @observable spots = []
   @observable loginError = ''
   @observable isFormCompleted = false;
   @observable userName = ''
   @observable userEmail = ''
   @observable zipCode = '80202'
-  @observable zipCodes = zipCodes
   @observable spotDetails = {}
   @observable loadingSpotDetailPics = false
-  @observable joke = ''
   @observable coordinates = {}
   @observable newSpotName = ''
   @observable newSpotAddress = ''
   @observable newSpotImages = ''
   @observable newSpotRating = ''
   @observable newSpotZipCode = ''
+  @observable weatherType = ''
+  @observable weatherTemp = ''
 
   @action handleChange = (event) => {
     this[event.target.name] = event.target.value
@@ -76,6 +78,7 @@ class GlobalStore {
     }
 
   @action validateUser = (event) => {
+
     this.isFormCompleted = false
     event.preventDefault()
 
@@ -89,7 +92,9 @@ class GlobalStore {
       this.isFormCompleted = true;
       this.getCoordinatesFromZip(+this.zipCode)
       // this.getSpots()
-      this.errorJoke()
+      // this.errorJoke()
+      // this.errorJoke()
+      this.getWeather()
     }
   }
 
@@ -102,14 +107,15 @@ class GlobalStore {
     // this.long = coordinates.results[0].location.long
     console.log('coordinates', this.coordinates);
     this.getSpots()
+    getNorrisJoke()
   }
 
 
-  @action errorJoke = async () => {
-    const joke = await getNorrisJoke()
-    this.joke = joke;
+  // @action generateErrorJoke = async () => {
+  //   const joke = await getNorrisJoke()
 
-  }
+
+  // // }
 
    @action getSpots = async () => {
   console.log('apicall made')
@@ -138,6 +144,12 @@ class GlobalStore {
   })
   }
 
+  @action getWeather = async () => {
+    const weatherApiData = await getWeatherApi()
+    this.weatherType = weatherApiData.consolidated_weather[0].weather_state_name
+    this.weatherTemp = weatherApiData.consolidated_weather[0].the_temp
+  }
+
   @action toggleFavorite = (id) => {
     this.spots.forEach(spot => {
       (spot.id === id) && (spot.favorite = !spot.favorite)
@@ -148,6 +160,7 @@ class GlobalStore {
   }
 
   @action displaySpotDetails = async (id) => {
+    window.scrollTo(0, 0);
     this.loadingSpotDetailPics = true
     const spot = this.spots.find(item => item.id === id)
     const spotDetails = await getSpotDetailsApi(spot.placeId)
@@ -164,7 +177,7 @@ class GlobalStore {
             favorite: spot.favorite,
             id: d.id,
             phone: d.formatted_phone_number || undefined,
-            hours: checkIfPropertyExists(() => d.opening_hours.weekday_text),
+            hours: checkIfArrayExists(() => d.opening_hours.weekday_text),
             reviews: d.reviews || undefined,
             types: d.types,
             mapUrl: d.url || undefined,
@@ -174,6 +187,17 @@ class GlobalStore {
             power: false,
           }
    this.loadingSpotDetailPics = false
+  }
+
+  @action clearStore = () => {
+    this.spots = []
+    this.loginError = ''
+    this.isFormCompleted = false;
+    this.userName = ''
+    this.userEmail = ''
+    this.zipCode = ''
+    this.spotDetails = {}
+    this.coordinates = {}
   }
 }
 

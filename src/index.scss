@@ -3,20 +3,13 @@
 @import './src/components/SpotContainer/SpotContainer';
 @import './src/components/Spot/Spot';
 @import './src/components/Nav/Nav';
+@import './src/components/Loading/Loading';
 @import './src/components/SpotDetails/SpotDetails';
-@import './src/components/Login/Login';
-
-// body,
-// * {
-//   margin: 0;
-//   padding: 0;
-//   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-//     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-//     sans-serif;
-//   -webkit-font-smoothing: antialiased;
-//   -moz-osx-font-smoothing: grayscale;
-// }
-
+@import './src/components/Weather/Weather';
+@import './src/components/Search/Search';
+@import './src/components/UserPage/UserPage';
+@import './src/components/Error/Error';
+@import './src/components/Login/Login'
 
 body,
 html {
@@ -33,37 +26,17 @@ html {
   background-color: $background-light;
 }
 
-.error-container {
+
+
+
+.weather {
+  background-color: #b3cdd1;
+  background-image: linear-gradient(315deg, #b3cdd1 0%, #9fa4c4 74%);
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  border: solid red 1px;
-  height: 100vh;
+  width: 100%;
 }
 
-// .login-form-background {
-//   background-image: linear-gradient(
-//       90deg,
-//       rgba(255, 255, 255, 1) 0%,
-//       rgba(255, 255, 255, 0.5116421568627452) 0%
-//     ),
-//     url("/images/homePageBackground.jpg");
-//   background-repeat: no-repeat;
-//   background-size: cover;
-//   height: 100%;
-//   overflow: hidden;
-//   width: auto;
-// }
-//
-// .login-form-background h2 {
-//   background-color: #4037a7;
-//   color: #addbe4;
-//   font-size: 50px;
-//   font-weight: bold;
-//   margin-bottom: -10%;
-//   padding: 0 2%;
-//   text-align: center;
-// }
+
 
 @import './media-queries';

@@ -12,12 +12,18 @@ import MdStar from 'react-ionicons/lib/MdStar'
 import IosWifi from 'react-ionicons/lib/IosWifi'
 import MdTime from 'react-ionicons/lib/MdTime'
 import MdCall from 'react-ionicons/lib/MdCall'
+import MdHome from 'react-ionicons/lib/MdHome'
+import MdLaptop from 'react-ionicons/lib/MdLaptop'
 import IosBatteryCharging from 'react-ionicons/lib/IosBatteryCharging'
 import { Link } from 'react-router-dom'
 import Map from '../Map/Map'
+import Loading from '../Loading/Loading'
 
 
 const SpotDetails = inject('GlobalStore')(observer((props) => {
+
+    const loadingMessage = "LOADING WORK SPACE DETAILS..."
+
     const {
       name,
       address,
@@ -28,7 +34,6 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
       phone,
       hours,
       reviews,
-      types,
       mapUrl,
       website,
       pictures,
@@ -103,60 +108,81 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
                 className="spot-add-fav"
                 onClick={() => GlobalStore.toggleFavorite(id)}/>
             }
-            {GlobalStore.loadingSpotDetailPics ? <div>Loading Pictures </div> :
-                <Slider {...gallerySettings} className="details-img-slider">
+            {GlobalStore.loadingSpotDetailPics ?
+            <Loading message={loadingMessage}/> :
+                <Slider {...gallerySettings} className="details-img-gallery">
                 {galleryItems}
                 </Slider>
               }
           </div>
+          <section classname="details-info-map-wrapper">
+            <div className="details-info-wrapper">
+              <h2 className="details-name">{name || "N/a"}</h2>
+              <div className="stars-container">
+                { stars }
+              </div>
+              <div className="feature">
+                <MdHome
+                  fontSize="40px"
+                  className="feature-icon"
+                />
+                <p>{address || 'N/a'}</p>
+              </div>
+              <div className="feature">
+                <MdCall
+                  fontSize="40px"
+                  className="feature-icon"
+                />
+                <p>{phone || 'N/a'}</p>
+              </div>
+              <div className="feature">
+                <MdLaptop
+                  fontSize="40px"
+                  className="feature-icon"
+                />
+                {website ? <a href={website} target='_blank'>Open Website</a> : <p>N/a</p>}
 
-          <div className="details-info">
-            <h2 className="details-name">{name}</h2>
-            <p>adress: {address}</p>
-            <div className="stars-container">
-              { stars }
+              </div>
+              <div className="feature">
+                <IosWifi
+                  fontSize="40px"
+                  className="feature-icon"
+                />
+                <p>{wifi ? 'Yes' : 'No'}</p>
+              </div>
+              <div className="feature">
+                <IosBatteryCharging
+                  fontSize="40px"
+                  className="feature-icon"
+                />
+                <p>{power ? 'Yes' : 'No'}</p>
+              </div>
+              {GlobalStore.loadingSpotDetailPics ?
+              <Loading message={loadingMessage}/> :
+              <div className="time-feature">
+                <MdTime
+                  fontSize="40px"
+                  className="feature-icon"
+                />
+                <ul className="work-time-wrapper">
+                  { workTime }
+                </ul>
+              </div>
+              }
             </div>
-            <div className="feature">
-              <MdCall
-                fontSize="40px"
-                className="feature-icon"
-               />
-              <p>{phone}</p>
-            </div>
-            <div className="feature">
-              <IosWifi
-                fontSize="40px"
-                className="feature-icon"
-               />
-              <p>{wifi ? 'Yes' : 'No'}</p>
-            </div>
-            <div className="feature">
-              <IosBatteryCharging
-                fontSize="40px"
-                className="feature-icon"
-              />
-              <p>{power ? 'Yes' : 'No'}</p>
-            </div>
-            {GlobalStore.loadingSpotDetailPics ? <div>Loading Pictures </div> :
-            <div className="time-feature">
-              <MdTime
-                fontSize="40px"
-                className="feature-icon"
-              />
-              <ul className="work-time-wrapper">
-                { workTime }
-              </ul>
-            </div>
-            }
             <div className="details-map-wrapper">
-              <Map center={coordinates}/>
+                <Map center={coordinates}/>
             </div>
-            {GlobalStore.loadingSpotDetailPics ? <div>Loading Pictures </div> :
+          </section>
+            {GlobalStore.loadingSpotDetailPics ?
+            <Loading message={loadingMessage}/> :
+              <section className="details-comment-container">
+                <h2>Comments: </h2>
                 <ul className="details-comment-wrapper">
                 { comments }
-              </ul>
-              }
-          </div>
+                </ul>
+              </section>
+            }
         </section>
       )
 }))

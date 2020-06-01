@@ -16,7 +16,7 @@ const Login = inject('GlobalStore')(observer((props) => {
       <h3 className="form-title">Find your outdoor office spot</h3>
       </div>
       <section className="login-form-container">
-      <form className="login-form">
+      <form className="login-form" onSubmit = {(e)=> GlobalStore.validateUser(e)}>
       {GlobalStore.loginError &&
         <p className="login-error">{GlobalStore.loginError}
         </p>}
@@ -45,7 +45,7 @@ const Login = inject('GlobalStore')(observer((props) => {
             value={GlobalStore.zipCode}
             onChange={GlobalStore.handleChange}
           />
-          <button className="login-btn" onClick={GlobalStore.validateUser}>
+          <button className="login-btn">
           Go!</button>
           </form>
           {GlobalStore.isFormCompleted && <Redirect to="/landing" />}

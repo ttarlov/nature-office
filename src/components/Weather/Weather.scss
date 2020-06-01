@@ -1,0 +1,28 @@
+.content-wrapper {
+  align-items: center;
+  color: white;
+  display: flex;
+  height: 6rem;
+  justify-content: space-between;
+  padding: .5rem;
+  width: 90%;
+}
+
+.temp-location-container {
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  justify-content: space-around;
+}
+
+.temp {
+  font-size: 1.8rem;
+}
+
+.location {
+  font-size: 1.3rem;
+}
+
+.weather-type {
+  font-size: 2rem;
+}
