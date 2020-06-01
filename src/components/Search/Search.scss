@@ -1,0 +1,24 @@
+.search-container {
+  align-items: center;
+  box-shadow: 1px 4px 10px 5px rgba(0, 0, 0, 0.05);
+  border-radius: 1.5rem;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.search-input {
+  background-color: $background-light;
+  border: none;
+  border-radius: 1.5rem;
+  font-size: 1.2rem;
+  padding: .5rem 1rem;
+  width: 90%;
+}
+
+.search-icon {
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+  margin-right: 1rem;
+}
