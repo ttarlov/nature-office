@@ -27,16 +27,6 @@ const AddNewSpot = inject('GlobalStore')(observer(() => {
 //   addReservation(newReservation);
 //   this.resetInputs();
 // }
-//
-// resetInputs = () => {
-//   this.setState({
-//     name: '',
-//     date: '',
-//     time: '',
-//     number: ''
-//   })
-// }
-
 
 // {
 //   // name: spot.name,
@@ -51,9 +41,15 @@ const AddNewSpot = inject('GlobalStore')(observer(() => {
 console.log(GlobalStore.newSpotRating);
   return (
     <section className="add-new-spot-form-background">
-    <h2>Add a new spot!</h2>
+    <div>
+    <h2 className="add-new-spot-title">Add a new spot!</h2>
+    </div>
     <section className="add-new-spot-form-container">
     <form className="add-new-spot-form">
+    {GlobalStore.loginError &&
+      <p className="login-error">{GlobalStore.loginError}
+      </p>}
+    <label htmlFor="userEmail">Name of Spot</label>
     <input
       type='text'
       placeholder='new spot name'
@@ -61,6 +57,7 @@ console.log(GlobalStore.newSpotRating);
       name='newSpotName'
       onChange={GlobalStore.handleChange}
     />
+    <label htmlFor="userEmail">Address</label>
       <input
         type='text'
         placeholder='address'
@@ -68,6 +65,7 @@ console.log(GlobalStore.newSpotRating);
         name='newSpotAddress'
         onChange={GlobalStore.handleChange}
       />
+      <label htmlFor="userEmail">Zip Code</label>
       <input
         type='text'
         placeholder='zip code'
@@ -76,6 +74,7 @@ console.log(GlobalStore.newSpotRating);
         name='newSpotZipCode'
         onChange={GlobalStore.handleChange}
       />
+      <label htmlFor="userEmail">Rating</label>
       <input
         type='text'
         maxlength='1'
@@ -92,8 +91,8 @@ console.log(GlobalStore.newSpotRating);
         name='newSpotImages'
         onChange={GlobalStore.handleChange}
       />
-        <label htmlFor="userName">(separate multiple images by comma)</label>
-      <button
+        <label htmlFor="userName">(separate multiple image links by comma)</label>
+      <button className="add-new-spot-button"
         onClick={GlobalStore.addNewSpot}
       >
         Upload New Spot!
