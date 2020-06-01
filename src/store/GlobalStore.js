@@ -35,6 +35,8 @@ class GlobalStore {
   @observable newSpotZipCode = ''
   @observable weatherType = ''
   @observable weatherTemp = ''
+  @observable commentUserName = ''
+  @observable commentMessage = ''
 
   @action handleChange = (event) => {
     this[event.target.name] = event.target.value
@@ -199,6 +201,17 @@ class GlobalStore {
     this.zipCode = ''
     this.spotDetails = {}
     this.coordinates = {}
+  }
+
+  @action postComment = (event) => {
+    event.preventDefault();
+    this.spotDetails.reviews.push({
+      relative_time_description: 'NOW',
+      author_name: this.commentUserName,
+      text: this.commentMessage
+    })
+    this.commentUserName = ''
+    this.commentMessage = ''
   }
 }
 
