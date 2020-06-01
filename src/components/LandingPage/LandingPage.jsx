@@ -43,7 +43,7 @@ const LandingPage = inject('GlobalStore')(observer(() => {
                 alt="spot"
               />
             </div>
-            <p className="category-title">TOP SPOTS</p>
+            <p className="category-title">TOP RATED</p>
           </section>
         </Link>
       </section>
