@@ -3,14 +3,6 @@ $break2: 768px;
 $break3: 1024px;
 $break4: 1280px;
 
-@media (min-width: $break1) {
-   .spot-container {
-      grid-template: auto / repeat(1, 1fr);
-      width: 70%;
-    }
-
-}
-
 @media (max-width: $break2){
   .login-form-container
   {
@@ -27,6 +19,17 @@ $break4: 1280px;
     margin-top: -30%;
   }
 }
+
+@media (min-width: $break1) {
+   .spot-container {
+      grid-template: auto / repeat(1, 1fr);
+      width: 70%;
+    }
+    .nav {
+      font-size: .7rem;
+    }
+}
+
 @media (min-width: $break2) {
     .spot-container {
       grid-template: auto / repeat(2, 1fr);
@@ -34,6 +37,9 @@ $break4: 1280px;
     }
     .details-comment-wrapper {
       grid-template: auto / repeat(2, 1fr);
+    }
+    .nav {
+      font-size: .8rem;
     }
 }
 
@@ -44,6 +50,9 @@ $break4: 1280px;
     .details-comment-wrapper {
       grid-template: auto / repeat(3, 1fr);
    }
+   .nav {
+    font-size: .9rem;
+  }
 
 }
 
@@ -51,5 +60,13 @@ $break4: 1280px;
     .spot-container {
       grid-template: auto / repeat(4, 1fr);
     }
-
+    .nav {
+      font-size: 1rem;
+    }
 }
+
+
+
+
+
+
