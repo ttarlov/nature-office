@@ -14,7 +14,6 @@ import Error from '../Error/Error.jsx';
 
 
 @inject('GlobalStore')
-// @inject('routing')
 @observer
 class App extends Component{
   render() {

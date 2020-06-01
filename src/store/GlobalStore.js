@@ -2,31 +2,31 @@ import { observable, action, computed } from 'mobx'
 import {
   getSpotsApi,
   getSpotDetailsApi,
-  checkIfPropertyExists,
   getNorrisJoke,
   getCoordinates,
   getWeatherApi
 } from "../apiCalls"
 import { Redirect, Link } from 'react-router-dom';
 import React from 'react'
-import { zipCodes, getSpotPhoto } from '../constants'
+import { 
+  getSpotPhoto, 
+  checkIfStringExists,
+  checkIfArrayExists
+} from '../constants'
 const stockPhoto = "/images/stockPhoto.jpg"
 // import rino from "../../images/RiNo.png";
 
 
 class GlobalStore {
   @observable title = 'nature office';
-  @observable apiData = []
   @observable spots = []
   @observable loginError = ''
   @observable isFormCompleted = false;
   @observable userName = ''
   @observable userEmail = ''
   @observable zipCode = ''
-  @observable zipCodes = zipCodes
   @observable spotDetails = {}
   @observable loadingSpotDetailPics = false
-  @observable joke = ''
   @observable coordinates = {}
   @observable weatherType = ''
   @observable weatherTemp = ''
@@ -121,29 +121,40 @@ class GlobalStore {
   }
 
   @action displaySpotDetails = async (id) => {
+    window.scrollTo(0, 0);
     this.loadingSpotDetailPics = true
     const spot = this.spots.find(item => item.id === id)
     const spotDetails = await getSpotDetailsApi(spot.placeId)
     const d = spotDetails.result
     const photoUrls = d.photos.map(photo => getSpotPhoto(photo.photo_reference, 3000))
     this.spotDetails = {
-            name: spot.name,
-            address: spot.address,
-            rating: spot.rating,
-            coordinates: spot.coordinates,
-            favorite: spot.favorite,
-            id: d.id,
-            phone: d.formatted_phone_number,
-            hours: checkIfPropertyExists(() => d.opening_hours.weekday_text),
-            reviews: d.reviews,
-            types: d.types,
-            mapUrl: d.url,
-            website: d.website,
-            pictures: photoUrls,
-            wifi: true,
-            power: false,
-          }
+        name: spot.name,
+        address: spot.address,
+        rating: spot.rating,
+        coordinates: spot.coordinates,
+        favorite: spot.favorite,
+        id: d.id,
+        phone: d.formatted_phone_number,
+        hours: checkIfArrayExists(() => d.opening_hours.weekday_text),
+        reviews: d.reviews,
+        mapUrl: d.url,
+        website: d.website,
+        pictures: photoUrls,
+        wifi: true,
+        power: false,
+      }
    this.loadingSpotDetailPics = false
+  }
+
+  @action clearStore = () => {
+    this.spots = []
+    this.loginError = ''
+    this.isFormCompleted = false;
+    this.userName = ''
+    this.userEmail = ''
+    this.zipCode = ''
+    this.spotDetails = {}
+    this.coordinates = {}
   }
 }
 

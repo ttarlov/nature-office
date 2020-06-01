@@ -9,7 +9,7 @@ const LandingPage = inject('GlobalStore')(observer(() => {
   const topRated = GlobalStore.spots[0] // Hard coded until getTopRatedSpots() is created / implemented
 
   return !GlobalStore.spots.length || !GlobalStore.weatherTemp || !GlobalStore.weatherType  ?
-    <Loading /> :
+    <Loading message="LOOKING OUTSIDE FOR WORK SPACES..."/> :
       <section className="landing-container">
         <Search />
         <Weather />

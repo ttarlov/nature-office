@@ -1,0 +1,42 @@
+.user-page-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    .user-page-img {
+        background-image: linear-gradient(rgba(27, 27, 27, 0.2), rgba(34, 34, 34, 0.2)),
+        url("https://images.unsplash.com/photo-1413813447360-290ffe8d33d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2704&q=2000");
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center;
+        height: 40vh;
+        display: flex;
+        .user-page-title {
+            color: $font-light;
+            font-size: 3rem;
+            margin: auto;
+        }
+    }
+}
+
+.user-profile-wrapper {
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .user-icon {
+        background-color: $background-medium;
+        padding: 10px;
+        border-radius: 50%;
+        margin-right: 30px;
+        &:hover {
+            background-color: $background-dark;
+            transition: background-color .5s;
+        }
+    }
+}
+
+.logout-btn {
+  @include button($background-dark);
+  text-decoration: none;
+}
+

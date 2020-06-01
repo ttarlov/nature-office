@@ -4,7 +4,7 @@ import IosCloudy from 'react-ionicons/lib/IosCloudy'
 import IosSunnyOutline from 'react-ionicons/lib/IosSunnyOutline'
 
 
-const Loading = () => {
+const Loading = (props) => {
   return (
     <section className="loading-container">
       <div className="animation-container">
@@ -41,7 +41,7 @@ const Loading = () => {
         </div>
       </div>
       <div className="loading-message">
-        <p>LOOKING OUTSIDE FOR WORK SPACES...</p>
+      <p>{props.message}</p>
         <p>ONE SEC</p>
       </div>
     </section>

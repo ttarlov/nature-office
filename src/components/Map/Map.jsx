@@ -8,9 +8,8 @@ const Map = (props) => {
         <GoogleMapReact
           bootstrapURLKeys={{ key: apiKey }}
           center={props.center}
-          zoom={15}
+          zoom={16}
         >
-        
         </GoogleMapReact>
       </div>
     )

@@ -35,14 +35,6 @@ export const getSpotDetailsApi = async (placeId) => {
   }
 }
 
-export const checkIfPropertyExists = (fn) => {
-  try {
-      return fn()
-  } catch (e) {
-      return null
-  }
-}
-
 export const getCoordinates = async (zipCode) => {
   try {
     const result = await fetch('https://fe-cors-proxy.herokuapp.com', {
