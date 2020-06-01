@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react'
 import { Link } from 'react-router-dom'
 import GlobalStore from '../../store/GlobalStore'
 import MdPerson from 'react-ionicons/lib/MdPerson'
+import SpotContainer from '../SpotContainer/SpotContainer';
 
 const UserPage = inject('GlobalStore')(observer(() => {
   const {
@@ -31,6 +32,7 @@ const UserPage = inject('GlobalStore')(observer(() => {
           >
             LOGOUT
           </Link>
+          <SpotContainer />
         </section>
       )
 }))

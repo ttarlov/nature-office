@@ -28,6 +28,9 @@ $break4: 1280px;
     .nav {
       font-size: .7rem;
     }
+    .comment-form {
+      width: 90%;
+    }
 }
 
 @media (min-width: $break2) {
@@ -41,6 +44,9 @@ $break4: 1280px;
     .nav {
       font-size: .8rem;
     }
+    .comment-form {
+      width: 70%;
+    }
 }
 
 @media (min-width: $break3) {
@@ -53,7 +59,9 @@ $break4: 1280px;
    .nav {
     font-size: .9rem;
   }
-
+  .comment-form {
+    width: 50%;
+  }
 }
 
 @media (min-width: $break4) {
@@ -62,6 +70,9 @@ $break4: 1280px;
     }
     .nav {
       font-size: 1rem;
+    }
+    .comment-form {
+      width: 40%;
     }
 }
 

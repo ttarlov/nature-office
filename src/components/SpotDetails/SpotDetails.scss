@@ -51,13 +51,10 @@
   }
 }
   
-
-
 .details-map-wrapper {
   width: 100%;
   height: 500px;
 }
-
 
 .details-comment-container {
   padding: 30px;
@@ -77,3 +74,45 @@
     }
   }
 }
+
+.comment-form {
+  @include box-shadow-radius;
+  margin: 50px auto 0;
+  background-color: $background-medium;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .comment-form-item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    input {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+    input,
+    textarea {
+      @include box-shadow-radius;
+      padding: 10px;
+      font-size: 1rem;
+      margin-bottom: 15px;
+      width: 100%;
+    }
+    .comment-label {
+      position: absolute;
+      filter: opacity(0%);
+    }
+    .add-comment-btn {
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30%;
+      @include button($background-dark)
+    }
+  }
+}
+

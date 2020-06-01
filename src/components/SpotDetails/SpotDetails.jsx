@@ -14,6 +14,7 @@ import MdTime from 'react-ionicons/lib/MdTime'
 import MdCall from 'react-ionicons/lib/MdCall'
 import MdHome from 'react-ionicons/lib/MdHome'
 import MdLaptop from 'react-ionicons/lib/MdLaptop'
+import IosPaperPlane from 'react-ionicons/lib/IosPaperPlane'
 import IosBatteryCharging from 'react-ionicons/lib/IosBatteryCharging'
 import { Link } from 'react-router-dom'
 import Map from '../Map/Map'
@@ -124,21 +125,18 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
               <div className="feature">
                 <MdHome
                   fontSize="40px"
-                  className="feature-icon"
                 />
                 <p>{address || 'N/a'}</p>
               </div>
               <div className="feature">
                 <MdCall
                   fontSize="40px"
-                  className="feature-icon"
                 />
                 <p>{phone || 'N/a'}</p>
               </div>
               <div className="feature">
                 <MdLaptop
                   fontSize="40px"
-                  className="feature-icon"
                 />
                 {website ? <a href={website} target='_blank'>Open Website</a> : <p>N/a</p>}
 
@@ -146,14 +144,12 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
               <div className="feature">
                 <IosWifi
                   fontSize="40px"
-                  className="feature-icon"
                 />
                 <p>{wifi ? 'Yes' : 'No'}</p>
               </div>
               <div className="feature">
                 <IosBatteryCharging
                   fontSize="40px"
-                  className="feature-icon"
                 />
                 <p>{power ? 'Yes' : 'No'}</p>
               </div>
@@ -181,6 +177,37 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
                 <ul className="details-comment-wrapper">
                 { comments }
                 </ul>
+                
+                <form className="comment-form">
+                  <div className="comment-form-item">
+                    <label htmlFor="comment-username" className="comment-label">Name</label>
+                      <input
+                      type="text"
+                      name="comment-username"
+                      placeholder="Name"
+                      // value={GlobalStore.userName}
+                      // onChange={GlobalStore.handleChange}
+                    />
+                  </div>
+                  <div className="comment-form-item">
+                    <label htmlFor="comment" className="comment-label">Comment</label>
+                      <textarea
+                      name="comment"
+                      placeholder="Comment"
+                      rows="5"
+                      // value={GlobalStore.userEmail}
+                      // onChange={GlobalStore.handleChange}
+                    />
+                  </div>
+                  <div className="comment-form-item">
+                      <button className="add-comment-btn">
+                      <IosPaperPlane
+                        fontSize="40px"
+                      />
+                        SEND
+                  </button>
+                  </div>
+                </form>
               </section>
             }
         </section>
