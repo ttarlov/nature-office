@@ -1,6 +1,7 @@
 import { observable, action, computed } from 'mobx'
 import {
   getSpotsApi,
+  getWeatherApi,
   getSpotDetailsApi,
   getNorrisJoke,
   getCoordinates,
