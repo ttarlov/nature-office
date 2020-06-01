@@ -9,14 +9,15 @@
 @import './src/components/Search/Search';
 @import './src/components/UserPage/UserPage';
 @import './src/components/Error/Error';
-@import './src/components/Login/Login'
+@import './src/components/Login/Login';
+
 
 body,
-html {
-  height: 100vh;
-  margin: 0;
-  width: 100%;
-}
+ html {
+   height: 100vh;
+   margin: 0;
+   width: 100%
+ }
 
 .app-container {
   height: 100vh;
@@ -25,8 +26,6 @@ html {
   box-sizing: border-box;
   background-color: $background-light;
 }
-
-
 
 
 .weather {
