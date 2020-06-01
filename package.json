@@ -97,7 +97,8 @@
       "!src/**/*.d.ts"
     ],
     "setupFiles": [
-      "react-app-polyfill/jsdom"
+      "react-app-polyfill/jsdom", 
+      "jest-localstorage-mock"
     ],
     "setupFilesAfterEnv": [
       "<rootDir>/src/setupTests.js"
@@ -152,8 +153,10 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/react": "^9.5.0",
     "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/user-event": "^7.2.1"
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "github:testing-library/user-event",
+    "jest-environment-jsdom-sixteen": "^1.0.3",
+    "jest-localstorage-mock": "^2.4.2"
   }
 }
