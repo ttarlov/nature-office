@@ -22,6 +22,7 @@ import Loading from '../Loading/Loading'
 
 
 const SpotDetails = inject('GlobalStore')(observer((props) => {
+    console.log(GlobalStore.spotDetails.reviews)
 
     const loadingMessage = "LOADING WORK SPACE DETAILS..."
 
@@ -183,29 +184,31 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
                     <label htmlFor="comment-username" className="comment-label">Name</label>
                       <input
                       type="text"
-                      name="comment-username"
+                      name="commentUserName"
                       placeholder="Name"
-                      // value={GlobalStore.userName}
-                      // onChange={GlobalStore.handleChange}
+                      value={GlobalStore.commentUserName}
+                      onChange={GlobalStore.handleChange}
                     />
                   </div>
                   <div className="comment-form-item">
                     <label htmlFor="comment" className="comment-label">Comment</label>
                       <textarea
-                      name="comment"
+                      name="commentMessage"
                       placeholder="Comment"
                       rows="5"
-                      // value={GlobalStore.userEmail}
-                      // onChange={GlobalStore.handleChange}
+                      value={GlobalStore.commentMessage}
+                      onChange={GlobalStore.handleChange}
                     />
                   </div>
                   <div className="comment-form-item">
-                      <button className="add-comment-btn">
-                      <IosPaperPlane
-                        fontSize="40px"
-                      />
-                        SEND
-                  </button>
+                    <button className="add-comment-btn"
+                            onClick={(event) => GlobalStore.postComment(event, id)}
+                    >
+                        <IosPaperPlane
+                          fontSize="40px"
+                        />
+                          SEND
+                    </button>
                   </div>
                 </form>
               </section>

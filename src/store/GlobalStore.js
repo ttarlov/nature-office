@@ -141,7 +141,8 @@ class GlobalStore {
         photo: photo,
         coordinates: spot.geometry.location,
         placeId: spot.place_id,
-        favorite: false
+        favorite: false,
+        reviews: []
       }
     )
   })
@@ -181,7 +182,7 @@ class GlobalStore {
             id: d.id,
             phone: d.formatted_phone_number || undefined,
             hours: checkIfArrayExists(() => d.opening_hours.weekday_text),
-            reviews: d.reviews || undefined,
+            reviews: d.reviews.concat(spot.reviews) || undefined,
             types: d.types,
             mapUrl: d.url || undefined,
             website: d.website || undefined,
@@ -203,13 +204,20 @@ class GlobalStore {
     this.coordinates = {}
   }
 
-  @action postComment = (event) => {
+  @action postComment = (event, id) => {
     event.preventDefault();
-    this.spotDetails.reviews.push({
+    const comment = {
       relative_time_description: 'NOW',
       author_name: this.commentUserName,
       text: this.commentMessage
+    }
+    this.spotDetails.reviews.push(comment)
+
+    this.spots.forEach(spot => {
+      (spot.id === id) && (spot.reviews.push(comment))
     })
+
+
     this.commentUserName = ''
     this.commentMessage = ''
   }
