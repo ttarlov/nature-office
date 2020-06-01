@@ -18,7 +18,7 @@ const Login = inject('GlobalStore')(observer((props) => {
       <section className="login-form-container">
       <form className="login-form">
       {GlobalStore.loginError &&
-        <p className="">{GlobalStore.loginError}
+        <p className="login-error">{GlobalStore.loginError}
         </p>}
             <label htmlFor="userName">Name</label>
             <input
@@ -38,8 +38,9 @@ const Login = inject('GlobalStore')(observer((props) => {
             />
           <label htmlFor="zipCode">Zip Code</label>
           <input
-            type="number"
+            type="text"
             name="zipCode"
+            maxlength="5"
             placeholder="80202"
             value={GlobalStore.zipCode}
             onChange={GlobalStore.handleChange}
