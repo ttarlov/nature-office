@@ -35,6 +35,25 @@ export const getSpotDetailsApi = async (placeId) => {
   }
 }
 
+
+export const addNewSpotApi = async (zipCode, name)=>{
+  try {
+    const result = await fetch('https://fe-cors-proxy.herokuapp.com', {
+      headers: {
+        "Target-URL": `https://maps.googleapis.com/maps/api/geocode/json?address=${name}${zipCode}&key=${apiKey}`
+      }
+    })
+    if (!result.ok) {
+      throw new Error(`Problem received status code of ${result.status}`)
+    }
+    const response = await result.json()
+    console.log("zipcode Returns", response.results);
+    return response.results
+  } catch (error) {
+    window.alert(`Server Error. Its not your fault the error is: ${error}`)
+  }
+}
+
 export const getCoordinates = async (zipCode) => {
   try {
     const result = await fetch('https://fe-cors-proxy.herokuapp.com', {
