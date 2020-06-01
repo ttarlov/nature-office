@@ -26,11 +26,36 @@ class GlobalStore {
   @observable loadingSpotDetailPics = false
   @observable joke = ''
   @observable coordinates = {}
+  @observable newSpotName = ''
+  @observable newSpotAddress = ''
+  @observable newSpotImages = ''
+  @observable newSpotRating = ''
+  @observable newSpotZipCode = ''
 
   @action handleChange = (event) => {
-    // this.loginError = ''
+    // const { zipCode, newSpotZipCode, newSpotRating } = event.target.name
     this[event.target.name] = event.target.value
+    this.zipCode = this.zipCode.replace(/[^0-9]/, '')
+    // this.zipCode.length > 5 ?
+    this.newSpotZipCode = this.newSpotZipCode.replace(/[^0-9]/, '')
+    this.newSpotRating = this.newSpotRating.replace(/[^12345]/, '')
+    //still doesn't work
   }
+
+  @action addNewSpot = (event) => {
+    event.preventDefault();
+    if (this.newSpotName === '' || this.newSpotAddress === '' || (this.newSpotZipCode.length !== 5)
+  || this.newSpotRating.length !== 1){
+      this.loginError = 'Please fill all Inputs'
+    }
+  }
+  @action resetInputs = () => {
+    this.newSpotName = ''
+    this.newSpotAddress = ''
+    this.newSpotImages = ''
+    this.newSpotRating = ''
+    this.newSpotZipCode = ''
+    }
 
   @action validateUser = (event) => {
     this.isFormCompleted = false
