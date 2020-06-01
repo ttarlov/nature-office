@@ -4,7 +4,8 @@ import {
   getSpotDetailsApi,
   checkIfPropertyExists,
   getNorrisJoke,
-  getCoordinates } from "../apiCalls"
+  getCoordinates,
+  addNewSpotApi } from "../apiCalls"
 import { Redirect, Link } from 'react-router-dom';
 import React from 'react'
 import { zipCodes, getSpotPhoto } from '../constants'
@@ -33,20 +34,37 @@ class GlobalStore {
   @observable newSpotZipCode = ''
 
   @action handleChange = (event) => {
-    // const { zipCode, newSpotZipCode, newSpotRating } = event.target.name
     this[event.target.name] = event.target.value
     this.zipCode = this.zipCode.replace(/[^0-9]/, '')
-    // this.zipCode.length > 5 ?
     this.newSpotZipCode = this.newSpotZipCode.replace(/[^0-9]/, '')
     this.newSpotRating = this.newSpotRating.replace(/[^12345]/, '')
-    //still doesn't work
   }
 
-  @action addNewSpot = (event) => {
+  @action addNewSpot = async (event) => {
     event.preventDefault();
-    if (this.newSpotName === '' || this.newSpotAddress === '' || (this.newSpotZipCode.length !== 5)
-  || this.newSpotRating.length !== 1){
+    if (this.newSpotName === '' || this.newSpotAddress === '' || this.newSpotImages === ''){
       this.loginError = 'Please fill all Inputs'
+      return
+    } else {
+      console.log('all add-new-spot inputs satisfied')
+      this.loginError = ''
+      let photos = this.newSpotImages.split(',')
+      const newSpotResults = await addNewSpotApi(+this.newSpotZipCode, this.newSpotName)
+      console.log('newSpotResults', newSpotResults);
+      this.spots.unshift({
+        name: this.newSpotName,
+        id: Date.now(),
+        address: this.newSpotAddress,
+        rating: this.newSpotRating,
+        photo: photos[0],
+        photos: photos,
+        coordinates: newSpotResults[0].geometry.location,
+        placeId: newSpotResults[0].place_id,
+        favorite: true
+      }
+      )
+      console.log('this.spots', this.spots);
+      this.resetInputs()
     }
   }
   @action resetInputs = () => {
@@ -63,8 +81,6 @@ class GlobalStore {
 
     console.log('here')
     console.log(this.zipCode)
-    // !this.zipCodes.includes(parseInt(this.zipCode))
-      // (!this.zipCodes.length)
     if (this.userName === '' || this.userEmail === '' || (this.zipCode.length !== 5) ){
       this.loginError = 'Please fill all Inputs'
     } else {
@@ -136,7 +152,10 @@ class GlobalStore {
     const spot = this.spots.find(item => item.id === id)
     const spotDetails = await getSpotDetailsApi(spot.placeId)
     const d = spotDetails.result
-    const photoUrls = d.photos.map(photo => getSpotPhoto(photo.photo_reference, 3000))
+    let photoUrls
+    if (d.photos){
+    photoUrls = d.photos.map(photo => getSpotPhoto(photo.photo_reference, 3000))
+  } else { photoUrls = spot.photos}
     this.spotDetails = {
             name: spot.name,
             address: spot.address,
@@ -144,12 +163,12 @@ class GlobalStore {
             coordinates: spot.coordinates,
             favorite: spot.favorite,
             id: d.id,
-            phone: d.formatted_phone_number,
+            phone: d.formatted_phone_number || undefined,
             hours: checkIfPropertyExists(() => d.opening_hours.weekday_text),
-            reviews: d.reviews,
+            reviews: d.reviews || undefined,
             types: d.types,
-            mapUrl: d.url,
-            website: d.website,
+            mapUrl: d.url || undefined,
+            website: d.website || undefined,
             pictures: photoUrls,
             wifi: true,
             power: false,
