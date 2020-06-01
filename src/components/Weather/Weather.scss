@@ -1,19 +1,17 @@
-.weather-container {
+.content-wrapper {
   align-items: center;
-  background-color: #b3cdd1;
-  background-image: linear-gradient(315deg, #b3cdd1 0%, #9fa4c4 74%);
-  border-radius: 7px;
   color: white;
   display: flex;
+  height: 6rem;
   justify-content: space-between;
-  height: 3.5rem;
-  padding: 1rem;
+  padding: .5rem;
+  width: 90%;
 }
 
 .temp-location-container {
   display: flex;
   flex-direction: column;
-  height: 85%;
+  height: 80%;
   justify-content: space-around;
 }
 
