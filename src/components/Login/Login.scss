@@ -9,7 +9,8 @@
   background-position: center center;
   background-attachment: fixed;
   background-size: cover;
-  height: 100%;
+  height: auto;
+  min-height: 100vh;
   width: 100%;
   padding: 50px 0;
   .main-title,
@@ -60,6 +61,7 @@
   }
 }
 .login-btn {
+  margin-top: 15px;
   @include button($accent-medium);
   padding: 10px 40px;
 }

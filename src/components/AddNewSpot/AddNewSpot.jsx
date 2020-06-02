@@ -10,7 +10,6 @@ const AddNewSpot = inject('GlobalStore')(observer(() => {
     <section className="add-new-spot-form-background">
     <div className="add-new-spot-content">
       <h2 className="add-new-spot-title">Add a new spot!</h2>
-
       <form className="add-new-spot-form">
       {GlobalStore.loginError &&
         <p className="add-spot-error">{GlobalStore.loginError}
@@ -58,6 +57,7 @@ const AddNewSpot = inject('GlobalStore')(observer(() => {
           />
         </div>
         <div className="add-form-item">
+          <label htmlFor="commaLink">(separate multiple image links by comma)</label>
           <input
             type= 'text'
             placeholder='image links (optional)'
@@ -65,14 +65,13 @@ const AddNewSpot = inject('GlobalStore')(observer(() => {
             name='newSpotImages'
             onChange={GlobalStore.handleChange}
           />
-          <label htmlFor="commaLink">(separate multiple image links by comma)</label>
         </div>
+        <label className="required" htmlFor="userName">* required </label>
         <button className="add-new-spot-button"
           onClick={GlobalStore.addNewSpot}
         >
           Upload New Spot!
         </button>
-        <label className="required" htmlFor="userName">* required </label>
       </form>
     </div>
     </section> :

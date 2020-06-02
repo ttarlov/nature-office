@@ -9,17 +9,25 @@
   background-position: center center;
   background-attachment: fixed;
   background-size: cover;
-  height: 100%;
+  height: auto;
+  min-height: 100vh;
   width: 100%;
   padding: 50px 0;
+  .add-new-spot-title {
+    text-align: center;
+    color: $font-light;
+    font-size: 3rem;
+    font-weight: 300;
+  }
   .add-new-spot-content {
     width: 100%;
     margin: auto;
+    margin-bottom: 120px;
   }
 }
 
 .add-new-spot-form {
-  width: 75%;
+  width: 85%;
   background-color: $background-medium;
   opacity: 0.92;
   @include box-shadow-radius;
@@ -28,4 +36,33 @@
   flex-direction: column;
   align-items: center;
   margin: 50px auto 0;
+  .add-form-item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    input {
+      @include box-shadow-radius;
+      border: 0;
+      width: 100%;
+      padding: 10px;
+      margin: 0;
+      font-size: 1rem;
+      margin-bottom: 15px;
+      width: 100%;
+      background-color:$background-white;
+      color: $accent-dark;
+    }
+    label {
+        color: $accent-dark;
+      }
+  }
+  .required {
+    color: $alert-error;
+}
+}
+
+.add-new-spot-button {
+  margin-top: 15px;
+  @include button($accent-medium);
+  padding: 10px 40px;
 }
