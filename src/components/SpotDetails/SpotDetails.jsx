@@ -69,7 +69,7 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
         )
       })
       }
-      if (hours !== null){
+      if (hours !== null || hours !== undefined){
         workTime = hours.map(day => {
         return (
         <li className="work-time">{day}</li>
@@ -87,6 +87,7 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
       slidesToScroll: 1
     }
 
+    // window.scrollTo(0, 0)
     return (
         <section className="details-container">
           <div className="details-img-gallery">
@@ -115,7 +116,7 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
                 </Slider>
               }
           </div>
-          <section classname="details-info-map-wrapper">
+          <section className="details-info-map-wrapper">
             <div className="details-info-wrapper">
               <h2 className="details-name">{name || "N/a"}</h2>
               <div className="stars-container">
