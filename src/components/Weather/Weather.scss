@@ -1,6 +1,14 @@
+.weather {
+  background-color: #b3cdd1;
+  background-image: linear-gradient(315deg, #b3cdd1 0%, #9fa4c4 74%);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .content-wrapper {
   align-items: center;
-  color: white;
+  color: $font-dark;
   display: flex;
   height: 6rem;
   justify-content: space-between;
@@ -17,10 +25,12 @@
 
 .temp {
   font-size: 1.8rem;
+  margin: 0;
 }
 
 .location {
   font-size: 1.3rem;
+  margin: 0;
 }
 
 .weather-type {

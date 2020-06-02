@@ -7,11 +7,14 @@
   justify-content: center;
 }
 
-.loading-message {
-  color: #9ea1a4;
-  font-size: 1.2rem;
+.msg-container {
   margin-top: .1rem;
   text-align: center;
+}
+
+.loading-msg {
+  color: #9ea1a4;
+  font-size: 1.3rem;
 }
 
 // ICONS

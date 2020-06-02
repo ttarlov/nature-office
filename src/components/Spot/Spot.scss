@@ -20,8 +20,7 @@
 
     .spot-title,
     .spot-adress,
-    .stars-container,
-    .category-title {
+    .stars-container {
       padding: 15px;
       margin: 0;
       cursor: pointer;
@@ -36,7 +35,8 @@
     right: 10px;
   }
 
-  .open-spot {
+  .open-spot,
+  .category-spot {
     text-decoration: none;
     color: inherit;
   }

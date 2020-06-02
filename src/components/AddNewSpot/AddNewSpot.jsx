@@ -36,7 +36,7 @@ const AddNewSpot = inject('GlobalStore')(observer(() => {
       <input
         type='text'
         placeholder='zip code'
-        maxlength='5'
+        maxLength='5'
         value={GlobalStore.newSpotZipCode}
         name='newSpotZipCode'
         onChange={GlobalStore.handleChange}
@@ -44,7 +44,7 @@ const AddNewSpot = inject('GlobalStore')(observer(() => {
       <label htmlFor="rating">Rating*</label>
       <input
         type='text'
-        maxlength='1'
+        maxLength='1'
         placeholder='rating(1-5)'
         value={GlobalStore.newSpotRating}
         name='newSpotRating'

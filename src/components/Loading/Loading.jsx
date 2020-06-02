@@ -3,7 +3,6 @@ import IosCloudyOutline from 'react-ionicons/lib/IosCloudyOutline'
 import IosCloudy from 'react-ionicons/lib/IosCloudy'
 import IosSunnyOutline from 'react-ionicons/lib/IosSunnyOutline'
 
-
 const Loading = (props) => {
   return (
     <section className="loading-container">
@@ -40,9 +39,9 @@ const Loading = (props) => {
           <span className="drop"></span>
         </div>
       </div>
-      <div className="loading-message">
-      <p>{props.message}</p>
-        <p>ONE SEC</p>
+      <div className="msg-container">
+        <p className="loading-msg">{props.message}</p>
+        <p className="loading-msg">ONE SEC</p>
       </div>
     </section>
   )

@@ -2,6 +2,7 @@ import { observable, action, computed } from 'mobx'
 import {
   getSpotsApi,
   getWeatherApi,
+  getWoeid,
   getSpotDetailsApi,
   getNorrisJoke,
   getCoordinates,
@@ -17,7 +18,6 @@ const stockPhoto = "/images/stockPhoto.jpg"
 const chuckNorrisAddImage = "/images/chuckNorrisAddImage.png"
 
 class GlobalStore {
-
   @observable title = 'nature office';
   @observable spots = []
   @observable loginError = ''
@@ -38,6 +38,8 @@ class GlobalStore {
   @observable commentUserName = ''
   @observable commentMessage = ''
   @observable newSpotFormCompleted = false
+  @observable filteredSpots = null
+  @observable city = ''
 
   @action handleChange = (event) => {
     this[event.target.name] = event.target.value
@@ -53,32 +55,31 @@ class GlobalStore {
   @action addNewSpot = async (event) => {
     event.preventDefault();
     if (this.newSpotName === '' || this.newSpotAddress === '' ||
-    this.newSpotZipCode.length !== 5 || this.newSpotRating.length !== 1){
+    this.newSpotZipCode.length !== 5 || this.newSpotRating.length !== 1) {
       this.loginError = 'Please fill all Inputs'
       return
     } else {
-      this.loginError = ''
-      let photos = this.newSpotImages.split(',')
-      const newSpotResults = await addNewSpotApi(+this.newSpotZipCode, this.newSpotName)
-      if(!newSpotResults.length || !newSpotResults[0].types.includes('establishment')){
-        this.loginError = 'Please enter a valid Spot'
-        return
-      }
-      this.spots.unshift({
-        name: this.newSpotName,
-        id: Date.now(),
-        address: this.newSpotAddress,
-        rating: this.newSpotRating,
-        photo: photos[0],
-        photos: photos,
-        coordinates: newSpotResults[0].geometry.location,
-        placeId: newSpotResults[0].place_id,
-        favorite: true
-      }
-      )
-      console.log('this.spots', this.spots);
-      this.resetInputs()
-      this.newSpotFormCompleted = true;
+        this.loginError = ''
+        let photos = this.newSpotImages.split(',')
+        const newSpotResults = await addNewSpotApi(+this.newSpotZipCode, this.newSpotName)
+        if(!newSpotResults.length || !newSpotResults[0].types.includes('establishment')){
+          this.loginError = 'Please enter a valid Spot'
+          return
+        }
+        this.spots.unshift({
+          name: this.newSpotName,
+          id: Date.now(),
+          address: this.newSpotAddress,
+          rating: this.newSpotRating,
+          photo: photos[0],
+          photos: photos,
+          coordinates: newSpotResults[0].geometry.location,
+          placeId: newSpotResults[0].place_id,
+          favorite: true
+        })
+        // console.log('this.spots', this.spots);
+        this.resetInputs()
+        this.newSpotFormCompleted = true;
     }
   }
 
@@ -88,59 +89,66 @@ class GlobalStore {
     this.newSpotImages = ''
     this.newSpotRating = ''
     this.newSpotZipCode = ''
-    }
+  }
 
   @action validateUser = (event) => {
     this.isFormCompleted = false
     event.preventDefault()
-    if (this.userName === '' || this.userEmail === '' || (this.zipCode.length !== 5) ){
+    if (this.userName === '' || this.userEmail === '' || (this.zipCode.length !== 5) ) {
       this.loginError = 'Please fill all Inputs'
     } else {
       this.loginError = ''
       this.isFormCompleted = true;
       this.getCoordinatesFromZip(+this.zipCode)
-      this.getWeather()
     }
   }
 
   @action getCoordinatesFromZip = async (zipCode) =>{
     const coordinates = await getCoordinates(zipCode)
-    console.log(coordinates)
-    console.log(coordinates[0].geometry.location)
+    // console.log(coordinates)
+    // console.log(coordinates[0].geometry.location)
     this.coordinates = coordinates[0].geometry.location
     this.getSpots()
+    this.getWeather()
     getNorrisJoke()
   }
 
-   @action getSpots = async () => {
-  const spotsApiData = await getSpotsApi(this.coordinates)
-  let photo
-  spotsApiData.results.forEach(spot => {
-    if (spot.photos === undefined){
-       photo = stockPhoto
-    } else {
-       photo = getSpotPhoto(spot.photos[0].photo_reference, 500)
-    }
-    this.spots.push(
-      {
-        name: spot.name,
-        id: spot.id,
-        address: spot.vicinity,
-        rating: spot.rating,
-        photo: photo,
-        coordinates: spot.geometry.location,
-        placeId: spot.place_id,
-        favorite: false,
-        reviews: []
+  @action getSpots = async () => {
+    const spotsApiData = await getSpotsApi(this.coordinates)
+    let photo
+    spotsApiData.results.forEach(spot => {
+      if (spot.photos === undefined){
+         photo = stockPhoto
+      } else {
+          photo = getSpotPhoto(spot.photos[0].photo_reference, 500)
       }
-    )
-  })
+      this.spots.push(
+        {
+          name: spot.name,
+          id: spot.id,
+          address: spot.vicinity,
+          rating: spot.rating,
+          photo: photo,
+          coordinates: spot.geometry.location,
+          placeId: spot.place_id,
+          favorite: false,
+          reviews: []
+        }
+      )
+    })
+  }
+
+  @action getWhereOnEarthId = async () => {
+    const woeidData = await getWoeid(this.coordinates);
+    return woeidData[0].woeid;
   }
 
   @action getWeather = async () => {
-    const weatherApiData = await getWeatherApi()
-    this.weatherType = weatherApiData.consolidated_weather[0].weather_state_name
-    this.weatherTemp = weatherApiData.consolidated_weather[0].the_temp
+    const woeid = await this.getWhereOnEarthId();
+    const weatherApiData = await getWeatherApi(woeid);
+    this.weatherType = weatherApiData.consolidated_weather[0].weather_state_name;
+    this.weatherTemp = weatherApiData.consolidated_weather[0].the_temp;
+    this.city = weatherApiData.title;
   }
 
   @action toggleFavorite = (id) => {
@@ -160,26 +168,26 @@ class GlobalStore {
     const d = spotDetails.result
     let photoUrls
     if (d.photos){
-    photoUrls = d.photos.map(photo => getSpotPhoto(photo.photo_reference, 3000))
-  } else { photoUrls = spot.photos}
-    this.spotDetails = {
-            name: spot.name,
-            address: spot.address,
-            rating: spot.rating,
-            coordinates: spot.coordinates,
-            favorite: spot.favorite,
-            id: d.id,
-            phone: d.formatted_phone_number || undefined,
-            hours: checkIfArrayExists(() => d.opening_hours.weekday_text),
-            reviews: d.reviews.concat(spot.reviews) || undefined,
-            types: d.types,
-            mapUrl: d.url || undefined,
-            website: d.website || undefined,
-            pictures: photoUrls,
-            wifi: true,
-            power: false,
-          }
-   this.loadingSpotDetails = false
+      photoUrls = d.photos.map(photo => getSpotPhoto(photo.photo_reference, 3000))
+    } else { photoUrls = spot.photos}
+        this.spotDetails = {
+          name: spot.name,
+          address: spot.address,
+          rating: spot.rating,
+          coordinates: spot.coordinates,
+          favorite: spot.favorite,
+          id: d.id,
+          phone: d.formatted_phone_number || undefined,
+          hours: checkIfArrayExists(() => d.opening_hours.weekday_text),
+          reviews: d.reviews.concat(spot.reviews) || undefined,
+          types: d.types,
+          mapUrl: d.url || undefined,
+          website: d.website || undefined,
+          pictures: photoUrls,
+          wifi: true,
+          power: false,
+        }
+    this.loadingSpotDetails = false
   }
 
   @action clearStore = () => {
@@ -191,6 +199,10 @@ class GlobalStore {
     this.zipCode = ''
     this.spotDetails = {}
     this.coordinates = {}
+    this.weatherType = ''
+    this.weatherTemp = ''
+    this.city = ''
+    this.filteredSpots = null
   }
 
   @action postComment = (event, id) => {
@@ -210,14 +222,11 @@ class GlobalStore {
       this.commentUserName = ''
       this.commentMessage = ''
     } else if (this.commentUserName === '') {
-      this.loginError = 'Please enter your name'
+        this.loginError = 'Please enter your name'
     } else if (this.commentMessage === '') {
-      this.loginError = 'Please enter your comment'
-    }
+        this.loginError = 'Please enter your comment'
+      }
   }
-
-
-
 }
 
 const store = new GlobalStore()

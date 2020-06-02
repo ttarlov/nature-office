@@ -1,15 +1,19 @@
-.search-container {
+.form-container {
+  display: flex;
+  justify-content: center;
+  margin: 2.5rem 0 -.5rem;
+  width: 100%;
+}
+
+.search-input-container {
   @include box-shadow-radius;
   align-items: center;
   background-color: $background-white;
   border-radius: 1.5rem;
   display: flex;
+  height: 3rem;
   justify-content: space-around;
-  width: 100%;
-
-  // position: fixed;
-  // top: 7rem;
-  // z-index: 1;
+  width: 90%;
 }
 
 .search-input {
@@ -17,7 +21,6 @@
   border: none;
   border-radius: 1.5rem;
   font-size: 1.2rem;
-  height: 2rem;
   padding: .5rem 1rem;
   width: 90%;
 }
