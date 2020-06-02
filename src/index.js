@@ -1,27 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import createBrowserHistory from 'history/createBrowserHistory';
+import { RouterStore, syncHistoryWithStore } from 'mobx-react-router';
 import './index.scss';
 import App from './components/App/App.jsx';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'mobx-react'
 import GlobalStore from './store/GlobalStore'
-import { BrowserRouter } from 'react-router-dom'
-// import { RouterStore, syncHistoryWithStore } from 'mobx-react-router'
+import { Router } from 'react-router'
 
-// const routingStore = new RouterStore();
-// const stores = {
-//   // Key can be whatever you want
-//   routing: routingStore,
-//   // ...other stores
-// };
+const browserHistory = createBrowserHistory();
+const routingStore = new RouterStore();
+const stores = {
+  // Key can be whatever you want
+  routing: routingStore,
+  dataStore: GlobalStore
+  // ...other stores
+};
 
-// const history = syncHistoryWithStore(browserHistory, routingStore);
+const history = syncHistoryWithStore(browserHistory, routingStore);
+
 ReactDOM.render(
    
-      <Provider GlobalStore={GlobalStore}>
-    <BrowserRouter>
+      <Provider {...stores}>
+    <Router history= {history}>
           <App />
-    </BrowserRouter>
+    </Router>
         </Provider>,
   document.getElementById('root')
 );
