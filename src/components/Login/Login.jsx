@@ -8,6 +8,7 @@ import { Link, Redirect } from 'react-router-dom'
 const Login = inject('GlobalStore')(observer((props) => {
   return (
     <section className="login-form-background">
+      <div className="login-content">
           <h2>{GlobalStore.title}</h2>
           <h3 className="form-title">Find your outdoor office spot</h3>
         <form className="login-form" onSubmit = {(e)=> GlobalStore.validateUser(e)}>
@@ -47,9 +48,10 @@ const Login = inject('GlobalStore')(observer((props) => {
               onChange={GlobalStore.handleChange}
             />
           </div>
-          <button className="login-btn">Go!</button>
+          <button className="login-btn">GO!</button>
         </form>
         {GlobalStore.isFormCompleted && <Redirect to="/landing" />}
+      </div>
     </section>
   )
 }))
