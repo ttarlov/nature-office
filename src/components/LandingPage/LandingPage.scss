@@ -1,0 +1,35 @@
+.category-title,
+.category-msg,
+.category-city {
+  cursor: pointer;
+  margin: 0;
+  text-decoration: none;
+}
+
+.category-title {
+  color: $font-medium;
+  font-size: 1.1rem;
+  padding: 1rem 0 0 1rem;
+}
+
+.category-spot {
+  display: flex;
+}
+
+.spot-arrow {
+  margin: 1rem 0 0 .5rem;
+}
+
+.category-city {
+  color: $font-dark;
+  font-size: 1.6rem;
+  padding: .2rem 0 .7rem 1rem;
+}
+
+.category-msg {
+  border-top: .1rem solid $background-light;
+  color: $font-medium;
+  font-size: 1.2rem;
+  padding: 1.2rem;
+  text-align: center;
+}
