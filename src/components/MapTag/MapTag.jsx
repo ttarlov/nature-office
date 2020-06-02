@@ -4,7 +4,7 @@ import GlobalStore from '../../store/GlobalStore'
 
 const MapTag = inject('GlobalStore')(observer((props) => {
   return (
-    <div className="content-wrapper">
+    <div className="map-tag-wrapper">
       {props.id}
     </div>
   )
