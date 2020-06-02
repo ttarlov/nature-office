@@ -1,7 +1,7 @@
 import React from 'react'
 import GlobalStore from '../../store/GlobalStore'
 import { inject, observer } from 'mobx-react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const AddNewSpot = inject('GlobalStore')(observer(() => {
 
@@ -78,7 +78,7 @@ const AddNewSpot = inject('GlobalStore')(observer(() => {
     <div className="add-new-spot-form-background">
       <div className="new-spot-added">
         <h2 className="add-new-spot-title">New Spot Added!</h2>
-        <Link to="/spotContainer">
+        <Link to="/spotContainer" className="new-spot-link">
         <button className="new-spot-added-button">
         Back to All Spots
         </button>

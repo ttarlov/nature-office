@@ -53,17 +53,16 @@
       margin-bottom: 15px;
       width: 100%;
       background-color:$background-white;
-      color: $accent-dark;
+      color: $background-dark;
     }
     label {
-      color: $accent-dark;
+      color: $background-dark;
     }
   }
 }
 .login-btn {
   margin-top: 15px;
-  @include button($accent-medium);
-  padding: 10px 40px;
+  @include button($background-dark);
 }
 
 

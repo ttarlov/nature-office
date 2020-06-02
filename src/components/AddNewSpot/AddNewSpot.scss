@@ -19,10 +19,20 @@
     font-size: 3rem;
     font-weight: 300;
   }
-  .add-new-spot-content {
+  .add-new-spot-content{
     width: 100%;
     margin: auto;
     margin-bottom: 120px;
+  }
+  .new-spot-added {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: auto; 
+    .add-new-spot-title {
+        color: font-light;
+    }
   }
 }
 
@@ -50,10 +60,10 @@
       margin-bottom: 15px;
       width: 100%;
       background-color:$background-white;
-      color: $accent-dark;
+      color: $background-dark;
     }
     label {
-        color: $accent-dark;
+        color: $background-dark;
       }
   }
   .required {
@@ -61,8 +71,13 @@
 }
 }
 
-.add-new-spot-button {
+.add-new-spot-button,
+.new-spot-added-button {
+  margin: auto;
   margin-top: 15px;
-  @include button($accent-medium);
-  padding: 10px 40px;
+  @include button($background-dark);
+}
+
+.new-spot-added-button {
+    margin: 30px;
 }
