@@ -4,6 +4,7 @@ import GlobalStore from '../../store/GlobalStore'
 import Spot from '../Spot/Spot'
 
 const SpotContainer = inject('GlobalStore')(observer((props) => {
+  GlobalStore.newSpotFormCompleted = false;
   const spots = GlobalStore.spots.map(spot => {
     return <Spot
               spot={spot}
