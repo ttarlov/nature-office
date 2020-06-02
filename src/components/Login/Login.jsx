@@ -20,32 +20,37 @@ const Login = inject('GlobalStore')(observer((props) => {
             GlobalStore.loginError
             && <p className="login-error">{GlobalStore.loginError}</p>
           }
-
-          <label htmlFor="userName">Name</label>
-          <input
-            type="text"
-            name="userName"
-            placeholder="name"
-            value={GlobalStore.userName}
-            onChange={GlobalStore.handleChange}
-          />
-          <label htmlFor="userEmail">Email</label>
-          <input
-            type="text"
-            name="userEmail"
-            placeholder="email"
-            value={GlobalStore.userEmail}
-            onChange={GlobalStore.handleChange}
-          />
-          <label htmlFor="zipCode">Zip Code</label>
-          <input
-            type="text"
-            name="zipCode"
-            maxLength="5"
-            placeholder="80202"
-            value={GlobalStore.zipCode}
-            onChange={GlobalStore.handleChange}
-          />
+          <div className="login-form-item">
+            <label htmlFor="userName">Name</label>
+            <input
+              type="text"
+              name="userName"
+              placeholder="name"
+              value={GlobalStore.userName}
+              onChange={GlobalStore.handleChange}
+            />
+          </div>
+          <div className="login-form-item">
+            <label htmlFor="userEmail">Email</label>
+            <input
+              type="text"
+              name="userEmail"
+              placeholder="email"
+              value={GlobalStore.userEmail}
+              onChange={GlobalStore.handleChange}
+            />
+          </div>
+          <div className="login-form-item">
+            <label htmlFor="zipCode">Zip Code</label>
+            <input
+              type="text"
+              name="zipCode"
+              maxLength="5"
+              placeholder="80202"
+              value={GlobalStore.zipCode}
+              onChange={GlobalStore.handleChange}
+            />
+          </div>
           <button className="login-btn">Go!</button>
         </form>
         {GlobalStore.isFormCompleted && <Redirect to="/landing" />}
