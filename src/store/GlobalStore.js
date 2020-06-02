@@ -2,6 +2,7 @@ import { observable, action, computed } from 'mobx'
 import {
   getSpotsApi,
   getWeatherApi,
+  getWoeid,
   getSpotDetailsApi,
   getNorrisJoke,
   getCoordinates,
@@ -38,6 +39,8 @@ class GlobalStore {
   @observable commentUserName = ''
   @observable commentMessage = ''
   @observable newSpotFormCompleted = false
+  @observable filteredSpots = null
+  @observable city = ''
 
   @action handleChange = (event) => {
     this[event.target.name] = event.target.value
@@ -99,7 +102,6 @@ class GlobalStore {
       this.loginError = ''
       this.isFormCompleted = true;
       this.getCoordinatesFromZip(+this.zipCode)
-      this.getWeather()
     }
   }
 
@@ -109,6 +111,7 @@ class GlobalStore {
     console.log(coordinates[0].geometry.location)
     this.coordinates = coordinates[0].geometry.location
     this.getSpots()
+    this.getWeather()
     getNorrisJoke()
   }
 
@@ -137,10 +140,17 @@ class GlobalStore {
   })
   }
 
+  @action getWhereOnEarthId = async () => {
+    const woeidData = await getWoeid(this.coordinates)
+    return woeidData[0].woeid
+  }
+
   @action getWeather = async () => {
-    const weatherApiData = await getWeatherApi()
+    const woeid = await this.getWhereOnEarthId()
+    const weatherApiData = await getWeatherApi(woeid)
     this.weatherType = weatherApiData.consolidated_weather[0].weather_state_name
     this.weatherTemp = weatherApiData.consolidated_weather[0].the_temp
+    this.city = weatherApiData.title
   }
 
   @action toggleFavorite = (id) => {
@@ -191,6 +201,10 @@ class GlobalStore {
     this.zipCode = ''
     this.spotDetails = {}
     this.coordinates = {}
+    this.weatherType = ''
+    this.weatherTemp = ''
+    this.city = ''
+    this.filteredSpots = null
   }
 
   @action postComment = (event, id) => {
