@@ -14,10 +14,11 @@ import {
   checkIfArrayExists
 } from '../constants'
 const stockPhoto = "/images/stockPhoto.jpg"
-
-
+const chuckNorrisAddImage = "/images/chuckNorrisAddImage.png"
+const oprahPhotoAddImage = "/images/oprahPhotoAddImage.png"
 
 class GlobalStore {
+
   @observable title = 'nature office';
   @observable spots = []
   @observable loginError = ''
@@ -35,6 +36,7 @@ class GlobalStore {
   @observable newSpotZipCode = ''
   @observable weatherType = ''
   @observable weatherTemp = ''
+  @observable newSpotFormCompleted = false
 
   @action handleChange = (event) => {
     this[event.target.name] = event.target.value
@@ -43,9 +45,14 @@ class GlobalStore {
     this.newSpotRating = this.newSpotRating.replace(/[^12345]/, '')
   }
 
+  @action  addDefaultSrc(ev){
+    ev.target.src = chuckNorrisAddImage
+  }
+
   @action addNewSpot = async (event) => {
     event.preventDefault();
-    if (this.newSpotName === '' || this.newSpotAddress === '' || this.newSpotImages === ''){
+    if (this.newSpotName === '' || this.newSpotAddress === '' ||
+    this.newSpotZipCode.length !== 5 || this.newSpotRating.length !== 1){
       this.loginError = 'Please fill all Inputs'
       return
     } else {
@@ -54,6 +61,10 @@ class GlobalStore {
       let photos = this.newSpotImages.split(',')
       const newSpotResults = await addNewSpotApi(+this.newSpotZipCode, this.newSpotName)
       console.log('newSpotResults', newSpotResults);
+      if(!newSpotResults.length || !newSpotResults[0].types.includes('establishment')){
+        this.loginError = 'Please enter a valid Spot'
+        return
+      }
       this.spots.unshift({
         name: this.newSpotName,
         id: Date.now(),
@@ -68,8 +79,10 @@ class GlobalStore {
       )
       console.log('this.spots', this.spots);
       this.resetInputs()
+      this.newSpotFormCompleted = true;
     }
   }
+  
   @action resetInputs = () => {
     this.newSpotName = ''
     this.newSpotAddress = ''
@@ -79,12 +92,8 @@ class GlobalStore {
     }
 
   @action validateUser = (event) => {
-
     this.isFormCompleted = false
     event.preventDefault()
-
-    console.log('here')
-    console.log(this.zipCode)
     if (this.userName === '' || this.userEmail === '' || (this.zipCode.length !== 5) ){
       this.loginError = 'Please fill all Inputs'
     } else {
@@ -92,9 +101,6 @@ class GlobalStore {
       this.loginError = ''
       this.isFormCompleted = true;
       this.getCoordinatesFromZip(+this.zipCode)
-      // this.getSpots()
-      // this.errorJoke()
-      // this.errorJoke()
       this.getWeather()
     }
   }
@@ -104,27 +110,16 @@ class GlobalStore {
     console.log(coordinates)
     console.log(coordinates[0].geometry.location)
     this.coordinates = coordinates[0].geometry.location
-    // this.lat = coordinates.results[0].location.lat
-    // this.long = coordinates.results[0].location.long
     console.log('coordinates', this.coordinates);
     this.getSpots()
     getNorrisJoke()
   }
 
-
-  // @action generateErrorJoke = async () => {
-  //   const joke = await getNorrisJoke()
-
-
-  // // }
-
    @action getSpots = async () => {
   console.log('apicall made')
   const spotsApiData = await getSpotsApi(this.coordinates)
-  // .then(data=> console.log(data))
   let photo
   spotsApiData.results.forEach(spot => {
-    console.log(spot);
     if (spot.photos === undefined){
        photo = stockPhoto
     } else {
