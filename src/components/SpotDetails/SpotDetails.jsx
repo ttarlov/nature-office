@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 import MdHeartOutline from 'react-ionicons/lib/MdHeartOutline'
@@ -205,12 +204,15 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
                       onChange={GlobalStore.handleChange}
                     />
                   </div>
+                  <p className= "comment-error-message">
+                    {GlobalStore.loginError || <span className="comment-fill-message">Let us know what you think!</span> }
+                  </p>
                   <div className="comment-form-item">
                     <button className="add-comment-btn"
                             onClick={(event) => GlobalStore.postComment(event, id)}
                     >
                       SEND
-                      <IosPaperPlane fontSize="40px"/>
+                      <IosPaperPlane fontSize="30px"/>
                     </button>
                   </div>
                 </form>

@@ -205,19 +205,27 @@ class GlobalStore {
 
   @action postComment = (event, id) => {
     event.preventDefault();
-    const comment = {
-      relative_time_description: 'NOW',
-      author_name: this.commentUserName,
-      text: this.commentMessage,
-      time: Date.now()/1000
+    if (this.commentUserName !== '' && this.commentMessage !== '') {
+      this.loginError = ''
+      const comment = {
+        relative_time_description: 'Now',
+        author_name: this.commentUserName,
+        text: this.commentMessage,
+        time: Date.now()/1000
+      }
+      this.spotDetails.reviews.push(comment)
+      this.spots.forEach(spot => {
+        (spot.id === id) && (spot.reviews.push(comment))
+      })
+      this.commentUserName = ''
+      this.commentMessage = ''
+    } else if (this.commentUserName === '') {
+      this.loginError = 'Please enter your name'
+    } else if (this.commentMessage === '') {
+      this.loginError = 'Please enter your comment'
     }
-    this.spotDetails.reviews.push(comment)
-    this.spots.forEach(spot => {
-      (spot.id === id) && (spot.reviews.push(comment))
-    })
-    this.commentUserName = ''
-    this.commentMessage = ''
   }
+  
 }
 
 const store = new GlobalStore()
