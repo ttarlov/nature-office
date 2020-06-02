@@ -51,13 +51,10 @@
   }
 }
   
-
-
 .details-map-wrapper {
   width: 100%;
   height: 500px;
 }
-
 
 .details-comment-container {
   padding: 30px;
@@ -76,4 +73,74 @@
       padding: 20px;
     }
   }
+  .comment-name {
+    font-weight: bold;
+  }
+  .comment-text {
+    margin-top: 5px;
+  }
+  .comment-name:before {
+    content: " ";
+    display: block;
+    height: 2px;
+    background-color: $background-light;
+    width: 100%;
+  }
+  .comment-time {
+    font-size: .9rem;
+    text-align: end;
+  }
 }
+
+.comment-form {
+  @include box-shadow-radius;
+  margin: 50px auto 0;
+  background-color: $background-medium;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .comment-form-item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    input {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+    input,
+    textarea {
+      @include box-shadow-radius;
+      padding: 10px;
+      font-size: 1rem;
+      margin-bottom: 15px;
+      width: 100%;
+    }
+    textarea {
+      resize: none;
+    }
+    .comment-label {
+      position: absolute;
+      filter: opacity(0%);
+    }
+    .add-comment-btn {
+      margin-top: 20px;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40%;
+      @include button($background-dark)
+    }
+  }
+}
+
+.comment-error-message {
+  color: $alert-error;
+}
+.comment-fill-message {
+  color: $font-light;
+}
+
