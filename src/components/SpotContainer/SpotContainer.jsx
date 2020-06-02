@@ -5,18 +5,21 @@ import Spot from '../Spot/Spot'
 
 const SpotContainer = inject('GlobalStore')(observer((props) => {
   GlobalStore.newSpotFormCompleted = false;
-  const spots = GlobalStore.spots.map(spot => {
-    return <Spot
-              spot={spot}
-              id={spot.id}
-              key={spot.id}
-            />
-  })
+  const spots = props.spots.map(spot => {
     return (
-        <section className="spot-container">
-          { spots }
-        </section>
-      )
+      <Spot
+        spot={spot}
+        id={spot.id}
+        key={spot.id}
+      />
+    )
+  })
+  return (
+    <section className="spot-container">
+      <h2>{ props.title }</h2>
+      { spots }
+    </section>
+  )
 }))
 
 export default SpotContainer
