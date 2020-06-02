@@ -69,14 +69,14 @@ const AddNewSpot = inject('GlobalStore')(observer(() => {
     </section>
     </section> :
     <div className="add-new-spot-form-background">
-    <div className="new-spot-added">
-    <h2 className="add-new-spot-title">New Spot Added!</h2>
-    <Link to="/spotContainer">
-    <button className="new-spot-added-button">
-    Back to All Spots
-    </button>
-    </Link>
-    </div>
+      <div className="new-spot-added">
+        <h2 className="add-new-spot-title">New Spot Added!</h2>
+        <Link to="/spotContainer">
+        <button className="new-spot-added-button">
+        Back to All Spots
+        </button>
+        </Link>
+      </div>
     </div>
       )
 }))
