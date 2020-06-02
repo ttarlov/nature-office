@@ -10,31 +10,35 @@ const UserPage = inject('GlobalStore')(observer(() => {
     userName,
     userEmail
   } = GlobalStore
-    return (
-        <section className="user-page-container">
-          <div className="user-page-img">
-            <h2 className="user-page-title">Nature Office</h2>
-          </div>
-          <div className="user-profile-wrapper">
-            <MdPerson
-              className="user-icon"
-              color="#fff"
-              fontSize="50px"
-            />
-            <div className="user-info-wrapper">
-              <h2>{userName}</h2>
-              <h2>{userEmail}</h2>
-            </div>
-          </div>
-          <Link to="/"
-            onClick={GlobalStore.clearStore}
-            className="logout-btn"
-          >
-            LOGOUT
-          </Link>
-          <SpotContainer />
-        </section>
-      )
+
+  return (
+    <section className="user-page-container">
+      <div className="user-page-img">
+        <h2 className="user-page-title">Nature Office</h2>
+      </div>
+      <div className="user-profile-wrapper">
+        <MdPerson
+          className="user-icon"
+          color="#fff"
+          fontSize="50px"
+        />
+        <div className="user-info-wrapper">
+          <h2>{userName}</h2>
+          <h2>{userEmail}</h2>
+        </div>
+      </div>
+      <Link to="/"
+        onClick={GlobalStore.clearStore}
+        className="logout-btn"
+      >
+        LOGOUT
+      </Link>
+      <SpotContainer
+        title={`Your Favorites in ${GlobalStore.city}, ${GlobalStore.zipCode}`}
+        spots={GlobalStore.spots}
+      />
+    </section>
+  )
 }))
 
 export default UserPage
