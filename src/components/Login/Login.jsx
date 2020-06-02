@@ -40,7 +40,7 @@ const Login = inject('GlobalStore')(observer((props) => {
           <input
             type="text"
             name="zipCode"
-            maxlength="5"
+            maxength="5"
             placeholder="80202"
             value={GlobalStore.zipCode}
             onChange={GlobalStore.handleChange}

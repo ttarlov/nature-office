@@ -16,7 +16,6 @@ import {
 const stockPhoto = "/images/stockPhoto.jpg"
 
 
-
 class GlobalStore {
   @observable title = 'nature office';
   @observable spots = []
@@ -26,7 +25,7 @@ class GlobalStore {
   @observable userEmail = ''
   @observable zipCode = '80202'
   @observable spotDetails = {}
-  @observable loadingSpotDetailPics = false
+  @observable loadingSpotDetails = false
   @observable coordinates = {}
   @observable newSpotName = ''
   @observable newSpotAddress = ''
@@ -35,6 +34,8 @@ class GlobalStore {
   @observable newSpotZipCode = ''
   @observable weatherType = ''
   @observable weatherTemp = ''
+  @observable commentUserName = ''
+  @observable commentMessage = ''
 
   @action handleChange = (event) => {
     this[event.target.name] = event.target.value
@@ -139,7 +140,8 @@ class GlobalStore {
         photo: photo,
         coordinates: spot.geometry.location,
         placeId: spot.place_id,
-        favorite: false
+        favorite: false,
+        reviews: []
       }
     )
   })
@@ -162,7 +164,7 @@ class GlobalStore {
 
   @action displaySpotDetails = async (id) => {
     window.scrollTo(0, 0);
-    this.loadingSpotDetailPics = true
+    this.loadingSpotDetails = true
     const spot = this.spots.find(item => item.id === id)
     const spotDetails = await getSpotDetailsApi(spot.placeId)
     const d = spotDetails.result
@@ -179,7 +181,7 @@ class GlobalStore {
             id: d.id,
             phone: d.formatted_phone_number || undefined,
             hours: checkIfArrayExists(() => d.opening_hours.weekday_text),
-            reviews: d.reviews || undefined,
+            reviews: d.reviews.concat(spot.reviews) || undefined,
             types: d.types,
             mapUrl: d.url || undefined,
             website: d.website || undefined,
@@ -187,7 +189,7 @@ class GlobalStore {
             wifi: true,
             power: false,
           }
-   this.loadingSpotDetailPics = false
+   this.loadingSpotDetails = false
   }
 
   @action clearStore = () => {
@@ -200,6 +202,32 @@ class GlobalStore {
     this.spotDetails = {}
     this.coordinates = {}
   }
+
+  @action postComment = (event, id) => {
+    event.preventDefault();
+    if (this.commentUserName !== '' && this.commentMessage !== '') {
+      this.loginError = ''
+      const comment = {
+        relative_time_description: 'Now',
+        author_name: this.commentUserName,
+        text: this.commentMessage,
+        time: Date.now()/1000
+      }
+      this.spotDetails.reviews.push(comment)
+      this.spots.forEach(spot => {
+        (spot.id === id) && (spot.reviews.push(comment))
+      })
+      this.commentUserName = ''
+      this.commentMessage = ''
+    } else if (this.commentUserName === '') {
+      this.loginError = 'Please enter your name'
+    } else if (this.commentMessage === '') {
+      this.loginError = 'Please enter your comment'
+    }
+  }
+
+  
+  
 }
 
 const store = new GlobalStore()

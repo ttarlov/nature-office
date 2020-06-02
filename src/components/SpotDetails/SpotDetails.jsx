@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 import MdHeartOutline from 'react-ionicons/lib/MdHeartOutline'
@@ -14,13 +13,16 @@ import MdTime from 'react-ionicons/lib/MdTime'
 import MdCall from 'react-ionicons/lib/MdCall'
 import MdHome from 'react-ionicons/lib/MdHome'
 import MdLaptop from 'react-ionicons/lib/MdLaptop'
+import IosPaperPlane from 'react-ionicons/lib/IosPaperPlane'
 import IosBatteryCharging from 'react-ionicons/lib/IosBatteryCharging'
 import { Link } from 'react-router-dom'
 import Map from '../Map/Map'
 import Loading from '../Loading/Loading'
+import { fromUnixTime } from 'date-fns'
 
 
 const SpotDetails = inject('GlobalStore')(observer((props) => {
+    console.log(GlobalStore.spotDetails.reviews)
 
     const loadingMessage = "LOADING WORK SPACE DETAILS..."
 
@@ -46,7 +48,7 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
     let stars
     let comments
     let workTime
-    if (!GlobalStore.loadingSpotDetailPics) {
+    if (!GlobalStore.loadingSpotDetails) {
       if (rating !== undefined){
       stars = [...Array(Math.round(rating))].map(i => <MdStar/>)
 
@@ -60,11 +62,15 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
     }
       if (reviews !== undefined){
       comments = reviews.map(review => {
+        let timeNow = JSON.stringify(fromUnixTime(review.time))
+        console.log(Date.now())
+        console.log(timeNow)
         return (
           <li className="details-comment">
-            <p>{review.relative_time_description}</p>
-            <p>{review.author_name}</p>
-            <p>{review.text}</p>
+            <p className="comment-name">{review.author_name}</p>
+            <p className="comment-text">{review.text}</p>
+            <p className="comment-time">{review.relative_time_description}</p>
+            <p className="comment-time">{timeNow}</p>
           </li>
         )
       })
@@ -108,7 +114,7 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
                 className="spot-add-fav"
                 onClick={() => GlobalStore.toggleFavorite(id)}/>
             }
-            {GlobalStore.loadingSpotDetailPics ?
+            {GlobalStore.loadingSpotDetails ?
             <Loading message={loadingMessage}/> :
                 <Slider {...gallerySettings} className="details-img-gallery">
                 {galleryItems}
@@ -124,21 +130,18 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
               <div className="feature">
                 <MdHome
                   fontSize="40px"
-                  className="feature-icon"
                 />
                 <p>{address || 'N/a'}</p>
               </div>
               <div className="feature">
                 <MdCall
                   fontSize="40px"
-                  className="feature-icon"
                 />
                 <p>{phone || 'N/a'}</p>
               </div>
               <div className="feature">
                 <MdLaptop
                   fontSize="40px"
-                  className="feature-icon"
                 />
                 {website ? <a href={website} target='_blank'>Open Website</a> : <p>N/a</p>}
 
@@ -146,18 +149,16 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
               <div className="feature">
                 <IosWifi
                   fontSize="40px"
-                  className="feature-icon"
                 />
                 <p>{wifi ? 'Yes' : 'No'}</p>
               </div>
               <div className="feature">
                 <IosBatteryCharging
                   fontSize="40px"
-                  className="feature-icon"
                 />
                 <p>{power ? 'Yes' : 'No'}</p>
               </div>
-              {GlobalStore.loadingSpotDetailPics ?
+              {GlobalStore.loadingSpotDetails ?
               <Loading message={loadingMessage}/> :
               <div className="time-feature">
                 <MdTime
@@ -174,13 +175,47 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
                 <Map center={coordinates}/>
             </div>
           </section>
-            {GlobalStore.loadingSpotDetailPics ?
+            {GlobalStore.loadingSpotDetails ?
             <Loading message={loadingMessage}/> :
               <section className="details-comment-container">
                 <h2>Comments: </h2>
                 <ul className="details-comment-wrapper">
                 { comments }
                 </ul>
+                
+                <form className="comment-form">
+                  <div className="comment-form-item">
+                    <label htmlFor="comment-username" className="comment-label">Name</label>
+                      <input
+                      type="text"
+                      name="commentUserName"
+                      placeholder="Name"
+                      value={GlobalStore.commentUserName}
+                      onChange={GlobalStore.handleChange}
+                    />
+                  </div>
+                  <div className="comment-form-item">
+                    <label htmlFor="comment" className="comment-label">Comment</label>
+                      <textarea
+                      name="commentMessage"
+                      placeholder="Comment"
+                      rows="8"
+                      value={GlobalStore.commentMessage}
+                      onChange={GlobalStore.handleChange}
+                    />
+                  </div>
+                  <p className= "comment-error-message">
+                    {GlobalStore.loginError || <span className="comment-fill-message">Let us know what you think!</span> }
+                  </p>
+                  <div className="comment-form-item">
+                    <button className="add-comment-btn"
+                            onClick={(event) => GlobalStore.postComment(event, id)}
+                    >
+                      SEND
+                      <IosPaperPlane fontSize="30px"/>
+                    </button>
+                  </div>
+                </form>
               </section>
             }
         </section>
