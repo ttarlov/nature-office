@@ -9,7 +9,7 @@ import AddNewSpot from '../AddNewSpot/AddNewSpot';
 import GlobalStore from '../../store/GlobalStore';
 import UserPage from '../UserPage/UserPage';
 import { inject, observer } from 'mobx-react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect   } from 'react-router-dom';
 import Error from '../Error/Error.jsx';
 
 
@@ -20,10 +20,12 @@ class App extends Component{
     return (
       <section className="app-container">
         <Switch>
-          
+
           <Route
             exact path='/' render={ () => <Login />} />
-          <Route exact path='/landing' render={ () => <LandingPage /> }/>
+            {GlobalStore.isFormCompleted ?
+            <Route exact path='/landing' render={ () => <LandingPage /> }/> :
+           <Redirect to="/" exact />}
           <Route
             exact path='/spotContainer' render={ () => <SpotContainer />} />
           <Route

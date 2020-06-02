@@ -61,11 +61,16 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
       })
     }
       if (reviews !== undefined){
+        let timeNow
       comments = reviews.map(review => {
-        let timeNow = JSON.stringify(fromUnixTime(review.time))
-        console.log(Date.now())
+        console.log('review',   review)
+        if (review){
+        timeNow = JSON.stringify(fromUnixTime(review.time))
         console.log(timeNow)
+
+        console.log(Date.now())
         return (
+
           <li className="details-comment">
             <p className="comment-name">{review.author_name}</p>
             <p className="comment-text">{review.text}</p>
@@ -73,9 +78,11 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
             <p className="comment-time">{timeNow}</p>
           </li>
         )
+      } else { return ''
+      }
       })
       }
-      if (hours !== null){
+      if (hours !== null || hours !== undefined){
         workTime = hours.map(day => {
         return (
         <li className="work-time">{day}</li>
@@ -93,6 +100,7 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
       slidesToScroll: 1
     }
 
+    // window.scrollTo(0, 0)
     return (
         <section className="details-container">
           <div className="details-img-gallery">
@@ -121,7 +129,7 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
                 </Slider>
               }
           </div>
-          <section classname="details-info-map-wrapper">
+          <section className="details-info-map-wrapper">
             <div className="details-info-wrapper">
               <h2 className="details-name">{name || "N/a"}</h2>
               <div className="stars-container">
@@ -182,7 +190,7 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
                 <ul className="details-comment-wrapper">
                 { comments }
                 </ul>
-                
+
                 <form className="comment-form">
                   <div className="comment-form-item">
                     <label htmlFor="comment-username" className="comment-label">Name</label>
