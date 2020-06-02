@@ -61,11 +61,16 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
       })
     }
       if (reviews !== undefined){
+        let timeNow
       comments = reviews.map(review => {
-        let timeNow = JSON.stringify(fromUnixTime(review.time))
-        console.log(Date.now())
+        console.log('review',   review)
+        if (review){
+        timeNow = JSON.stringify(fromUnixTime(review.time))
         console.log(timeNow)
+
+        console.log(Date.now())
         return (
+
           <li className="details-comment">
             <p className="comment-name">{review.author_name}</p>
             <p className="comment-text">{review.text}</p>
@@ -73,6 +78,8 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
             <p className="comment-time">{timeNow}</p>
           </li>
         )
+      } else { return ''
+      }
       })
       }
       if (hours !== null || hours !== undefined){
@@ -183,7 +190,7 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
                 <ul className="details-comment-wrapper">
                 { comments }
                 </ul>
-                
+
                 <form className="comment-form">
                   <div className="comment-form-item">
                     <label htmlFor="comment-username" className="comment-label">Name</label>
