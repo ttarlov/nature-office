@@ -9,10 +9,9 @@ const Login = inject('GlobalStore')(observer((props) => {
   return (
     <section className="login-form-background">
       <div className="login-content">
-          <h2>{GlobalStore.title}</h2>
+          <h1 className="main-title">{GlobalStore.title}</h1>
           <h3 className="form-title">Find your outdoor office spot</h3>
         <form className="login-form" onSubmit = {(e)=> GlobalStore.validateUser(e)}>
-
           {
             GlobalStore.loginError
             && <p className="login-error">{GlobalStore.loginError}</p>
