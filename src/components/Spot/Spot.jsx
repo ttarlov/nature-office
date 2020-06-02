@@ -40,7 +40,7 @@ const Spot = inject('GlobalStore')(observer((props) => {
           >
             <img
               className="spot-img"
-              src={photo}
+              src={photo} onError={GlobalStore.addDefaultSrc}
               alt="spot"
             />
           </Link>
