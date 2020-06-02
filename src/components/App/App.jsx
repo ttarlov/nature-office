@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
-import { inject, observer } from 'mobx-react';
-import { Route, Switch, Redirect } from 'react-router-dom';
-import Map from '../Map/Map';
-import Login from '../Login/Login';
-import LandingPage from '../LandingPage/LandingPage';
-import Nav from '../Nav/Nav';
-import SpotContainer from '../SpotContainer/SpotContainer';
-import SpotDetails from '../SpotDetails/SpotDetails';
-import AddNewSpot from '../AddNewSpot/AddNewSpot';
-import GlobalStore from '../../store/GlobalStore';
-import UserPage from '../UserPage/UserPage';
-import Error from '../Error/Error.jsx';
+import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
+import { Route, Switch, Redirect } from 'react-router-dom'
+import GlobalStore from '../../store/GlobalStore'
+import Login from '../Login/Login'
+import Nav from '../Nav/Nav'
+import SpotContainer from '../SpotContainer/SpotContainer'
+import LandingPage from '../LandingPage/LandingPage'
+import Favorites from '../Favorites/Favorites'
+import Map from '../Map/Map'
+import SpotDetails from '../SpotDetails/SpotDetails'
+import AddNewSpot from '../AddNewSpot/AddNewSpot'
+import UserPage from '../UserPage/UserPage'
+import Error from '../Error/Error.jsx'
 
 @inject('GlobalStore')
 @observer
@@ -31,7 +32,7 @@ class App extends Component {
 
           <Route exact path='/spotContainer' render={ () =>
             <SpotContainer
-              title={`All Spots in ${GlobalStore.city}, ${GlobalStore.zipCode}`}
+              title={'All Work Spaces'}
               spots={GlobalStore.spots}
             />
           } />
@@ -45,17 +46,14 @@ class App extends Component {
 
           <Route exact path='/topRated' render={ () =>
             <SpotContainer
-              title={`Top Rated Spots in ${GlobalStore.city}, ${GlobalStore.zipCode}`}
+              title={'Top Rated Work Spaces'}
               spots={GlobalStore.filteredSpots}
             />
           } />
 
-          <Route exact path='/favorites' render={ () =>
-            <SpotContainer
-              title={'Favorites'}
-              spots={GlobalStore.spots}
-            />
-          } />
+          <Route
+            exact path='/favorites' render={ () => <Favorites /> }
+          />
 
           <Route
             exact path='/spotDetails/:name' render={ () => <SpotDetails /> }

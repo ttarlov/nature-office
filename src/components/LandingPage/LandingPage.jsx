@@ -2,59 +2,92 @@ import React from 'react'
 import { inject, observer } from 'mobx-react'
 import { Link } from 'react-router-dom'
 import GlobalStore from '../../store/GlobalStore'
-import Weather from '../Weather/Weather'
 import Loading from '../Loading/Loading'
+import Weather from '../Weather/Weather'
 import Search from '../Search/Search'
+import IosArrowRoundForward from 'react-ionicons/lib/IosArrowRoundForward'
 
 const LandingPage = inject('GlobalStore')(observer(() => {
-
-  const filterTopRated = (e) => {
-    let sortedByRating = [...GlobalStore.spots].sort((a, b) => b.rating - a.rating)
-    GlobalStore.filteredSpots = sortedByRating.filter(spot => spot.rating >= 4.5)
-    GlobalStore.filteredSpots.length === 0 && console.log('NO SPOTS RATED ABOVE 4.5');
+  const filterTopRated = () => {
+    let sortedByRating = [...GlobalStore.spots].sort((a, b) => b.rating - a.rating).sort(() => Math.random() - 0.5);
+    GlobalStore.filteredSpots = sortedByRating.filter(spot => spot.rating >= 4.5);
   }
 
   const findRandomSpot = () => {
+    filterTopRated()
     let sortedSpots = [...GlobalStore.spots].sort(() => Math.random() - 0.5)
-    return sortedSpots[0]
+    return sortedSpots.filter(spot => spot.rating < 4.5)[0]
   }
 
-  return !GlobalStore.spots.length || !GlobalStore.weatherTemp || !GlobalStore.weatherType  ?
-    <Loading message="LOOKING OUTSIDE FOR WORK SPACES..."/> :
-      <React.Fragment>
-        <div className="weather">
-          <Weather/>
-        </div>
-        <section className="landing-container">
-          <Search />
+  const randomSpot = findRandomSpot();
 
-          <Link to={'/spotContainer/'}>
-            <section className="spot-wrapper">
-              <div className="spot-img-wrapper">
+  return (
+    !GlobalStore.spots.length || !GlobalStore.weatherTemp || !GlobalStore.weatherType
+    ? <Loading message="LOOKING OUTSIDE FOR WORK SPACES..."/>
+    : <React.Fragment>
+        <Weather/>
+        <Search />
+        <section className="spot-container">
+          <section className="spot-wrapper">
+            <div className="spot-img-wrapper">
+              <Link to={'/spotContainer'}>
                 <img
                   className="spot-img"
-                  src={findRandomSpot().photo}
+                  src={randomSpot.photo}
                   alt="spot"
                 />
-              </div>
-              <p className="category-title">Explore all spots in { GlobalStore.city }</p>
-            </section>
-          </Link>
-
-          <Link to={'/topRated/'} onClick={filterTopRated}>
-            <section className="spot-wrapper">
-              <div className="spot-img-wrapper">
+              </Link>
+            </div>
+            <Link
+              to={`/spotDetails/${randomSpot.name}`}
+              className="category-spot"
+            >
+                <p className="category-title">{randomSpot.name}</p>
+                <IosArrowRoundForward
+                  className="spot-arrow"
+                  color="#333333"
+                  fontSize="1.5rem"
+                />
+            </Link>
+            <Link
+              to={'/spotContainer'}
+              className="open-spot">
+                <p className="category-city">{ GlobalStore.city }</p>
+                <p className="category-msg">Explore more work spaces</p>
+            </Link>
+          </section>
+          <section className="spot-wrapper">
+            <div className="spot-img-wrapper">
+              <Link to={'/topRated'}>
                 <img
                   className="spot-img"
-                  src={findRandomSpot().photo}
-                  alt="spot"
+                  src={GlobalStore.filteredSpots[0].photo}
+                  alt="spot" />
+              </Link>
+            </div>
+            <Link
+              to={`/spotDetails/${GlobalStore.filteredSpots[0].name}`}
+              className="category-spot"
+            >
+                <p className="category-title">{GlobalStore.filteredSpots[0].name}</p>
+                <IosArrowRoundForward
+                  className="spot-arrow"
+                  color="#333333"
+                  fontSize="1.5rem"
                 />
-              </div>
-              <p className="category-title">Top rated spots in { GlobalStore.city }</p>
-            </section>
-          </Link>
+            </Link>
+            <Link
+              to={'/topRated'}
+              className="open-spot"
+            >
+                <p className="category-city">{ GlobalStore.city }</p>
+                <p className="category-msg">Top Rated</p>
+            </Link>
+          </section>
+
         </section>
       </React.Fragment>
+  )
 }))
 
 export default LandingPage

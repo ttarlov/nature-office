@@ -29,23 +29,25 @@ const Search = inject('GlobalStore')(observer(() => {
   }
 
   return (
-    <form className="search-container">
-      <input
-        className="search-input"
-        type="text"
-        name="search"
-        placeholder="Search by name"
-        onChange={updateSearchValue}
-        required
-      />
-      <Link
-        to={'/searchResults/'}
-        className="search-icon"
-        onClick={handleSubmit}
-      >
-        <IosSearch fontSize="2rem"/>
-      </Link>
-    </form>
+    <section className="form-container">
+      <form className="search-input-container">
+        <input
+          className="search-input"
+          type="text"
+          name="search"
+          placeholder="Search by name"
+          onChange={updateSearchValue}
+          required
+        />
+        <Link
+          to={'/searchResults/'}
+          className="search-icon"
+          onClick={handleSubmit}
+        >
+          <IosSearch fontSize="2rem"/>
+        </Link>
+      </form>
+    </section>
   )
 }))
 
