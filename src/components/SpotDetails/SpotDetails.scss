@@ -123,13 +123,21 @@
       filter: opacity(0%);
     }
     .add-comment-btn {
+      margin-top: 20px;
       padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 30%;
+      width: 40%;
       @include button($background-dark)
     }
   }
+}
+
+.comment-error-message {
+  color: $alert-error;
+}
+.comment-fill-message {
+  color: $font-light;
 }
 
