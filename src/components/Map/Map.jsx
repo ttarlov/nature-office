@@ -13,8 +13,8 @@ const Map = () => {
             color="red"
             lat={marker[0].lat}
             lng={marker[0].lng}
-            beat={true}
             id={spot.id}
+            name={spot.name}
           />
     )
   })
@@ -31,7 +31,6 @@ const Map = () => {
             color="blue"
             lat={targetMarker[0].lat}
             lng={targetMarker[0].lng}
-            beat={true}
             id={GlobalStore.spotDetails.id}
           />
         </GoogleMapReact>
