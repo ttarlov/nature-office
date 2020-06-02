@@ -16,7 +16,6 @@ import {
 const stockPhoto = "/images/stockPhoto.jpg"
 
 
-
 class GlobalStore {
   @observable title = 'nature office';
   @observable spots = []
@@ -209,15 +208,13 @@ class GlobalStore {
     const comment = {
       relative_time_description: 'NOW',
       author_name: this.commentUserName,
-      text: this.commentMessage
+      text: this.commentMessage,
+      time: Date.now()/1000
     }
     this.spotDetails.reviews.push(comment)
-
     this.spots.forEach(spot => {
       (spot.id === id) && (spot.reviews.push(comment))
     })
-
-
     this.commentUserName = ''
     this.commentMessage = ''
   }

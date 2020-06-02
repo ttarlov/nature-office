@@ -19,6 +19,7 @@ import IosBatteryCharging from 'react-ionicons/lib/IosBatteryCharging'
 import { Link } from 'react-router-dom'
 import Map from '../Map/Map'
 import Loading from '../Loading/Loading'
+import { fromUnixTime } from 'date-fns'
 
 
 const SpotDetails = inject('GlobalStore')(observer((props) => {
@@ -62,11 +63,15 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
     }
       if (reviews !== undefined){
       comments = reviews.map(review => {
+        let timeNow = JSON.stringify(fromUnixTime(review.time))
+        console.log(Date.now())
+        console.log(timeNow)
         return (
           <li className="details-comment">
-            <p>{review.relative_time_description}</p>
-            <p>{review.author_name}</p>
-            <p>{review.text}</p>
+            <p className="comment-name">{review.author_name}</p>
+            <p className="comment-text">{review.text}</p>
+            <p className="comment-time">{review.relative_time_description}</p>
+            <p className="comment-time">{timeNow}</p>
           </li>
         )
       })
@@ -204,10 +209,8 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
                     <button className="add-comment-btn"
                             onClick={(event) => GlobalStore.postComment(event, id)}
                     >
-                        <IosPaperPlane
-                          fontSize="40px"
-                        />
-                          SEND
+                      SEND
+                      <IosPaperPlane fontSize="40px"/>
                     </button>
                   </div>
                 </form>

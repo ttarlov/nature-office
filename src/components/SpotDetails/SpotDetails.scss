@@ -73,6 +73,23 @@
       padding: 20px;
     }
   }
+  .comment-name {
+    font-weight: bold;
+  }
+  .comment-text {
+    margin-top: 5px;
+  }
+  .comment-name:before {
+    content: " ";
+    display: block;
+    height: 2px;
+    background-color: $background-light;
+    width: 100%;
+  }
+  .comment-time {
+    font-size: .9rem;
+    text-align: end;
+  }
 }
 
 .comment-form {
