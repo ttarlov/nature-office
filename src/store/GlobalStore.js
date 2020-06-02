@@ -15,7 +15,6 @@ import {
 } from '../constants'
 const stockPhoto = "/images/stockPhoto.jpg"
 const chuckNorrisAddImage = "/images/chuckNorrisAddImage.png"
-const oprahPhotoAddImage = "/images/oprahPhotoAddImage.png"
 
 class GlobalStore {
 
@@ -56,11 +55,9 @@ class GlobalStore {
       this.loginError = 'Please fill all Inputs'
       return
     } else {
-      console.log('all add-new-spot inputs satisfied')
       this.loginError = ''
       let photos = this.newSpotImages.split(',')
       const newSpotResults = await addNewSpotApi(+this.newSpotZipCode, this.newSpotName)
-      console.log('newSpotResults', newSpotResults);
       if(!newSpotResults.length || !newSpotResults[0].types.includes('establishment')){
         this.loginError = 'Please enter a valid Spot'
         return
@@ -82,7 +79,7 @@ class GlobalStore {
       this.newSpotFormCompleted = true;
     }
   }
-  
+
   @action resetInputs = () => {
     this.newSpotName = ''
     this.newSpotAddress = ''
@@ -97,7 +94,6 @@ class GlobalStore {
     if (this.userName === '' || this.userEmail === '' || (this.zipCode.length !== 5) ){
       this.loginError = 'Please fill all Inputs'
     } else {
-      console.log('all inputs satisfied')
       this.loginError = ''
       this.isFormCompleted = true;
       this.getCoordinatesFromZip(+this.zipCode)
@@ -110,13 +106,11 @@ class GlobalStore {
     console.log(coordinates)
     console.log(coordinates[0].geometry.location)
     this.coordinates = coordinates[0].geometry.location
-    console.log('coordinates', this.coordinates);
     this.getSpots()
     getNorrisJoke()
   }
 
    @action getSpots = async () => {
-  console.log('apicall made')
   const spotsApiData = await getSpotsApi(this.coordinates)
   let photo
   spotsApiData.results.forEach(spot => {
