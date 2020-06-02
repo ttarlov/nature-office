@@ -11,6 +11,9 @@ const UserPage = inject('GlobalStore')(observer(() => {
     userEmail
   } = GlobalStore
 
+  const filteredFavorites = GlobalStore.spots.filter(spot => spot.favorite)
+
+
   return (
     <section className="user-page-container">
       <div className="user-page-img">
@@ -34,8 +37,8 @@ const UserPage = inject('GlobalStore')(observer(() => {
         LOGOUT
       </Link>
       <SpotContainer
-        title={`Your Favorites in ${GlobalStore.city}, ${GlobalStore.zipCode}`}
-        spots={GlobalStore.spots}
+        title={'Your Favorites'}
+        spots={filteredFavorites}
       />
     </section>
   )
