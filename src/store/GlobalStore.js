@@ -225,6 +225,8 @@ class GlobalStore {
       this.loginError = 'Please enter your comment'
     }
   }
+
+  
   
 }
 
