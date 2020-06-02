@@ -32,6 +32,7 @@ const Map = () => {
             lat={targetMarker[0].lat}
             lng={targetMarker[0].lng}
             id={GlobalStore.spotDetails.id}
+            mapUrl={GlobalStore.spotDetails.mapUrl}
           />
         </GoogleMapReact>
       </div>
