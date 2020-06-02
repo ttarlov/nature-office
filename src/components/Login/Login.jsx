@@ -2,9 +2,9 @@ import React from 'react'
 import { inject, observer } from 'mobx-react'
 import GlobalStore from '../../store/GlobalStore'
 import { Link, Redirect } from 'react-router-dom'
-import homePageBackground from "./homePageBackground.jpg"
 
 
+// inject('GlobalStore')
 const Login = inject('GlobalStore')(observer((props) => {
   // console.log('isFormCompleted', GlobalStore.isFormCompleted)
   return (
