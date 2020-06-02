@@ -72,10 +72,22 @@ export const getCoordinates = async (zipCode) => {
   }
 }
 
-export const getWeatherApi = async () => {
+export const getWeatherApi = async (woeid) => {
   const result = await fetch('https://fe-cors-proxy.herokuapp.com', {
     headers: {
-      "Target-URL": 'https://www.metaweather.com/api/location/2391279/'
+      "Target-URL": `https://www.metaweather.com/api/location/${woeid}/`
+    }
+  })
+
+  return await result.json()
+}
+
+export const getWoeid = async (coordinates) => {
+  let latitude = coordinates.lat
+  let longitude = coordinates.lng
+  const result = await fetch('https://fe-cors-proxy.herokuapp.com', {
+    headers: {
+      "Target-URL": `https://www.metaweather.com/api/location/search/?lattlong=${latitude},${longitude}`
     }
   })
 
