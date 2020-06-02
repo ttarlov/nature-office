@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import GlobalStore from '../../store/GlobalStore'
-import MapTag from '../MapTag/MapTag'
+import { MapTag, MapTargetTag } from '../MapTag/MapTag'
 const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
  
 const Map = () => {
@@ -10,7 +10,6 @@ const Map = () => {
     const marker = [{...spot.coordinates}]
     return (
       <MapTag
-            color="red"
             lat={marker[0].lat}
             lng={marker[0].lng}
             id={spot.id}
@@ -27,11 +26,9 @@ const Map = () => {
           zoom={16}
         >
           { markers }
-          <MapTag 
-            color="blue"
+          <MapTargetTag 
             lat={targetMarker[0].lat}
             lng={targetMarker[0].lng}
-            id={GlobalStore.spotDetails.id}
             mapUrl={GlobalStore.spotDetails.mapUrl}
           />
         </GoogleMapReact>
