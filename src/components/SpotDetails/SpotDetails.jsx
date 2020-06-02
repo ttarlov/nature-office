@@ -199,7 +199,7 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
                       <textarea
                       name="commentMessage"
                       placeholder="Comment"
-                      rows="5"
+                      rows="8"
                       value={GlobalStore.commentMessage}
                       onChange={GlobalStore.handleChange}
                     />

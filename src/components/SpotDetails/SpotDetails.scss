@@ -118,6 +118,9 @@
       margin-bottom: 15px;
       width: 100%;
     }
+    textarea {
+      resize: none;
+    }
     .comment-label {
       position: absolute;
       filter: opacity(0%);
