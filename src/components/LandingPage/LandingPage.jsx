@@ -8,18 +8,12 @@ import Search from '../Search/Search'
 import IosArrowRoundForward from 'react-ionicons/lib/IosArrowRoundForward'
 
 const LandingPage = inject('GlobalStore')(observer(() => {
-  const filterTopRated = () => {
-    let sortedByRating = [...GlobalStore.spots].sort((a, b) => b.rating - a.rating).sort(() => Math.random() - 0.5);
-    GlobalStore.filteredSpots = sortedByRating.filter(spot => spot.rating >= 4.5);
-  }
-
-  const findRandomSpot = () => {
-    filterTopRated()
-    let sortedSpots = [...GlobalStore.spots].sort(() => Math.random() - 0.5)
-    return sortedSpots.filter(spot => spot.rating < 4.5)[0]
-  }
-
-  const randomSpot = findRandomSpot();
+  const randomizedInitially = [...GlobalStore.spots].sort(() => Math.random() - 0.5);
+  const reRandomizeSpots = spots => spots.sort(() => Math.random() - 0.5);
+  const topRatings = randomizedInitially.filter(spot => spot.rating >= 4.5);
+  const bottomRatings = randomizedInitially.filter(spot => spot.rating < 4.5);
+  const previewTopRated = reRandomizeSpots(topRatings)[0];
+  const previewBottomRated = reRandomizeSpots(bottomRatings)[0];
 
   return (
     !GlobalStore.spots.length || !GlobalStore.weatherTemp || !GlobalStore.weatherType
@@ -33,16 +27,16 @@ const LandingPage = inject('GlobalStore')(observer(() => {
               <Link to={'/spotContainer'}>
                 <img
                   className="spot-img"
-                  src={randomSpot.photo}
+                  src={previewBottomRated.photo}
                   alt="spot"
                 />
               </Link>
             </div>
             <Link
-              to={`/spotDetails/${randomSpot.name}`}
+              to={`/spotDetails/${previewBottomRated.name}`}
               className="category-spot"
             >
-                <p className="category-title">{randomSpot.name}</p>
+                <p className="category-title">{previewBottomRated.name}</p>
                 <IosArrowRoundForward
                   className="spot-arrow"
                   color="#333333"
@@ -61,15 +55,15 @@ const LandingPage = inject('GlobalStore')(observer(() => {
               <Link to={'/topRated'}>
                 <img
                   className="spot-img"
-                  src={GlobalStore.filteredSpots[0].photo}
+                  src={previewTopRated.photo}
                   alt="spot" />
               </Link>
             </div>
             <Link
-              to={`/spotDetails/${GlobalStore.filteredSpots[0].name}`}
+              to={`/spotDetails/${previewTopRated.name}`}
               className="category-spot"
             >
-                <p className="category-title">{GlobalStore.filteredSpots[0].name}</p>
+                <p className="category-title">{previewTopRated.name}</p>
                 <IosArrowRoundForward
                   className="spot-arrow"
                   color="#333333"
@@ -84,7 +78,6 @@ const LandingPage = inject('GlobalStore')(observer(() => {
                 <p className="category-msg">Top Rated</p>
             </Link>
           </section>
-
         </section>
       </React.Fragment>
   )

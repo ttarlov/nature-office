@@ -24,7 +24,7 @@ const Search = inject('GlobalStore')(observer(() => {
     return (
       !GlobalStore.filteredSpots
       ? e.preventDefault()
-      : console.log('should go to link')
+      : searchInputValue = ''
     )
   }
 
