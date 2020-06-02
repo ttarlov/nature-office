@@ -48,7 +48,7 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
     let stars
     let comments
     let workTime
-    if (!GlobalStore.loadingSpotDetailPics) {
+    if (!GlobalStore.loadingSpotDetails) {
       if (rating !== undefined){
       stars = [...Array(Math.round(rating))].map(i => <MdStar/>)
 
@@ -114,7 +114,7 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
                 className="spot-add-fav"
                 onClick={() => GlobalStore.toggleFavorite(id)}/>
             }
-            {GlobalStore.loadingSpotDetailPics ?
+            {GlobalStore.loadingSpotDetails ?
             <Loading message={loadingMessage}/> :
                 <Slider {...gallerySettings} className="details-img-gallery">
                 {galleryItems}
@@ -158,7 +158,7 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
                 />
                 <p>{power ? 'Yes' : 'No'}</p>
               </div>
-              {GlobalStore.loadingSpotDetailPics ?
+              {GlobalStore.loadingSpotDetails ?
               <Loading message={loadingMessage}/> :
               <div className="time-feature">
                 <MdTime
@@ -175,7 +175,7 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
                 <Map center={coordinates}/>
             </div>
           </section>
-            {GlobalStore.loadingSpotDetailPics ?
+            {GlobalStore.loadingSpotDetails ?
             <Loading message={loadingMessage}/> :
               <section className="details-comment-container">
                 <h2>Comments: </h2>

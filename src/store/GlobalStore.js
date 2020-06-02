@@ -25,7 +25,7 @@ class GlobalStore {
   @observable userEmail = ''
   @observable zipCode = '80202'
   @observable spotDetails = {}
-  @observable loadingSpotDetailPics = false
+  @observable loadingSpotDetails = false
   @observable coordinates = {}
   @observable newSpotName = ''
   @observable newSpotAddress = ''
@@ -164,7 +164,7 @@ class GlobalStore {
 
   @action displaySpotDetails = async (id) => {
     window.scrollTo(0, 0);
-    this.loadingSpotDetailPics = true
+    this.loadingSpotDetails = true
     const spot = this.spots.find(item => item.id === id)
     const spotDetails = await getSpotDetailsApi(spot.placeId)
     const d = spotDetails.result
@@ -189,7 +189,7 @@ class GlobalStore {
             wifi: true,
             power: false,
           }
-   this.loadingSpotDetailPics = false
+   this.loadingSpotDetails = false
   }
 
   @action clearStore = () => {
