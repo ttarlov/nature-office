@@ -8,7 +8,7 @@ const Search = inject('GlobalStore')(observer(() => {
   let searchInputValue
 
   const filterSearch = () => {
-    GlobalStore.filteredSpots = GlobalStore.spots.filter(spot => {
+    GlobalStore.filteredSearch = GlobalStore.spots.filter(spot => {
       return spot.name.toLowerCase().includes(searchInputValue.toLowerCase())
     })
   }
@@ -17,15 +17,15 @@ const Search = inject('GlobalStore')(observer(() => {
     searchInputValue = e.target.value;
     searchInputValue
     ? filterSearch()
-    : GlobalStore.filteredSpots = null;
+    : GlobalStore.filteredSearch = null;
   }
 
   const handleSubmit = (e) => {
-    return (
-      !GlobalStore.filteredSpots
-      ? e.preventDefault()
-      : console.log('should go to link')
-    )
+    if (!GlobalStore.filteredSearch) {
+      e.preventDefault()
+    } else {
+      searchInputValue = ''
+    }
   }
 
   return (
