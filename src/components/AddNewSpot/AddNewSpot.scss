@@ -1,0 +1,48 @@
+.add-new-spot-form-background {
+  @include form-background;
+  .add-new-spot-title {
+    @include form-title(3rem);
+  }
+  .add-new-spot-content{
+    width: 100%;
+    margin: auto;
+    margin-bottom: 120px;
+  }
+  .new-spot-added {
+    @include form-item;
+    align-items: center;
+    margin: auto; 
+    .add-new-spot-title {
+        color: font-light;
+    }
+  }
+}
+
+.add-new-spot-form {
+  @include box-shadow-radius;
+  @include form(85%);
+  .add-form-item {
+    @include form-item;
+    input {
+      @include box-shadow-radius;
+      @include form-input;
+    }
+    label {
+        color: $background-dark;
+      }
+  }
+  .required {
+    color: $alert-error;
+}
+}
+
+.add-new-spot-button,
+.new-spot-added-button {
+  margin: auto;
+  margin-top: 15px;
+  @include button($background-dark);
+}
+
+.new-spot-added-button {
+    margin: 30px;
+}
