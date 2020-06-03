@@ -12,6 +12,9 @@
     margin: auto;
   }
 }
+.login-error {
+  color: red; 
+}
 
 .login-form {
   @include box-shadow-radius;
@@ -31,5 +34,3 @@
   margin-top: 15px;
   @include button($background-dark);
 }
-
-

@@ -7,7 +7,6 @@ import Nav from '../Nav/Nav'
 import SpotContainer from '../SpotContainer/SpotContainer'
 import LandingPage from '../LandingPage/LandingPage'
 import Favorites from '../Favorites/Favorites'
-// import Map from '../Map/Map'
 import SpotDetails from '../SpotDetails/SpotDetails'
 import AddNewSpot from '../AddNewSpot/AddNewSpot'
 import UserPage from '../UserPage/UserPage'
@@ -16,18 +15,24 @@ import Error from '../Error/Error.jsx'
 @inject('GlobalStore')
 @observer
 class App extends Component {
+
   render() {
+    console.log(GlobalStore.isFormCompleted)
     return (
       <section className="app-container">
         <Switch>
+
           <Route
             exact path='/' render={ () => <Login /> }
           />
 
+          <Route path='/error' render ={ () => <Error /> }
+          />
+
           {
-            GlobalStore.isFormCompleted
-            ? <Route exact path='/landing' render={ () => <LandingPage /> } />
-            : <Redirect to="/" exact />
+            GlobalStore.isFormCompleted ?
+             <Route exact path='/landing' render={ () => <LandingPage /> } />
+            : <Redirect to='/error' />
           }
 
           <Route exact path='/spotContainer' render={ () =>
@@ -67,7 +72,7 @@ class App extends Component {
             exact path='/addNewSpot' render={ () => <AddNewSpot /> }
           />
 
-          <Route path='*' render ={ () => <Error /> } />
+        }
         </Switch>
         {GlobalStore.spots.length > 0 && <Nav/>}
       </section>

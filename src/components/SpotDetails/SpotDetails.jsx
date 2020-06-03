@@ -54,7 +54,7 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
       })
     }
     if (reviews !== undefined) {
-      let timeNow
+      // let timeNow
       comments = reviews.map(review => {
         if (review) {
         // timeNow = JSON.stringify(fromUnixTime(review.time))

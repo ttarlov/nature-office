@@ -7,11 +7,8 @@ import {
   getNorrisJoke,
   getCoordinates,
   addNewSpotApi } from "../apiCalls"
-// import { Redirect, Link } from 'react-router-dom';
-// import React from 'react'
 import {
   getSpotPhoto,
-  // checkIfStringExists,
   checkIfArrayExists
 } from '../constants'
 const stockPhoto = "/images/stockPhoto.jpg"
@@ -63,7 +60,6 @@ class GlobalStore {
         this.loginError = ''
         let photos = this.newSpotImages.split(',')
         const newSpotResults = await addNewSpotApi(+this.newSpotZipCode, this.newSpotName)
-        console.log('newSpotResults', newSpotResults);
         if(!newSpotResults.length || !newSpotResults[0].types.includes('establishment')){
           this.loginError = 'Please enter a valid Spot'
           return
@@ -80,7 +76,6 @@ class GlobalStore {
           reviews: [],
           favorite: true
         })
-        console.log('this.spots', this.spots);
         this.resetInputs()
         this.newSpotFormCompleted = true;
     }
@@ -101,19 +96,22 @@ class GlobalStore {
       this.loginError = 'Please fill all Inputs'
     } else {
       this.loginError = ''
-      this.isFormCompleted = true;
       this.getCoordinatesFromZip(+this.zipCode)
     }
   }
 
   @action getCoordinatesFromZip = async (zipCode) =>{
     const coordinates = await getCoordinates(zipCode)
-    // console.log(coordinates)
-    // console.log(coordinates[0].geometry.location)
-    this.coordinates = coordinates[0].geometry.location
-    this.getSpots()
-    this.getWeather()
-    getNorrisJoke()
+    if (coordinates.length){
+      this.isFormCompleted = true;
+      this.coordinates = coordinates[0].geometry.location
+      this.getSpots()
+      this.getWeather()
+      getNorrisJoke()
+    } else {
+      this.loginError = "Please enter a valid Zip Code"
+      return
+  }
   }
 
   @action getSpots = async () => {
@@ -168,7 +166,6 @@ class GlobalStore {
     this.loadingSpotDetails = true
     const spot = this.spots.find(item => item.id === id)
     const spotDetails = await getSpotDetailsApi(spot.placeId)
-    console.log('spotDetails', spotDetails.result);
     const d = spotDetails.result
     let photoUrls
     if (d.photos){
