@@ -33,7 +33,8 @@ Nature Office is an appication we built during our time at [Turing School of Sof
 <img width="1439" alt="1" src="https://user-images.githubusercontent.com/57964291/83582274-57359800-a4fe-11ea-9c25-4d7dbc6e55fc.png">
 
 ### See loading page animation if data is loading.
-![Loading page animation](/loadingPage.gif)
+
+![2](Animated GIF-source.gif)
 
 ### See current weather conditions for entered location and categories.
 <img width="1438" alt="3" src="https://user-images.githubusercontent.com/57964291/83582285-5ef53c80-a4fe-11ea-9562-961aa68b8be8.png">
