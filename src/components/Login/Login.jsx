@@ -3,8 +3,6 @@ import { inject, observer } from 'mobx-react'
 import GlobalStore from '../../store/GlobalStore'
 import { Redirect } from 'react-router-dom'
 
-
-// inject('GlobalStore')
 const Login = inject('GlobalStore')(observer((props) => {
   return (
     <section className="login-form-background">
