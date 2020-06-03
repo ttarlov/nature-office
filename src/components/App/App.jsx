@@ -15,18 +15,24 @@ import Error from '../Error/Error.jsx'
 @inject('GlobalStore')
 @observer
 class App extends Component {
+
   render() {
+    console.log(GlobalStore.isFormCompleted)
     return (
       <section className="app-container">
         <Switch>
+
           <Route
             exact path='/' render={ () => <Login /> }
           />
 
+          <Route path='/error' render ={ () => <Error /> }
+          />
+
           {
-            GlobalStore.isFormCompleted
-            ? <Route exact path='/landing' render={ () => <LandingPage /> } />
-            : <Redirect to="/" exact />
+            GlobalStore.isFormCompleted ?
+             <Route exact path='/landing' render={ () => <LandingPage /> } />
+            : <Redirect to='/error' />
           }
 
           <Route exact path='/spotContainer' render={ () =>
@@ -66,7 +72,7 @@ class App extends Component {
             exact path='/addNewSpot' render={ () => <AddNewSpot /> }
           />
 
-          <Route path='*' render ={ () => <Error /> } />
+        }
         </Switch>
         {GlobalStore.spots.length > 0 && <Nav/>}
       </section>
