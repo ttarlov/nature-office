@@ -18,7 +18,7 @@ Nature Office is an appication we built during our time at [Turing School of Sof
 
 **Challenges:**
 
-Finding documentation and resources on MobX that were consistent was challenging. Given the short turn around time, we had less opportunity to dive deep into the "why" and "how" thing's were and were not working with our MobX implementaion. Another challenge we faced was working with the Google API. It was more complex than APIs we've used on previous projects, although in the end was a success. 
+Finding documentation and resources on MobX that were consistent was challenging. Given the short turn around time, we had less opportunity to dive deep into the "why" and "how" thing's were and were not working with our MobX implementaion. We ran into issues with using MobX's "inject" in conjunction with React Router. This caused our MobX functionality to not work quite in the way we wanted. Future iterations would address this issue. Another challenge we faced was working with the Google API. It was more complex than APIs we've used on previous projects, although in the end was a success! 
 
 ## Setup
 1. clone down this repo to desired location
