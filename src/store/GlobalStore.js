@@ -38,7 +38,8 @@ class GlobalStore {
   @observable commentUserName = ''
   @observable commentMessage = ''
   @observable newSpotFormCompleted = false
-  @observable filteredSpots = null
+  @observable filteredSearch = null
+  @observable filteredTopRated = null
   @observable city = ''
 
   @action handleChange = (event) => {
