@@ -62,6 +62,9 @@ Finding documentation and resources on MobX that were consistent was challenging
 ### See confirmation message if new spot is successfully added.
 <img width="1440" alt="10" src="https://user-images.githubusercontent.com/57964291/83582305-66b4e100-a4fe-11ea-9969-42c7460b82ec.png">
 
+### See error page if something fails to load.
+<img width="1437" alt="Screen Shot 2020-06-03 at 12 16 44" src="https://user-images.githubusercontent.com/57964291/83673262-d2498d80-a594-11ea-9c9f-9faaacb92d42.png">
+
 ### Navigate to user page and see all favorite spots, logout button, personal info.
 <img width="1435" alt="11" src="https://user-images.githubusercontent.com/57964291/83582310-687ea480-a4fe-11ea-97a4-c32fd2ced8fd.png">
 
