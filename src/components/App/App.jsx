@@ -40,14 +40,14 @@ class App extends Component {
           <Route exact path='/searchResults' render={ () =>
             <SpotContainer
               title={'Search Results'}
-              spots={GlobalStore.filteredSpots}
+              spots={GlobalStore.filteredSearch}
             />
           } />
 
           <Route exact path='/topRated' render={ () =>
             <SpotContainer
               title={'Top Rated Work Spaces'}
-              spots={GlobalStore.filteredSpots}
+              spots={GlobalStore.filteredTopRated}
             />
           } />
 

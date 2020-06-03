@@ -5,21 +5,20 @@ import GlobalStore from '../../store/GlobalStore'
 import Loading from '../Loading/Loading'
 import Weather from '../Weather/Weather'
 import Search from '../Search/Search'
-import IosArrowRoundForward from 'react-ionicons/lib/IosArrowRoundForward'
 
 const LandingPage = inject('GlobalStore')(observer(() => {
-  const filterTopRated = () => {
-    let sortedByRating = [...GlobalStore.spots].sort((a, b) => b.rating - a.rating).sort(() => Math.random() - 0.5);
-    GlobalStore.filteredSpots = sortedByRating.filter(spot => spot.rating >= 4.5);
+  window.scrollTo(0, 0);
+  const randomizedInitially = [...GlobalStore.spots].sort(() => Math.random() - 0.5);
+  const reRandomizeSpots = spots => spots.sort(() => Math.random() - 0.5);
+  const getTopRatings = () => {
+    const topRatings = randomizedInitially.filter(spot => spot.rating >= 4.5);
+    GlobalStore.filteredTopRated = topRatings;
+    return topRatings;
   }
 
-  const findRandomSpot = () => {
-    filterTopRated()
-    let sortedSpots = [...GlobalStore.spots].sort(() => Math.random() - 0.5)
-    return sortedSpots.filter(spot => spot.rating < 4.5)[0]
-  }
-
-  const randomSpot = findRandomSpot();
+  const bottomRatings = randomizedInitially.filter(spot => spot.rating < 4.5);
+  const previewTopRated = reRandomizeSpots(getTopRatings())[0];
+  const previewBottomRated = reRandomizeSpots(bottomRatings)[0];
 
   return (
     !GlobalStore.spots.length || !GlobalStore.weatherTemp || !GlobalStore.weatherType
@@ -28,32 +27,21 @@ const LandingPage = inject('GlobalStore')(observer(() => {
         <Weather/>
         <Search />
         <section className="spot-container">
+
           <section className="spot-wrapper">
             <div className="spot-img-wrapper">
               <Link to={'/spotContainer'}>
                 <img
                   className="spot-img"
-                  src={randomSpot.photo}
+                  src={previewBottomRated.photo}
                   alt="spot"
                 />
               </Link>
             </div>
-            <Link
-              to={`/spotDetails/${randomSpot.name}`}
-              className="category-spot"
-            >
-                <p className="category-title">{randomSpot.name}</p>
-                <IosArrowRoundForward
-                  className="spot-arrow"
-                  color="#333333"
-                  fontSize="1.5rem"
-                />
-            </Link>
-            <Link
-              to={'/spotContainer'}
-              className="open-spot">
-                <p className="category-city">{ GlobalStore.city }</p>
-                <p className="category-msg">Explore more work spaces</p>
+            <Link to={'/spotContainer'} className="open-spot">
+              <p className="category-title">{previewBottomRated.name}</p>
+              <p className="category-city">{ GlobalStore.city }</p>
+              <p className="category-msg">Explore more work spaces</p>
             </Link>
           </section>
           <section className="spot-wrapper">
@@ -61,30 +49,16 @@ const LandingPage = inject('GlobalStore')(observer(() => {
               <Link to={'/topRated'}>
                 <img
                   className="spot-img"
-                  src={GlobalStore.filteredSpots[0].photo}
+                  src={previewTopRated.photo}
                   alt="spot" />
               </Link>
             </div>
-            <Link
-              to={`/spotDetails/${GlobalStore.filteredSpots[0].name}`}
-              className="category-spot"
-            >
-                <p className="category-title">{GlobalStore.filteredSpots[0].name}</p>
-                <IosArrowRoundForward
-                  className="spot-arrow"
-                  color="#333333"
-                  fontSize="1.5rem"
-                />
-            </Link>
-            <Link
-              to={'/topRated'}
-              className="open-spot"
-            >
-                <p className="category-city">{ GlobalStore.city }</p>
-                <p className="category-msg">Top Rated</p>
+            <Link to={'/topRated'} className="open-spot">
+              <p className="category-title">{previewTopRated.name}</p>
+              <p className="category-city">{ GlobalStore.city }</p>
+              <p className="category-msg">Top Rated</p>
             </Link>
           </section>
-
         </section>
       </React.Fragment>
   )
