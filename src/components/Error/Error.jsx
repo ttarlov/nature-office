@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getNorrisJoke } from '../../apiCalls'
+// import { getNorrisJoke } from '../../apiCalls'
 
 const Error = ()  => {
     const joke = sessionStorage.getItem("joke")
     console.log(joke);
-    
-    
+
+
 
     return (
         <div className="error-container">
