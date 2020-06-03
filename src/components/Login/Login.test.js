@@ -102,8 +102,6 @@ describe('Login Component', () => {
 
        const globalStore = new DecoratedGlobalStore()
 
-
-    // const mockLoginUser = jest.fn();
         const validateUser = jest.fn();
         const handleChange = jest.fn();
 
@@ -124,8 +122,6 @@ describe('Login Component', () => {
         fireEvent.change(getByPlaceholderText('name'), {target: {value: 'Chuck Norris'}});
         fireEvent.change(getByPlaceholderText('email'), {target: {value: 'norris@aol.com'}});
         fireEvent.change(getByPlaceholderText('80202'), {target: {value: '80202'}});
-
-        // const idea = await waitFor(()=> getByText("Sweaters for pugs"))
 
         fireEvent.click(getByText('Go!'))
         const button = await waitFor(()=> getByText("USER PAGE"))
