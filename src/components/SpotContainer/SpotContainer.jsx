@@ -24,6 +24,7 @@ const SpotContainer = inject('GlobalStore')(observer((props) => {
       <section className="spot-container">
         {spots}
       </section>
+      { GlobalStore.filteredSearch = null }
     </React.Fragment>
   )
 }))
