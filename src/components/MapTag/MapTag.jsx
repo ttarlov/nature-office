@@ -17,11 +17,9 @@ export const MapTargetTag = inject('GlobalStore')(observer((props) => {
   return (
     <a
       href={props.mapUrl}
-      target="_blank">
+      target="_blank" rel="noopener noreferrer">
       <IosPin color="red" fontSize="40px"/>
       <p className="map-tag-name">{props.name}</p>
     </a>
   )
 }))
-
-

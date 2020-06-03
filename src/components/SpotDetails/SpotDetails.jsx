@@ -34,7 +34,6 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
     phone,
     hours,
     reviews,
-    mapUrl,
     website,
     pictures,
     wifi,
@@ -143,7 +142,7 @@ const SpotDetails = inject('GlobalStore')(observer((props) => {
             <MdLaptop
               fontSize="40px"
             />
-            {website ? <a href={website} target='_blank'>Open Website</a> : <p>N/a</p>}
+            {website ? <a href={website} target='_blank' rel="noopener noreferrer">Open Website</a> : <p>N/a</p>}
           </div>
           <div className="feature">
             <IosWifi

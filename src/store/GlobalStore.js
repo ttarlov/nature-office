@@ -1,4 +1,4 @@
-import { observable, action, computed } from 'mobx'
+import { observable, action } from 'mobx'
 import {
   getSpotsApi,
   getWeatherApi,
@@ -7,11 +7,11 @@ import {
   getNorrisJoke,
   getCoordinates,
   addNewSpotApi } from "../apiCalls"
-import { Redirect, Link } from 'react-router-dom';
-import React from 'react'
+// import { Redirect, Link } from 'react-router-dom';
+// import React from 'react'
 import {
   getSpotPhoto,
-  checkIfStringExists,
+  // checkIfStringExists,
   checkIfArrayExists
 } from '../constants'
 const stockPhoto = "/images/stockPhoto.jpg"
@@ -63,6 +63,7 @@ class GlobalStore {
         this.loginError = ''
         let photos = this.newSpotImages.split(',')
         const newSpotResults = await addNewSpotApi(+this.newSpotZipCode, this.newSpotName)
+        console.log('newSpotResults', newSpotResults);
         if(!newSpotResults.length || !newSpotResults[0].types.includes('establishment')){
           this.loginError = 'Please enter a valid Spot'
           return
@@ -76,9 +77,10 @@ class GlobalStore {
           photos: photos,
           coordinates: newSpotResults[0].geometry.location,
           placeId: newSpotResults[0].place_id,
+          reviews: [],
           favorite: true
         })
-        // console.log('this.spots', this.spots);
+        console.log('this.spots', this.spots);
         this.resetInputs()
         this.newSpotFormCompleted = true;
     }
@@ -166,11 +168,18 @@ class GlobalStore {
     this.loadingSpotDetails = true
     const spot = this.spots.find(item => item.id === id)
     const spotDetails = await getSpotDetailsApi(spot.placeId)
+    console.log('spotDetails', spotDetails.result);
     const d = spotDetails.result
     let photoUrls
     if (d.photos){
       photoUrls = d.photos.map(photo => getSpotPhoto(photo.photo_reference, 3000))
     } else { photoUrls = spot.photos}
+    let reviews
+    if (d.reviews){
+      reviews = d.reviews.concat(spot.reviews)
+    } else {
+      reviews = spot.reviews
+    }
         this.spotDetails = {
           name: spot.name,
           address: spot.address,
@@ -180,7 +189,7 @@ class GlobalStore {
           id: d.id,
           phone: d.formatted_phone_number || undefined,
           hours: checkIfArrayExists(() => d.opening_hours.weekday_text),
-          reviews: d.reviews.concat(spot.reviews) || undefined,
+          reviews: reviews,
           types: d.types,
           mapUrl: d.url || undefined,
           website: d.website || undefined,
