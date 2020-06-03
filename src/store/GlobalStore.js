@@ -11,7 +11,7 @@ import {
 // import React from 'react'
 import {
   getSpotPhoto,
-  checkIfStringExists,
+  // checkIfStringExists,
   checkIfArrayExists
 } from '../constants'
 const stockPhoto = "/images/stockPhoto.jpg"
