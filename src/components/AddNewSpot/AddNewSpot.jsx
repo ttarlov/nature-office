@@ -1,7 +1,7 @@
 import React from 'react'
 import GlobalStore from '../../store/GlobalStore'
 import { inject, observer } from 'mobx-react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const AddNewSpot = inject('GlobalStore')(observer(() => {
 
