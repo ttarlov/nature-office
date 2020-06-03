@@ -1,5 +1,7 @@
 # Stretch: Nature Office
 
+![1](/gif.gif)
+
 ## Team Members:
 Madison Randle - [GitHub](https://github.com/madisonrandle)
 
