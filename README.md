@@ -14,7 +14,11 @@
 **Technologies Used:**
 *React*, *React Router*, *ES6*, *TDD*, *SCSS*, *MobX*, *Fetch API for receiving 3rd party data*
 
-Nature Office is an appication we built during our time at [Turing School of Softwar and Design](http://turing.io). Placeholder text...........
+Nature Office is an appication we built during our time at [Turing School of Softwar and Design](http://turing.io). The goal for this project, over the course of nine days, was to incorporate a new technology into our application that wasn’t explicitly taught. We chose to learn global state management using MobX. 
+
+**Challenges:**
+
+Finding documentation and resources on MobX that were consistent was challenging. Given the short turn around time, we had less opportunity to dive deep into the "why" and "how" thing's were and were not working with our MobX implementaion. Another challenge we faced was working with the Google API. It was more complex than APIs we've used on previous projects, although in the end was a success. 
 
 ## Setup
 1. clone down this repo to desired location
