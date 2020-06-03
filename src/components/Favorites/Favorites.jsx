@@ -1,6 +1,6 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import GlobalStore from '../../store/GlobalStore'
 import SpotContainer from '../SpotContainer/SpotContainer'
 
