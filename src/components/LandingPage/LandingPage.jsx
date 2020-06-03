@@ -7,6 +7,7 @@ import Weather from '../Weather/Weather'
 import Search from '../Search/Search'
 
 const LandingPage = inject('GlobalStore')(observer(() => {
+  GlobalStore.loggedOut = false;
   window.scrollTo(0, 0);
   const randomizedInitially = [...GlobalStore.spots].sort(() => Math.random() - 0.5);
   const reRandomizeSpots = spots => spots.sort(() => Math.random() - 0.5);
