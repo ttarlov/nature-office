@@ -26,13 +26,13 @@ class App extends Component {
             exact path='/' render={ () => <Login /> }
           />
 
-          <Route path='/error' render ={ () => <Error /> }
+          <Route path='/nature-office/error' render ={ () => <Error /> }
           />
 
           {
             GlobalStore.isFormCompleted ?
              <Route exact path='/landing' render={ () => <LandingPage /> } />
-            : <Redirect to='/error' />
+            : <Redirect to='/nature-office/error' />
           }
 
           <Route exact path='/spotContainer' render={ () =>
