@@ -30,7 +30,7 @@ const UserPage = inject('GlobalStore')(observer(() => {
           <h2>{userEmail}</h2>
         </div>
       </div>
-      <Link to="/"
+      <Link to="/nature-office"
         onClick={GlobalStore.clearStore}
         className="logout-btn"
       >
