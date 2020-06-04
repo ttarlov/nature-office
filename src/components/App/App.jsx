@@ -23,7 +23,7 @@ class App extends Component {
         <Switch>
 
           <Route
-            exact path='/' render={ () => <Login /> }
+            exact path='/nature-office' render={ () => <Login /> }
           />
 
           <Route path='/nature-office/error' render ={ () => <Error /> }
