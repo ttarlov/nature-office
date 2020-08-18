@@ -7,6 +7,10 @@ import { Provider } from 'mobx-react'
 import GlobalStore from './store/GlobalStore'
 import { BrowserRouter } from 'react-router-dom'
 
+require('dotenv').config()
+
+
+
 ReactDOM.render(
   <Provider GlobalStore={GlobalStore}>
     <BrowserRouter>
