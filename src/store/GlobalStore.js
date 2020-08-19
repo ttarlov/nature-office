@@ -126,7 +126,7 @@ class GlobalStore {
       this.spots.push(
         {
           name: spot.name,
-          id: spot.id,
+          id: spot.place_id,
           address: spot.vicinity,
           rating: spot.rating,
           photo: photo,
@@ -153,6 +153,7 @@ class GlobalStore {
   }
 
   @action toggleFavorite = (id) => {
+    console.log('id', id)
     this.spots.forEach(spot => {
       (spot.id === id) && (spot.favorite = !spot.favorite)
     })
@@ -183,7 +184,7 @@ class GlobalStore {
           rating: spot.rating,
           coordinates: spot.coordinates,
           favorite: spot.favorite,
-          id: d.id,
+          id: spot.id,
           phone: d.formatted_phone_number || undefined,
           hours: checkIfArrayExists(() => d.opening_hours.weekday_text),
           reviews: reviews,
